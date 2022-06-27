@@ -8,4 +8,14 @@ extension LcUserExt on LCUser {
     return avatar;
   }
 
+   String? get nickname{
+     String? nickname = this['nickname'];
+     return nickname;
+   }
+
+   String? get wxId{
+     String? wxId = this['wx_id'];
+     return wxId;
+   }
+
 }

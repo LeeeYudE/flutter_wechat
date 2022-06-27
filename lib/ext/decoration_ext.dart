@@ -8,7 +8,7 @@ extension DecorationColorExt on Color {
   }
 
   Decoration boxDecoration({double? borderRadius}){
-    return BoxDecoration(color: this, borderRadius:borderRadius != null ? BorderRadius.circular(borderRadius):BorderRadius.zero,);
+    return BoxDecoration(color: this, borderRadius:BorderRadius.circular(borderRadius??12.w),);
   }
 
   Decoration borderDecoration({double? borderRadius,double width = 2}){
@@ -24,6 +24,18 @@ extension DecorationColorExt on Color {
             bottomLeft: bottomLeft != null ? Radius.circular(bottomLeft) : Radius.zero,
             bottomRight: bottomRight != null ? Radius.circular(bottomRight) : Radius.zero
         ),
+    );
+  }
+
+  Decoration bottomBorder({ double? width,Color? bgColor}){
+    return BoxDecoration(
+        color: bgColor,
+        border:Border(
+            bottom: BorderSide(
+                color: this,
+                width: width??1.w
+            )
+        )
     );
   }
 

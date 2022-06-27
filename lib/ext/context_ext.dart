@@ -23,6 +23,10 @@ extension ContextExt on BuildContext {
     return getScreenHeight(this);
   }
 
+  double get statusHeight{
+    return MediaQuery.of(this).padding.top;
+  }
+
   /// 获取屏幕宽度
   static double getScreenWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
@@ -31,4 +35,6 @@ extension ContextExt on BuildContext {
   static double getScreenHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
   }
+
+
 }

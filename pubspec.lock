@@ -169,6 +169,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  custom_pop_up_menu:
+    dependency: "direct main"
+    description:
+      name: custom_pop_up_menu
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.4"
   dart_style:
     dependency: transitive
     description:
@@ -319,6 +326,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.6"
+  flutter_qr_reader:
+    dependency: "direct main"
+    description:
+      name: flutter_qr_reader
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.5"
   flutter_smart_dialog:
     dependency: "direct main"
     description:
@@ -406,6 +420,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  image_gallery_saver:
+    dependency: "direct main"
+    description:
+      name: image_gallery_saver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.7.1"
   image_picker:
     dependency: "direct main"
     description:
@@ -756,6 +777,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.3"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  qr_flutter:
+    dependency: "direct main"
+    description:
+      name: qr_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   quiver:
     dependency: transitive
     description:
@@ -1070,5 +1105,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
+  dart: ">=2.17.0 <3.0.0"
   flutter: ">=2.10.0"

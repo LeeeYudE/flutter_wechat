@@ -52,5 +52,9 @@
 	<string>App需要您的同意,才能访问相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>用于设置用户头像，和好友分享照片</string>
+	<key>io.flutter.embedded_views_preview</key>
+    <string>YES</string>
+    <key>NSCameraUsageDescription</key>
+    <string>你的操作需要访问相机权限</string>
 </dict>
 </plist>

@@ -3,6 +3,7 @@ import 'package:wechat/color/colors.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/widget/tap_widget.dart';
 
+import '../../../language/strings.dart';
 import '../../../utils/utils.dart';
 
 class MainBottomBar extends StatefulWidget {
@@ -26,10 +27,10 @@ class _MainBottomBarState extends State<MainBottomBar> {
       color: Colours.c_EEEEEE,
       child: Row(
           children: [
-            _buildTabItem('tabbar_mainframe_normal','tabbar_mainframe_selected','微信',0),
-            _buildTabItem('tabbar_contacts_normal','tabbar_contacts_selected','通讯录',1),
-            _buildTabItem('tabbar_discover_normal','tabbar_discover_selected','发现',2),
-            _buildTabItem('tabbar_me_normal','tabbar_me_selected','我的',3)
+            _buildTabItem('tabbar_mainframe_normal','tabbar_mainframe_selected',Ids.wachat.str(),0),
+            _buildTabItem('tabbar_contacts_normal','tabbar_contacts_selected',Ids.contacts.str(),1),
+            _buildTabItem('tabbar_discover_normal','tabbar_discover_selected',Ids.discover.str(),2),
+            _buildTabItem('tabbar_mine_normal','tabbar_mine_selected',Ids.mine.str(),3)
           ],
       ),
     );

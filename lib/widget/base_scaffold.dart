@@ -10,6 +10,7 @@ class MyScaffold extends StatelessWidget {
   final Widget? leading;
   final Widget? body;
   final Color? appbarColor;
+  final Color? backgroundColor;
   final Widget? titleWidget;
   final Widget? floatingActionButton;
   final Brightness? brightness;
@@ -19,7 +20,7 @@ class MyScaffold extends StatelessWidget {
   final IconData? backIcon;
   final Widget? bottomNavigationBar;
 
-   MyScaffold({
+   const MyScaffold({
     Key? key,
     this.title,
     this.actions,
@@ -27,6 +28,7 @@ class MyScaffold extends StatelessWidget {
     this.brightness,
     this.body,
     this.appbarColor,
+    this.backgroundColor,
     this.resizeToAvoidBottomInset = false,
     this.child,
     this.titleWidget,
@@ -41,11 +43,12 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      backgroundColor: backgroundColor,
       appBar: showAppbar?AppBar(
         //状态栏颜色
         brightness: brightness ?? Brightness.dark,
         centerTitle: true,
-        backgroundColor: appbarColor??Colours.white,
+        backgroundColor: appbarColor??Colours.c_EEEEEE,
         automaticallyImplyLeading: false,
         title: _buildCustomTitle(context),
         leadingWidth: 0.0,
@@ -62,7 +65,7 @@ class MyScaffold extends StatelessWidget {
   }
 
   Widget _buildCustomTitle(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: titleWidget??Stack(
         alignment: Alignment.center,
@@ -86,7 +89,7 @@ class MyScaffold extends StatelessWidget {
               constraints: BoxConstraints(
                   maxWidth: 400.w
               ),
-              child: Text(title ?? '', style: TextStyle(fontSize: 32.sp, color: Colors.black, decoration: TextDecoration.none)),
+              child: Text(title ?? '', style: TextStyle(fontSize: 32.sp, color: Colors.black, decoration: TextDecoration.none,fontWeight: FontWeight.w500)),
             )
             ),
           ),

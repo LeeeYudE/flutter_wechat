@@ -68,8 +68,19 @@ dependencies:
   webview_flutter: ^2.0.3
 
   event_bus:  ^2.0.0
+  #桌面长按快捷操作
   shortcut: ^0.0.1
   uuid: ^3.0.6
+  #pop菜单
+  custom_pop_up_menu: ^1.2.4
+  #扫一扫
+  flutter_qr_reader: ^1.0.5
+  #生成二维码
+  qr_flutter: ^4.0.0
+  #保存图片到手机
+  image_gallery_saver: ^1.7.1
+
+
 
   flutter_localizations:
     sdk: flutter
@@ -115,6 +126,8 @@ flutter:
     - assets/images/chat/
     - assets/images/mine/
     - assets/images/discover/
+    - assets/images/contact/
+    - assets/images/scan/
     - assets/json/
 
   # To add assets to your application, add an assets section, like this:

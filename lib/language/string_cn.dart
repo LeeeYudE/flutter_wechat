@@ -1,12 +1,9 @@
 
 import 'strings.dart';
 
-/// @author Barry
-/// @date 2020/8/19
-/// describe:
 const Map<String, String> languageChinese = {
   ...noTranslate,
-  Ids.appName: '备份密码',
+  Ids.appName: '微信',
   Ids.confirm: '确定',
   Ids.cancel: '取消',
   Ids.languageSelect: '选择语言',
@@ -69,5 +66,26 @@ const Map<String, String> languageChinese = {
   Ids.phone_only_use_check: '上述手机号仅用于登录验证',
   Ids.user_no_exist: '用户不存在',
   Ids.passowrd_too_short: '密码长度不得低于6位数',
+
+  Ids.wachat: '微信',
+  Ids.contacts: '通讯录',
+  Ids.discover: '发现',
+  Ids.mine: '我的',
+  Ids.create_chat: '发起群聊',
+  Ids.add_friend: '添加朋友',
+  Ids.scan: '扫一扫',
+  Ids.receive_payment: '收付款',
+  Ids.qrcode_business_card: '二维码名片',
+  Ids.scan_qrcode_business_card: '扫一扫上面的二维码图案，加我微信',
+  Ids.save_to_phone: '保存到手机',
+  Ids.save_success: '保存成功',
+  Ids.save_fail: '保存失败',
+  Ids.no_permission: '暂无权限',
+  Ids.new_friend: '新的朋友',
+  Ids.lable: '标签',
+  Ids.group_chat: '群聊',
+  Ids.accound_and_phone: '账号/手机号',
+  Ids.my_wechat_id: '我的微信id',
+  Ids.search: '搜索',
 
 };

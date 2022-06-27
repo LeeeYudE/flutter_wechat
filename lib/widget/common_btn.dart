@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:wechat/core.dart';
 import '../color/colors.dart';
+import '../utils/datetime_util.dart';
 
 class CommonBtn extends StatefulWidget {
 
@@ -23,12 +24,22 @@ class CommonBtn extends StatefulWidget {
 }
 
 class _CommonBtnState extends State<CommonBtn> {
+  ///防止重复点击
+  static const int CLICK_TIME = 200;
+
+  int _lastClickTime = 0;
   bool _isPan = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.enable?widget.onTap:null,
+      onTap: (){
+        var dateTimeNowMilli = DateTimeUtil.dateTimeNowMilli();
+        if(dateTimeNowMilli - _lastClickTime > CLICK_TIME){
+          _lastClickTime = dateTimeNowMilli;
+          if(widget.enable)widget.onTap?.call();
+        }
+      },
       behavior: HitTestBehavior.opaque,
       child: Opacity(
         opacity: _isPan && widget.enable ?0.8:1,

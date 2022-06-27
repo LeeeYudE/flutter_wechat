@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../route/slide_transition_route.dart';
 import '../route/transparent_rounter.dart';
-
+import '../widget/dialog/dialog_bottom_layout.dart';
+import '../widget/dialog/dialog_bottom_widget.dart';
 
 class NavigatorUtils{
 
@@ -58,6 +59,16 @@ class NavigatorUtils{
     );
   }
 
+  static Future<T?> showBottomDialog<T>(Widget dialog, {bool barrierDismissible = false,}) {
+    return Get.generalDialog<T>(
+      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+        return DialogBottomLayout(dialog);
+      },
+    );
+  }
 
+  static Future<T?> showBottomItemsDialog<T>(List<DialogBottomWidgetItem> list, {bool barrierDismissible = false,}) {
+    return showBottomDialog(DialogBottomWidget(list));
+  }
 
 }

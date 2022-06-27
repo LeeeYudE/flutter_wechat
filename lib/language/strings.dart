@@ -76,7 +76,28 @@ class Ids {
   static const String user_no_exist = 'user_no_exist';
   static const String passowrd_too_short = 'passowrd_too_short';
 
+  static const String wachat = 'wachat';
+  static const String contacts = 'contacts';
+  static const String discover = 'discover';
+  static const String mine = 'mine';
 
+  static const String create_chat = 'create_chat';
+  static const String add_friend = 'add_friend';
+  static const String scan = 'scan';
+  static const String receive_payment  = 'receive_payment';
+
+  static const String qrcode_business_card  = 'qrcode_business_card';
+  static const String scan_qrcode_business_card  = 'scan_qrcode_business_card';
+  static const String save_to_phone  = 'save_to_phone';
+  static const String save_success  = 'save_success';
+  static const String save_fail  = 'save_fail';
+  static const String no_permission  = 'no_permission';
+  static const String new_friend  = 'new_friend';
+  static const String group_chat  = 'group_chat';
+  static const String lable  = 'lable';
+  static const String accound_and_phone  = 'accound_and_phone';
+  static const String my_wechat_id  = 'my_wechat_id';
+  static const String search  = 'search';
 
 
 }

@@ -32,7 +32,7 @@ class Colours {
       brightness: Brightness.light,
       primaryColor: color,
       platform: TargetPlatform.iOS,
-      scaffoldBackgroundColor: Colours.white,
+      scaffoldBackgroundColor: c_EEEEEE,
       focusColor: color,
       cursorColor: color,
       dividerColor: color,
@@ -155,6 +155,7 @@ class Colours {
   static const Color c_0066FF = Color(0xFF0066FF);
   static const Color c_FF9B63 = Color(0xFFFF9B63);
   static const Color c_63A1FF = Color(0xFF63A1FF);
+  static const Color transparent = Color(0x00000000);
 
   static const Color line_color = Color(0xFFA3A3A4);
 

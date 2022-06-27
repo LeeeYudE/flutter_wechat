@@ -7,7 +7,6 @@ import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:wechat/core.dart';
 import 'package:wechat/utils/language_util_v2.dart';
 
 import 'app_pages.dart';

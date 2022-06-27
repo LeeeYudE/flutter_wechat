@@ -1,7 +1,12 @@
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat/color/colors.dart';
+import 'package:wechat/utils/utils.dart';
 import 'package:wechat/widget/base_scaffold.dart';
+import 'package:wechat/core.dart';
+import 'package:wechat/widget/tap_widget.dart';
 
+import '../../../language/strings.dart';
 import '../widget/main_appbar.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -12,19 +17,24 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
+
+  List<String> menuItems = [];
+
+  final CustomPopupMenuController _controller = CustomPopupMenuController();
+
+
+
   @override
   Widget build(BuildContext context) {
-    return MyScaffold(
-      showLeading: false,
-      title: '微信',
-      appbarColor: Colours.c_EEEEEE,
-      body: _buildBody(),
+    return MainScaffold(
+      Ids.wachat.str(),
+      _buildBody()
     );
   }
 
   _buildBody() {
     return Container(
-      color: Colours.theme_color,
+      color: Colours.white,
     );
   }
 }
