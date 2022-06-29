@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 
@@ -10,7 +9,6 @@ import '../../../utils/navigator_utils.dart';
 import '../../../utils/utils.dart';
 import '../../../widget/input_field.dart';
 import '../../../widget/tap_widget.dart';
-import '../mine/qrcode_business_card_page.dart';
 import 'controller/search_friend_controller.dart';
 
 class SearchFriendPage extends BaseGetBuilder<SearchFriendController> {
@@ -78,5 +76,6 @@ class SearchFriendPage extends BaseGetBuilder<SearchFriendController> {
       ),
     );
   }
+
 
 }

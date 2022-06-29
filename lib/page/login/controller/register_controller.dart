@@ -96,7 +96,7 @@ class RegisterController extends BaseXController{
       user.password = password;
       user.mobile = phone;
       user['nickname'] = nickname;
-      user['wx_id'] = "wx_id_"+Md5Util.generateMd5(const Uuid().v4().toString());
+      user['wx_id'] = "wxid_"+Md5Util.generateMd5(const Uuid().v4().toString()).substring(16);
       await user.signUp();
       LCUser.logout();
       NavigatorUtils.offNamed(RegisterSuccessPage.routeName);

@@ -27,7 +27,7 @@ class LoginPhoneController extends BaseXController{
 
   login() async {
     lcPost(() async {
-     var bool = await UserController().login(phone, passwordController.text.toString());
+     var bool = await UserController.instance.login(phone, passwordController.text.toString());
      if(bool){
        NavigatorUtils.offAllNamed(MainPage.routeName);
      }

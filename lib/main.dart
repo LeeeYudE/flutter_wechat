@@ -11,6 +11,7 @@ import 'package:wechat/utils/language_util_v2.dart';
 
 import 'app_pages.dart';
 import 'color/colors.dart';
+import 'controller/chat_controller.dart';
 import 'controller/user_controller.dart';
 import 'language/translation_service.dart';
 import 'package:leancloud_storage/leancloud.dart';
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Get.put(UserController(),permanent: true);
+    Get.put(ChatController(),permanent: true);
     ///状态栏字体颜色
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }

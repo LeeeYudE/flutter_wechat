@@ -9,7 +9,10 @@ import 'package:wechat/page/login/splash_page.dart';
 import 'package:wechat/page/login/verify_machine_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
 import 'package:wechat/page/main/contacts/add_friend_page.dart';
+import 'package:wechat/page/main/contacts/friend_detail_page.dart';
+import 'package:wechat/page/main/contacts/new_friend_page.dart';
 import 'package:wechat/page/main/contacts/search_friend_page.dart';
+import 'package:wechat/page/main/mine/setting_page.dart';
 import 'package:wechat/page/main/discover/scan_qrcode_page.dart';
 import 'package:wechat/page/main/main_page.dart';
 import 'package:wechat/page/main/mine/qrcode_business_card_page.dart';
@@ -80,6 +83,18 @@ class AppPages {
       name: SearchFriendPage.routeName,
       page: () => SearchFriendPage(),
     ),
+    _getPage(
+      name: FriendDetailPage.routeName,
+      page: () => FriendDetailPage(),
+    ),
+    _getPage(
+      name: SettingPage.routeName,
+      page: () => const SettingPage(),
+    ),
+    _getPage(
+      name: NewFriendPage.routeName,
+      page: () => NewFriendPage(),
+    ),
   ];
 
   static GetPage _getPage({
@@ -90,6 +105,7 @@ class AppPages {
     return GetPage(
       name: name,
       binding: binding,
+      transition: Transition.fadeIn,///页面过度效果
       page: () {
         debugPrint('pageName=$name');
         return page();

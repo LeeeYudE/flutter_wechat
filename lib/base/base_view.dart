@@ -42,6 +42,9 @@ abstract class BaseGetBuilder<T extends GetxController> extends GetView<T> {
     return super.createElement();
   }
 
+
+  Widget controllerBuilder(BuildContext context, T controller);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<T>(
@@ -50,8 +53,6 @@ abstract class BaseGetBuilder<T extends GetxController> extends GetView<T> {
          return controllerBuilder(context,controller);
         });
   }
-
-  Widget controllerBuilder(BuildContext context, T controller);
 
   ///获取控制器，为null会直接使用默认的
   T? getController();

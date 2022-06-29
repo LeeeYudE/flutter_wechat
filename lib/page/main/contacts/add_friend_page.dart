@@ -35,8 +35,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
     return Column(
       children: [
         TapWidget(
-          onTap: () {
-            NavigatorUtils.toNamed(SearchFriendPage.routeName);
+          onTap: () async {
+           var result = await NavigatorUtils.toNamed(SearchFriendPage.routeName);
+           if(result??false){
+             NavigatorUtils.pop();
+           }
           },
           child: Container(
             height: 60.w,

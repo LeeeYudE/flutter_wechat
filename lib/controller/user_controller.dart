@@ -13,15 +13,6 @@ import '../utils/navigator_utils.dart';
 
 class UserController extends BaseXController {
 
-  factory UserController() => _getInstance();
-  UserController._();
-  static UserController? _instance;
-
-  static UserController _getInstance() {
-    _instance ??= UserController._();
-    return _instance!;
-  }
-
   static UserController get instance => Get.find();
   ViewState _initState = ViewState.Init;
 
@@ -30,29 +21,23 @@ class UserController extends BaseXController {
   bool get isLogin => user != null;
 
   bool get isInited => _initState == ViewState.Idle;
+  String get username => user?.username??'';
 
   @override
-  onInit(){
-    init();
+  onReady(){
+    _init();
   }
 
-  init() async {
+  _init() async {
     user = await LCUser.getCurrent();
+    _initState = ViewState.Idle;
     if(user == null){
-      _initState = ViewState.Idle;
       update();
     }else{
       Future.delayed(1000.toMilliSeconds,(){
         NavigatorUtils.offNamed(MainPage.routeName);
       });
     }
-
-  }
-
-  test() async {
-    LCObject object = LCObject('TestObject');
-    object['words'] = 'Hello world!';
-    await object.save();
   }
 
   checkLogin({required VoidCallback callback , bool needCallback = false}) async {

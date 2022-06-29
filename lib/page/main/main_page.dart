@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:wechat/controller/chat_controller.dart';
 import 'package:wechat/page/main/contacts/contacts_page.dart';
 import 'package:wechat/page/main/discover/discover_page.dart';
 import 'package:wechat/page/main/wechat/chat_list_page.dart';
@@ -25,8 +26,9 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    ChatController.instance.friendIndex();
     _pages.add(const ChatListPage());
-    _pages.add(const ContactsPage());
+    _pages.add(ContactsPage());
     _pages.add(const DiscoverPage());
     _pages.add(const MinePage());
   }

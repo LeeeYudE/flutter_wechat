@@ -13,6 +13,8 @@ import '../../widget/common_btn.dart';
 
 class SplashPage extends BaseGetBuilder<UserController> {
 
+  static const String routeName = '/';
+
   @override
   UserController? getController() => null;
 

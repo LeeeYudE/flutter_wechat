@@ -43,6 +43,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  bindings_compatible:
+    dependency: transitive
+    description:
+      name: bindings_compatible
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -85,6 +92,41 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  camera:
+    dependency: transitive
+    description:
+      name: camera
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.8+1"
+  camera_android:
+    dependency: transitive
+    description:
+      name: camera_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.8+3"
+  camera_avfoundation:
+    dependency: transitive
+    description:
+      name: camera_avfoundation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.8+2"
+  camera_platform_interface:
+    dependency: transitive
+    description:
+      name: camera_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
+  camera_web:
+    dependency: transitive
+    description:
+      name: camera_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1+6"
   characters:
     dependency: transitive
     description:
@@ -217,14 +259,14 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.0"
+    version: "6.2.1"
   extended_image_library:
     dependency: "direct main"
     description:
       name: extended_image_library
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.3.0"
   fake_async:
     dependency: transitive
     description:
@@ -943,6 +985,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:
@@ -1075,7 +1124,14 @@ packages:
       name: wechat_assets_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.2.0"
+    version: "7.3.2"
+  wechat_camera_picker:
+    dependency: "direct main"
+    description:
+      name: wechat_camera_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.4.0"
   win32:
     dependency: transitive
     description:
@@ -1106,4 +1162,4 @@ packages:
     version: "3.1.1"
 sdks:
   dart: ">=2.17.0 <3.0.0"
-  flutter: ">=2.10.0"
+  flutter: ">=3.0.0"

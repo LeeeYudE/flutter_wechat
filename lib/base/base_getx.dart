@@ -50,21 +50,31 @@ abstract class BaseXController extends GetxController {
     DialogUtil.disimssLoading();
   }
 
-  lcPost(Function function,{ValueChanged<LCException>? onError,bool? showloading = true,bool? showToast = true,String? loadingMsg}) async {
+  lcPost(Function function,{ValueChanged<LCException>? onError,bool? showloading = true,bool? showToast = true,String? loadingMsg,bool changeState = false}) async {
     if(showloading??false) {
       showLoading(msg: loadingMsg);
     }
+    if(changeState){
+      setBusyState();
+    }
     try{
      await function();
+     if(changeState){
+       setIdleState();
+     }
     }on LCException catch (e){
       if(showToast??false){
         e.message.toast();
+      }
+      if(changeState){
+        setErrorState();
       }
       debugPrint('${e.code} : ${e.message}');
     }
     if(showloading??false) {
       disimssLoading();
     }
+
   }
 
   @override

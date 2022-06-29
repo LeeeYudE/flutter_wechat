@@ -98,6 +98,23 @@ class Ids {
   static const String accound_and_phone  = 'accound_and_phone';
   static const String my_wechat_id  = 'my_wechat_id';
   static const String search  = 'search';
+  static const String service  = 'service';
+  static const String favorite = 'favorite';
+  static const String friends_circle = 'friends_circle';
+  static const String emoji = 'emoji';
+
+  static const String account_and_safety = 'account_and_safety';
+  static const String new_message_notify = 'new_message_notify';
+  static const String chat = 'chat';
+  static const String common = 'common';
+  static const String friend_permission = 'friend_permission';
+  static const String about_wechat = 'about_wechat';
+  static const String help_and_feedback = 'help_and_feedback';
+  static const String logout = 'logout';
+  static const String add_to_contacts = 'add_to_contacts';
+  static const String send_message = 'send_message';
+  static const String send_success = 'send_success';
+  static const String agree = 'agree';
 
 
 }

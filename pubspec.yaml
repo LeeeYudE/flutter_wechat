@@ -54,7 +54,10 @@ dependencies:
   extended_image_library: ^3.1.2
   extended_image: ^6.0.3
   icons_launcher: ^1.1.0
-  wechat_assets_picker: ^7.0.0
+  #微信选图
+  wechat_assets_picker: ^7.3.2
+  #微信拍照
+  wechat_camera_picker: ^3.4.0
 
 
   leancloud_storage: ^0.7.8
@@ -99,7 +102,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

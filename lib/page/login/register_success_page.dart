@@ -17,6 +17,7 @@ class RegisterSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyScaffold(
       body: _buildBody(context),
+      appbarColor: Colours.white,
       showLeading: false,
     );
   }

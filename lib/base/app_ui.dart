@@ -72,7 +72,7 @@ class AppUI extends AbstractAppUI {
     return Column(
       children:  [
         const Spacer(flex: 1),
-        LoadWidget(size: 100.w,color: Colours.primaryColor(context)),
+        LoadWidget(size: 100.w,color: Colours.c_999999),
         const Spacer(flex: 2),
       ],
     );
