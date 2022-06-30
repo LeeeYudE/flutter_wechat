@@ -43,7 +43,7 @@ class DialogUtil{
 
   static Future<File?> choosePhotoDialog(BuildContext context , String title ,{bool crop = false}){
    return showModalBottomSheet(
-        backgroundColor: Colours.c15,
+        backgroundColor: Colours.c_CCCCCC,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(ScreenUtilExt.setWidth(60)),

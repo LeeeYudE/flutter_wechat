@@ -6,11 +6,11 @@ extension Unwrap<T> on List<T?>? {
 }
 
 extension ListExt<T> on List<T> {
-  void forEachIndex(void action(int index, T value)) {
+  void forEachIndex(void Function(int index, T value) action) {
     asMap().forEach(action);
   }
 
-  bool hasIndex(bool test(T element)) {
+  bool hasIndex(bool Function(T element) test) {
     return indexWhere(test) != -1;
   }
 

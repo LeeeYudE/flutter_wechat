@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wechat/controller/chat_controller.dart';
+import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/page/main/contacts/contacts_page.dart';
 import 'package:wechat/page/main/discover/discover_page.dart';
-import 'package:wechat/page/main/wechat/chat_list_page.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/lazy_indexed_stack.dart';
+import '../../controller/friend_controller.dart';
+import 'chat/chat_list_page.dart';
 import 'mine/mine_page.dart';
 import 'widget/main_bottom_bar.dart';
 
@@ -26,8 +27,9 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    ChatController.instance.friendIndex();
-    _pages.add(const ChatListPage());
+    FriendController.instance.friendIndex();
+    ChatManagerController.instance.initClient();
+    _pages.add(ChatListPage());
     _pages.add(ContactsPage());
     _pages.add(const DiscoverPage());
     _pages.add(const MinePage());

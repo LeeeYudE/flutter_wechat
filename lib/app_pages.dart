@@ -8,6 +8,7 @@ import 'package:wechat/page/login/safety_verify_page.dart';
 import 'package:wechat/page/login/splash_page.dart';
 import 'package:wechat/page/login/verify_machine_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
+import 'package:wechat/page/main/chat/chat_page.dart';
 import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/page/main/contacts/new_friend_page.dart';
@@ -95,6 +96,10 @@ class AppPages {
       name: NewFriendPage.routeName,
       page: () => NewFriendPage(),
     ),
+    _getPage(
+      name: ChatPage.routeName,
+      page: () => ChatPage(),
+    ),
   ];
 
   static GetPage _getPage({
@@ -105,7 +110,7 @@ class AppPages {
     return GetPage(
       name: name,
       binding: binding,
-      transition: Transition.fadeIn,///页面过度效果
+      // transition: Transition.fadeIn,///页面过度效果
       page: () {
         debugPrint('pageName=$name');
         return page();

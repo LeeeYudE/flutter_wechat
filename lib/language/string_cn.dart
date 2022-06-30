@@ -103,5 +103,10 @@ const Map<String, String> languageChinese = {
   Ids.send_message: '发消息',
   Ids.send_success: '发送成功',
   Ids.agree: '同意',
+  Ids.item_image: '[图片]',
+  Ids.item_audio: '[语音]',
+  Ids.item_video: '[视频]',
+  Ids.item_file: '[文件]',
+  Ids.item_location: '[路径]',
 
 };

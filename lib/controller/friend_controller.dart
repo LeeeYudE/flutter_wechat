@@ -3,13 +3,17 @@ import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/controller/user_controller.dart';
 
-class ChatController extends BaseXController {
+class FriendController extends BaseXController{
 
- static const List<String> tags = ['⬆️','a','b','c','d','e','f','g','h','i','j','k','l','n','m','o','p','q','r','s','p','u','v','w','x','y','z'];
+  FriendController._();
 
- static ChatController get instance => Get.find();
+  FriendController.create();
 
+  static FriendController get instance => Get.find();
+
+  static const List<String> tags = ['⬆️','a','b','c','d','e','f','g','h','i','j','k','l','n','m','o','p','q','r','s','p','u','v','w','x','y','z'];
   RxList<LCObject> friends = <LCObject>[].obs;
+
 
   friendIndex(){
     lcPost(() async {
@@ -25,5 +29,6 @@ class ChatController extends BaseXController {
   isFriend(String username){
     return friends.indexWhere((element) => element['followee']['username']==username) != -1;
   }
+
 
 }

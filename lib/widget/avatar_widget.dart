@@ -10,12 +10,14 @@ class AvatarWidget extends StatelessWidget {
   final double weightWidth;
   final bool hero;
   final double? decorationWidth;
+  final double? borderRadius;
 
   const AvatarWidget({
     required this.avatar,
     required this.weightWidth,
     this.hero = false,
-    this.decorationWidth
+    this.decorationWidth,
+    this.borderRadius
   });
 
   @override
@@ -23,14 +25,13 @@ class AvatarWidget extends StatelessWidget {
     return _buildAvatarWidget(avatar);
   }
 
-
   Widget _buildAvatarWidget(String? avatar) {
     return Container(
       width: weightWidth,
       height: weightWidth,
       decoration: decorationWidth != null ? Colours.white.borderDecoration(borderRadius: 12.w,width: decorationWidth!):null,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12.w,),
+        borderRadius: BorderRadius.circular(borderRadius??12.w,),
         child: TextUtil.isEmpty(avatar) ? _buildEmptyImage() : hero ? Hero(tag: avatar!, child: _buildImage(avatar)): _buildImage(avatar!),
       ),
     );

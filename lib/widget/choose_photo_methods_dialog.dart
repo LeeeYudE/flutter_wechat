@@ -32,7 +32,7 @@ class ChoosePhotoMethodsDialog extends Dialog {
                 child: Text(
                   title,
                   style: TextStyle(
-                    color: Colours.c12,
+                    color: Colours.c_6C4D30,
                     fontSize: ScreenUtilExt.setSp(31.68),
                     fontWeight: FontWeight.w600,
                   ),

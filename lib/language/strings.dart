@@ -116,6 +116,12 @@ class Ids {
   static const String send_success = 'send_success';
   static const String agree = 'agree';
 
+  static const String item_image = '[image]';
+  static const String item_audio = '[voice]';
+  static const String item_video = '[video]';
+  static const String item_file = '[file]';
+  static const String item_location = '[location]';
+
 
 }
 

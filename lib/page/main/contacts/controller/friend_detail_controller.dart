@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/base/base_getx.dart';
-import 'package:wechat/controller/chat_controller.dart';
+import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 
+import '../../../../controller/friend_controller.dart';
 import '../../../../language/strings.dart';
 import '../friend_detail_page.dart';
 
@@ -41,7 +42,7 @@ class FriendDetailController extends BaseXController {
         List<LCUser?>? results = await userQueryPhone.find();
         if(results?.isNotEmpty??false){
           friend = results!.first;
-          isFriend = ChatController.instance.isFriend(username);
+          isFriend = FriendController.instance.isFriend(username);
         }
       },changeState: true,showloading: false);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wechat/base/base_view.dart';
+import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/core.dart';
 import '../../../base/common_state_widget_x.dart';
@@ -113,7 +114,7 @@ class FriendDetailPage extends BaseGetBuilder<FriendDetailController> {
   _buildSendMessage(FriendDetailController controller){
     return TapWidget(
       onTap: () {
-
+        ChatManagerController.instance.createSingleChat(controller.friend?.username??'');
       },
       child: Container(
         height: 100.w,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat/base/base_view.dart';
 import 'package:wechat/color/colors.dart';
-import 'package:wechat/controller/chat_controller.dart';
+import 'package:wechat/controller/chat_manager_controller.dart';
+import 'package:wechat/controller/friend_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/remove_top_widget.dart';
@@ -16,7 +17,7 @@ import '../widget/main_appbar.dart';
 import 'widget/friend_item.dart';
 import 'new_friend_page.dart';
 
-class ContactsPage extends BaseGetBuilder<ChatController>{
+class ContactsPage extends BaseGetBuilder<FriendController>{
 
   final IndexBarController _indexBarController = IndexBarController();
   final IndexBarDragListener _barDragListener = IndexBarDragListener.create();
@@ -30,14 +31,14 @@ class ContactsPage extends BaseGetBuilder<ChatController>{
   }
 
   @override
-  Widget controllerBuilder(BuildContext context, ChatController controller) {
+  Widget controllerBuilder(BuildContext context, FriendController controller) {
     return MainScaffold(
         Ids.contacts.str(),
         _buildBody(controller)
     );
   }
 
-  Widget _buildBody(ChatController controller) {
+  Widget _buildBody(FriendController controller) {
     return Stack(
       children: [
         Obx(()=> RemoveTopPaddingWidget(child: ListView.builder(itemBuilder: (context , index){
@@ -91,7 +92,7 @@ class ContactsPage extends BaseGetBuilder<ChatController>{
     return Align(
       alignment: Alignment.centerRight,
       child: IndexBar(
-        data: ChatController.tags,
+        data: FriendController.tags,
         itemHeight: 30.w,
         margin: EdgeInsets.only(bottom: 10.w),
         indexHintBuilder: (BuildContext context, String tag){
@@ -104,6 +105,6 @@ class ContactsPage extends BaseGetBuilder<ChatController>{
   }
 
   @override
-  ChatController? getController() => null;
+  FriendController? getController() => null;
 
 }

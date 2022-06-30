@@ -13,6 +13,11 @@ import '../utils/navigator_utils.dart';
 
 class UserController extends BaseXController {
 
+  UserController._();
+
+  UserController.create();
+
+
   static UserController get instance => Get.find();
   ViewState _initState = ViewState.Init;
 

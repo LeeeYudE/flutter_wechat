@@ -70,6 +70,14 @@ abstract class BaseXController extends GetxController {
         setErrorState();
       }
       debugPrint('${e.code} : ${e.message}');
+    }on Exception catch (e){
+      if(showToast??false){
+        'Exception'.toast();
+      }
+      if(changeState){
+        setErrorState();
+      }
+      e.printError();
     }
     if(showloading??false) {
       disimssLoading();

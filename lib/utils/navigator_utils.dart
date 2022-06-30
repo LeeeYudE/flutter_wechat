@@ -23,11 +23,17 @@ class NavigatorUtils{
   }
 
   static Future? offPage(Widget page, {dynamic arguments}) {
+
     return Get.off(page, arguments: arguments);
   }
 
   static Future? toPage(Widget page, {dynamic arguments}) {
     return Get.to(page, arguments: arguments);
+  }
+
+  ///退到某个页面再打开页面
+  static Future? offNamedUntil(String toName , String withName, {dynamic arguments}){
+    return Get.offNamedUntil(toName, ModalRoute.withName(withName,),arguments: arguments);
   }
 
   static Future pushTransparentPage(BuildContext? context, Widget page, {String? pageName, Route? route , int? direction}) async {

@@ -54,8 +54,7 @@ class Colours {
   static const Color theme_color_4 = Color(0xff1296db);
   static const Color theme_color_5 = Color(0xFFFED648);
 
-  static const Color text_normal = Color(0xFF666666);
-  static const Color text_gray = Color(0xFF999999);
+
   static const Color text_gray_c = Color(0xFFcccccc);
   static const Color bg_gray = Color(0xFFF6F6F6);
   static const Color text_blue = Color(0xFF4688FA);
@@ -74,22 +73,6 @@ class Colours {
   static Color black_transparent = Colors.black.withOpacity(0.8);
   static Color black_background = Colors.black.withOpacity(0.6);
 
-  static const Color c1 = Color(0xFF5B3D21); //主色
-  static const Color c2 = Color(0xFFe8e8e9); //主色
-  static const Color c3 = Color(0xFFe6b670); //主色金色
-  static const Color c4 = Color(0xFF0a0a14); //背景色
-  static const Color c5 = Color(0xFF60657b); //灰色
-  static const Color c6 = Color(0xaaffffff); //15%不透明度	分隔线颜色
-  static const Color c7 = Color(0xFF00aa34); //在线色
-  static const Color c8 = Color(0xFFe9381b); //红点颜色
-  static const Color c9 = Color(0xffDEAB68); //按钮背景色
-  static const Color c11 = Color(0xffF1C78F); //appbar返回颜色
-  static const Color c12 = Color(0xffFFEBCE); //文字主色
-  static const Color c13 = Color(0xff3E352C); //输入框背景色
-  static const Color c14 = Color(0xff291c10); //暗黑系背景底色
-  static const Color c15 = Color(0xff3B2A1A); //弹窗背景色
-  static const Color c16 = Color(0xFF211305); //状态栏背景色
-  static const Color c17 = Color(0xff8C6238); //暗黑系版按钮背景色
   static const Color white = Color(0xffffffff); //暗黑系版按钮背景色
   static const Color black = Color(0xff000000); //暗黑系版按钮背景色
 
