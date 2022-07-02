@@ -35,9 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  flutter_baidu_mapapi_map: ^3.1.0+1
-  flutter_baidu_mapapi_search: ^3.1.0
-  flutter_baidu_mapapi_utils: ^3.1.0
+  flutter_baidu_mapapi_map: ^3.2.0
+  flutter_baidu_mapapi_search: ^3.2.0
+  flutter_baidu_mapapi_utils: ^3.2.0
   flutter_bmflocation: ^3.1.0
   flustars: ^2.0.1
   # https://github.com/Sky24n/sp_util
@@ -55,10 +55,9 @@ dependencies:
   extended_image: ^6.0.3
   icons_launcher: ^1.1.0
   #微信选图
-  wechat_assets_picker: ^7.3.2
+  wechat_assets_picker: ^7.1.2
   #微信拍照
   wechat_camera_picker: ^3.4.0
-
 
   leancloud_storage: ^0.7.8
   leancloud_official_plugin: ^1.0.1
@@ -75,15 +74,21 @@ dependencies:
   shortcut: ^0.0.1
   uuid: ^3.0.6
   #pop菜单
-  custom_pop_up_menu: ^1.2.4
+  custom_pop_up_menu: ^1.2.2
   #扫一扫
   flutter_qr_reader: ^1.0.5
   #生成二维码
   qr_flutter: ^4.0.0
   #保存图片到手机
   image_gallery_saver: ^1.7.1
+  #录音
+  flutter_audio_recorder2: ^0.0.2
+  #震动
+  flutter_vibrate: ^1.3.0
+  #富文本输入
+  extended_text_field: ^10.0.0
 
-
+  flutter_staggered_grid_view: ^0.4.0
 
   flutter_localizations:
     sdk: flutter
@@ -131,6 +136,7 @@ flutter:
     - assets/images/discover/
     - assets/images/contact/
     - assets/images/scan/
+    - assets/images/emoji/
     - assets/json/
 
   # To add assets to your application, add an assets section, like this:

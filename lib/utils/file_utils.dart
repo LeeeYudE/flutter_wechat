@@ -1,0 +1,84 @@
+import 'dart:io';
+
+import 'package:flustars/flustars.dart';
+import 'package:path_provider/path_provider.dart';
+
+class FileUtils {
+
+  static Future<Directory> getAppDirectory() async {
+    Directory? tempDir;
+    if (Platform.isIOS) {
+      tempDir = await getApplicationDocumentsDirectory();
+    } else {
+      tempDir = await getExternalStorageDirectory();
+    }
+    final String tempPath = tempDir!.path + '/';
+    final Directory file = Directory(tempPath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
+    return file;
+  }
+
+  static Future<Directory> getAppApkDirectory() async {
+    Directory? tempDir;
+    if (Platform.isIOS) {
+      tempDir = await getApplicationDocumentsDirectory();
+    } else {
+      tempDir = await getExternalStorageDirectory();
+    }
+    final String tempPath = tempDir!.path + '/apk';
+    final Directory file = Directory(tempPath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
+    return file;
+  }
+
+  static Future<Directory> _getTemporaryDirectory() async {
+    final Directory tempDirectory = await getTemporaryDirectory();
+    return tempDirectory;
+  }
+
+  static Future<Directory> getVoiceTemporaryDirectory() async {
+    final Directory tempDirectory = await _getTemporaryDirectory();
+    final String voicePath = tempDirectory.path + '/voice';
+    final Directory file = Directory(voicePath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
+    return file;
+  }
+
+  static Future<Directory> getVideoTemporaryDirectory() async {
+    final Directory tempDirectory = await _getTemporaryDirectory();
+    final String voicePath = tempDirectory.path + '/video';
+    final Directory file = Directory(voicePath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
+    return file;
+  }
+
+
+  static Future<Directory> getImageTemporaryDirectory() async {
+    final Directory tempDirectory = await _getTemporaryDirectory();
+    final String voicePath = tempDirectory.path + '/image';
+    final Directory file = Directory(voicePath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
+    return file;
+  }
+
+  static deleteFile(String path){
+    if(!TextUtil.isEmpty(path)){
+      final lrsFloor = File(path);
+      if(lrsFloor.existsSync()){
+        lrsFloor.deleteSync();
+      }
+    }
+
+  }
+
+}

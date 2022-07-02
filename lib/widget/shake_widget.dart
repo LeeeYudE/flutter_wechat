@@ -19,7 +19,7 @@ class ShakeWidgetState extends State<ShakeWidget> with SingleTickerProviderState
   int _count = 0;
 
   void shakeMe() {
-    WidgetsBinding.instance.addPostFrameCallback((callback) {
+    WidgetsBinding.instance?.addPostFrameCallback((callback) {
       if (_animationController != null &&!_animationController!.isAnimating) {
         _count = 0;
         _animationController?.forward();

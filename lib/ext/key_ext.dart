@@ -47,6 +47,18 @@ extension KeyExt on GlobalKey {
     return false;
   }
 
+  ///判断位置是否在当前控件里面
+  bool includeOffset(Offset otherOffset) {
+    final RenderBox renderBox = currentContext?.findRenderObject() as RenderBox;
+    final size = renderBox.size;
+    final Offset offset = renderBox.localToGlobal(Offset.zero);
+    if(otherOffset.dx > offset.dx && otherOffset.dx < offset.dx + size.width &&
+        otherOffset.dy > offset.dy && otherOffset.dy < offset.dy + size.height){
+      return true;
+    }
+    return false;
+  }
+
   /// 获取截取图片的数据
   Future<Uint8List?> _getImageData(GlobalKey repaintKey) async {
     BuildContext? buildContext = repaintKey.currentContext;

@@ -122,6 +122,22 @@ class Ids {
   static const String item_file = '[file]';
   static const String item_location = '[location]';
 
+  static const String press_start_voice = 'press_start_voice';
+  static const String press_end_voice = 'press_end_voice';
+  static const String press_cancel_voice = 'press_cancel_voice';
+  static const String record_too_short = 'record_too_short';
+  static const String recording = 'recording';
+  static const String loosen_to_cancle = 'loosen_to_cancle';
+  static const String up_for_cancel = 'up_for_cancel';
+
+  static const String album = 'album';
+  static const String shoot = 'shoot';
+  static const String location = 'location';
+  static const String red_package = 'rea_package';
+  static const String file = 'file';
+  static const String send = 'send';
+  static const String all_emoji = 'all_emoji';
+
 
 }
 

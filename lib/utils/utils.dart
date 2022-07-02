@@ -1,6 +1,8 @@
 
 class Utils {
 
+  Utils._();
+
   static const String PNG = 'png';
   static const String WEBP = 'webp';
   static const String SVG = 'svg';
@@ -11,6 +13,7 @@ class Utils {
   static const String DIR_CONTACT = 'contact';
   static const String DIR_DICOVER = 'dicover';
   static const String DIR_MINE = 'mine';
+  static const String DIR_EMOJI = 'emoji';
 
   //获取图片位置
   static String getImgPath(String name, {String format = PNG, String? dir}) {

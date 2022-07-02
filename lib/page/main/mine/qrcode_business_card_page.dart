@@ -43,8 +43,7 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
          if(result == 0) {
            _repaintKey.doSaveImage();
          }
-        },
-        child: Image.asset(Utils.getImgPath('ic_more_black',dir: Utils.DIR_ICON,),width: 40.w,height: 40.w,))
+        }, child: Image.asset(Utils.getImgPath('ic_more_black',dir: Utils.DIR_ICON,),width: 40.w,height: 40.w,))
       ],
     );
   }

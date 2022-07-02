@@ -5,6 +5,7 @@ import 'package:wechat/page/main/discover/discover_page.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/lazy_indexed_stack.dart';
 import '../../controller/friend_controller.dart';
+import '../../utils/emoji_text.dart';
 import 'chat/chat_list_page.dart';
 import 'mine/mine_page.dart';
 import 'widget/main_bottom_bar.dart';
@@ -29,10 +30,11 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     FriendController.instance.friendIndex();
     ChatManagerController.instance.initClient();
-    _pages.add(ChatListPage());
+    _pages.add(const ChatListPage());
     _pages.add(ContactsPage());
     _pages.add(const DiscoverPage());
     _pages.add(const MinePage());
+    EmojiUtil.instance.init();
   }
 
   @override

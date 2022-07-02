@@ -1,0 +1,148 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
+import 'package:wechat/base/constant.dart';
+import 'package:wechat/utils/navigator_utils.dart';
+import 'package:wechat/widget/common_btn.dart';
+import 'package:wechat/widget/remove_top_widget.dart';
+import '../../../base/base_view.dart';
+import '../../../color/colors.dart';
+import '../../../language/strings.dart';
+import '../../../widget/tap_widget.dart';
+import 'controller/select_address_page.dart';
+import 'package:wechat/core.dart';
+
+class SelectAddressPage extends BaseGetBuilder<SelectAddressController> {
+
+  static const String routeName='/SelectAddressPage';
+
+  final DraggableScrollableController _draggableScrollableController = DraggableScrollableController();
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  SelectAddressController? getController() => SelectAddressController();
+
+  @override
+  Widget controllerBuilder(BuildContext context, SelectAddressController controller) {
+    return Scaffold(
+      body: _buildBody(context,controller),
+    );
+  }
+
+  _buildBody(BuildContext context, SelectAddressController controller){
+    return Stack(
+      children: [
+        Container(
+          height: double.infinity,
+          margin: EdgeInsets.only(bottom: 480.w),
+          child: Stack(
+            children: [
+              BMFMapWidget(
+                key: controller.mapKey,
+                onBMFMapCreated: (_controller) {
+                  controller.onBMFMapCreated(_controller);
+                },
+                mapOptions: controller.initMapOptions(),
+              ),
+              _buildHeader(),
+              buildSlideTransition(context,controller),
+              _buildMyLocation(context,controller),
+            ],
+          ),
+        ),
+        _buildBottomAddress(context)
+      ],
+    );
+  }
+
+  _buildBottomAddress(BuildContext context){
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: 800.w,
+        child: NotificationListener<DraggableScrollableNotification>(
+          onNotification: (notification){
+            debugPrint('####################');
+            debugPrint('minExtent = ${notification.minExtent}');
+            debugPrint('maxExtent = ${notification.maxExtent}');
+            debugPrint('initialExtent = ${notification.initialExtent}');
+            debugPrint('extent = ${notification.extent}');
+            debugPrint('####################');
+            return true;
+          },
+          child: DraggableScrollableSheet(builder: (BuildContext context, ScrollController scrollController) {
+            return RemoveTopPaddingWidget(
+              child: ListView.builder(itemBuilder: (context , index){
+                return Container(
+                  height: 100.w,
+                  color: Colours.white,
+                  child: Center(child: Text(index.toString(),style: TextStyle(color: Colours.theme_color,fontSize: 32.sp),)),
+                );
+              },itemCount: 100,controller: scrollController,),
+            );
+          }, initialChildSize: 0.6,
+            minChildSize: 0.6,
+            maxChildSize: 1.0,
+            controller: _draggableScrollableController,),
+        ),
+      ),
+    );
+  }
+
+  _buildHeader(){
+    return Container(
+      height: 250.w,
+      padding: EdgeInsets.only(top: 100.w,left: 20.w,right: 20.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Colours.black_background,Colours.transparent]
+        )
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TapWidget(onTap: () {
+            NavigatorUtils.pop();
+          },
+          child: Text(Ids.cancel.str(),style: TextStyle(color: Colours.white,fontSize: 32.sp),)),
+          CommonBtn(text: Ids.send.str(), width: 120.w, height: 60.w, onTap: (){
+
+          })
+        ],
+      ),
+    );
+  }
+
+  Widget buildSlideTransition(BuildContext context, SelectAddressController controller) {
+    return Center(//SlideTransition 用于执行平移动画
+      child: SlideTransition(
+        position: controller.sliderAnimation, //将要执行动画的子view
+        child: Image.asset('icon_slider_location'.imgAsset,width: 80.w,height: 80.w,),
+      ),
+    );
+  }
+
+  _buildMyLocation(BuildContext context, SelectAddressController controller){
+    return Align(alignment: Alignment.bottomRight,
+      child: TapWidget(
+        onTap: () {
+          controller.backMyLocation();
+        },
+        child: Container(
+          margin: EdgeInsets.all(40.w),
+          child: Container(
+            padding: EdgeInsets.all(20.w),
+            decoration: Colours.white.boxDecoration(borderRadius: 50.w),
+            child: const Icon(Icons.my_location,color: Colours.black,),
+          ),
+        ),
+      ),);
+  }
+
+}

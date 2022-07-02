@@ -109,4 +109,19 @@ const Map<String, String> languageChinese = {
   Ids.item_file: '[文件]',
   Ids.item_location: '[路径]',
 
+  Ids.press_start_voice: '按住说话',
+  Ids.press_end_voice: '松开发送',
+  Ids.press_cancel_voice: '取消发送',
+  Ids.record_too_short: '录音时间太短',
+  Ids.recording: '正在录音...',
+  Ids.loosen_to_cancle: '松开取消发送',
+  Ids.up_for_cancel: '上滑取消发送',
+  Ids.album: '相册',
+  Ids.shoot: '拍摄',
+  Ids.location: '位置',
+  Ids.red_package: '红包',
+  Ids.file: '文件',
+  Ids.send: '发送',
+  Ids.all_emoji: '所有表情',
+
 };

@@ -12,7 +12,7 @@ abstract class BaseView<T> extends GetView<T> {
   StatelessElement createElement() {
     debugPrint('charco, createElement=> build-$this');
     onInit();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       debugPrint('charco, createElement=> onReady-$this');
       onReady();
     });
@@ -35,7 +35,7 @@ abstract class BaseGetBuilder<T extends GetxController> extends GetView<T> {
   StatelessElement createElement() {
     debugPrint('charco, createElement=> build-$this');
     onInit();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       debugPrint('charco, createElement=> onReady-$this');
       onReady();
     });

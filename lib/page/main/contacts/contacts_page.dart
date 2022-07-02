@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat/base/base_view.dart';
 import 'package:wechat/color/colors.dart';
-import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/controller/friend_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
