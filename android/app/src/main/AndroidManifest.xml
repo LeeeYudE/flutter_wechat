@@ -16,6 +16,7 @@
     <application
         android:label="小李微信"
         android:name=".MyApplication"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -13,7 +13,8 @@ import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/page/main/contacts/new_friend_page.dart';
 import 'package:wechat/page/main/contacts/search_friend_page.dart';
-import 'package:wechat/page/main/map/select_address_page.dart';
+import 'package:wechat/page/main/map/preview_loctaion_page.dart';
+import 'package:wechat/page/main/map/select_location_page.dart';
 import 'package:wechat/page/main/mine/setting_page.dart';
 import 'package:wechat/page/main/discover/scan_qrcode_page.dart';
 import 'package:wechat/page/main/main_page.dart';
@@ -102,8 +103,12 @@ class AppPages {
       page: () => ChatPage(),
     ),
     _getPage(
-      name: SelectAddressPage.routeName,
-      page: () => SelectAddressPage(),
+      name: SelectLocationPage.routeName,
+      page: () => SelectLocationPage(),
+    ),
+    _getPage(
+      name: PreviewLocationPage.routeName,
+      page: () => PreviewLocationPage(),
     ),
   ];
 

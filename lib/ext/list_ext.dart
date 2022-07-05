@@ -6,12 +6,25 @@ extension Unwrap<T> on List<T?>? {
 }
 
 extension ListExt<T> on List<T> {
+
   void forEachIndex(void Function(int index, T value) action) {
     asMap().forEach(action);
   }
 
   bool hasIndex(bool Function(T element) test) {
     return indexWhere(test) != -1;
+  }
+
+  T? itemWhere(bool Function(T element) test) {
+    var _indexWhere = indexWhere(test);
+    return _indexWhere != -1?this[_indexWhere]:null;
+  }
+
+  T? safetyItem(int index){
+    if(index < 0 || index > length - 1){
+      return null;
+    }
+    return this[index];
   }
 
 }

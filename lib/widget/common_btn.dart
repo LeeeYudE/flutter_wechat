@@ -45,7 +45,7 @@ class _CommonBtnState extends State<CommonBtn> {
         opacity: _isPan && widget.enable ?0.8:1,
         child: Container(
           decoration: BoxDecoration(
-            color: widget.backgroundColor??Colours.currentColor(),
+            color: widget.backgroundColor??Colours.theme_color,
             borderRadius: BorderRadius.circular(widget.borderRadius??10.w),
           ),
           width: widget.width??80.w,

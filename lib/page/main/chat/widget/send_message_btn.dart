@@ -40,7 +40,9 @@ class _SendMessageBtnState extends State<SendMessageBtn> with TickerProviderStat
       }
     });
     controller.addListener(() {
-      setState(() {});
+      if(mounted){
+        setState(() {});
+      }
     });
   }
 
@@ -49,8 +51,12 @@ class _SendMessageBtnState extends State<SendMessageBtn> with TickerProviderStat
     return Center(
       child: Opacity(
         opacity:bezier.value,
-        child: CommonBtn(text: Ids.send.str(), width: 100 * bezier.value, height: 60.w * bezier.value, onTap: (){
-
+        child: CommonBtn(text: Ids.send.str(), width: 100.w * bezier.value, height: 60.w * bezier.value, onTap: (){
+          var text = _chatController.textController.text.trim();
+          if(!TextUtil.isEmpty(text)){
+            _chatController.sendText(text);
+            _chatController.textController.clear();
+          }
         },textStyle: TextStyle(color: Colours.white,fontSize: 28.sp*bezier.value),),
       ),
     );

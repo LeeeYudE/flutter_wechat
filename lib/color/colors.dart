@@ -55,9 +55,6 @@ class Colours {
   static const Color theme_color_5 = Color(0xFFFED648);
 
 
-  static const Color text_gray_c = Color(0xFFcccccc);
-  static const Color bg_gray = Color(0xFFF6F6F6);
-  static const Color text_blue = Color(0xFF4688FA);
   static const Color line = Color(0xFFEEEEEE);
   static const Color order_line = Color(0xFFFFEBCE);
   static const Color me_text_label = Color(0xFFDDDDDD);
@@ -75,6 +72,7 @@ class Colours {
 
   static const Color white = Color(0xffffffff); //暗黑系版按钮背景色
   static const Color black = Color(0xff000000); //暗黑系版按钮背景色
+  static const Color transparent = Color(0x00000000);
 
   static const Color c_301F0F = Color(0xff301F0F);
   static const Color c_5F452D = Color(0xff5F452D);
@@ -140,7 +138,7 @@ class Colours {
   static const Color c_FF9B63 = Color(0xFFFF9B63);
   static const Color c_63A1FF = Color(0xFF63A1FF);
   static const Color c_5B6B8D = Color(0xFF5B6B8D);
-  static const Color transparent = Color(0x00000000);
+  static const Color c_98E165 = Color(0xFF98E165);
 
   static const Color line_color = Color(0xFFA3A3A4);
 

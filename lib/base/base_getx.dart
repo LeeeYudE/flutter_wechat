@@ -50,7 +50,7 @@ abstract class BaseXController extends GetxController {
     DialogUtil.disimssLoading();
   }
 
-  lcPost(Function function,{ValueChanged<LCException>? onError,bool? showloading = true,bool? showToast = true,String? loadingMsg,bool changeState = false}) async {
+  lcPost(Function function,{ValueChanged<Exception>? onError,bool? showloading = true,bool? showToast = true,String? loadingMsg,bool changeState = false}) async {
     if(showloading??false) {
       showLoading(msg: loadingMsg);
     }
@@ -69,6 +69,7 @@ abstract class BaseXController extends GetxController {
       if(changeState){
         setErrorState();
       }
+      onError?.call(e);
       debugPrint('${e.code} : ${e.message}');
     }on Exception catch (e){
       if(showToast??false){
@@ -77,6 +78,7 @@ abstract class BaseXController extends GetxController {
       if(changeState){
         setErrorState();
       }
+      onError?.call(e);
       e.printError();
     }
     if(showloading??false) {

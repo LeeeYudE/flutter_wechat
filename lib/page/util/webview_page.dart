@@ -4,13 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:wechat/color/colors.dart';
+import 'package:wechat/core.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 
 class WebviewArguments{
   String? title;
   String? url;
 
-  WebviewArguments( this.title,this.url);
+  WebviewArguments({this.title,this.url});
 }
 
 class WebViewPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class WebViewPage extends StatefulWidget {
 class _WebViewPageState extends State<WebViewPage> {
 
   late WebviewArguments _webviewArguments;
+  late WebViewController _controller;
 
   @override
   void initState() {
@@ -41,7 +43,23 @@ class _WebViewPageState extends State<WebViewPage> {
       title: _webviewArguments.title,
       body: WebView(
         initialUrl: _webviewArguments.url,
+        onWebViewCreated: (controller){
+          _controller = controller;
+
+        },
+        onPageFinished: (String url){
+          _initTitle(_controller);
+        },
       ),
     );
   }
+
+  _initTitle(WebViewController controller) async {
+    if(TextUtil.isEmpty(_webviewArguments.title)){
+      _webviewArguments.title = await controller.getTitle();
+      print('controller.getTitle() ${_webviewArguments.title}');
+      setState((){});
+    }
+  }
+
 }

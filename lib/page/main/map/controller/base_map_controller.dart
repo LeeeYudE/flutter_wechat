@@ -19,6 +19,7 @@ class BaseMapController extends BaseXController {
 
   LocationFlutterPlugin myLocPlugin = LocationFlutterPlugin();
   BaiduLocation? _lastLocation;
+  BMFCoordinate? _coordinateCenter;
 
   @override
   void onReady() {
@@ -55,7 +56,7 @@ class BaseMapController extends BaseXController {
 
   _onBaiduLocationResult(BaiduLocation result) async {
     print('BaiduLocation ${result.getMap().toString()}');
-    if(_lastLocation == null){
+    if(_lastLocation == null && _coordinateCenter == null){
       dituController?.updateBaiduLocation(result);
     }
     _lastLocation = result;
@@ -111,6 +112,10 @@ class BaseMapController extends BaseXController {
     dituController?.updateBaiduLocation(_lastLocation);
   }
 
+  void moveToLocation(BMFCoordinate coordinate) {
+    dituController?.updateBaiduBMFCoordinate(coordinate);
+  }
+
   /// 创建完成回调
   @mustCallSuper
   void onBMFMapCreated(BMFMapController controller) async {
@@ -122,22 +127,24 @@ class BaseMapController extends BaseXController {
       debugPrint('showUserLocation $showUserLocation');
       _init();
     });
-
-
   }
 
   /// 设置地图参数
-  BMFMapOptions initMapOptions() {
-    String? _loaction = SpUtil.getString(Constant.SP_LAST_LOCATION, defValue: null);
-    double lat = 39.917215;
-    double lng = 116.380341;
-    if(_loaction != null){
-      var split = _loaction.split(',');
-      lat = double.parse(split[0]);
-      lng = double.parse(split[1]);
+  BMFMapOptions initMapOptions({BMFCoordinate? center}) {
+    _coordinateCenter = center;
+    if(center == null){
+      String? _loaction = SpUtil.getString(Constant.SP_LAST_LOCATION, defValue: null);
+      double lat = 39.917215;
+      double lng = 116.380341;
+      if(_loaction != null){
+        var split = _loaction.split(',');
+        lat = double.parse(split[0]);
+        lng = double.parse(split[1]);
+      }
+      center = BMFCoordinate(lat,lng);
     }
     BMFMapOptions mapOptions = BMFMapOptions(
-      center: BMFCoordinate(lat,lng),
+      center: center,
       zoomLevel: Constant.MAP_ZOOM.toInt(),
       changeCenterWithDoubleTouchPointEnabled:true,
       gesturesEnabled:true ,

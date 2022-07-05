@@ -77,16 +77,17 @@ class UserController extends BaseXController {
       return true;
     } on LCException catch (e) {
       e.message.toast();
-      print('${e.code} : ${e.message}');
+      debugPrint('${e.code} : ${e.message}');
       disimssLoading();
       return false;
     }
   }
 
-  logout() async {
+  Future<void> logout() async {
    await LCUser.logout();
    user = null;
    update();
+
   }
 
 }

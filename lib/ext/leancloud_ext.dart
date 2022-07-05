@@ -52,6 +52,37 @@ extension LcConversationExt on Conversation {
 
 extension LCMessageExt on Message{
 
+  static const int TYPE_TEXT = 1;
+  static const int TYPE_IMAGE = 2;
+  static const int TYPE_AUDIO = 3;
+  static const int TYPE_VIDEO = 4;
+  static const int TYPE_FILE = 5;
+  static const int TYPE_LOCATION = 6;
+
+  bool get isSend => fromClientID == UserController.instance.username;
+
+  int get messageType {
+    if(this is TextMessage){
+      return TYPE_TEXT;
+    }
+    if(this is ImageMessage){
+      return TYPE_IMAGE;
+    }
+    if(this is AudioMessage){
+      return TYPE_AUDIO;
+    }
+    if(this is VideoMessage){
+      return TYPE_VIDEO;
+    }
+    if(this is FileMessage){
+      return TYPE_FILE;
+    }
+    if(this is LocationMessage){
+      return TYPE_LOCATION;
+    }
+    return -1;
+  }
+
   String get contentText{
     if(this is TextMessage){
       return (this as TextMessage).text??'';
@@ -72,6 +103,14 @@ extension LCMessageExt on Message{
       return Ids.item_location.str();
     }
     return '';
+  }
+
+}
+
+extension LocationMessageExt on LocationMessage{
+
+  String get addressUrl {
+    return 'http://api.map.baidu.com/staticimage?center=$longitude,$latitude&maker=$longitude,$latitude&width=${400.w}&height=${150.w}&zoom=14';
   }
 
 }

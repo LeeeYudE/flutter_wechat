@@ -137,7 +137,7 @@ class RegisterPage extends BaseGetBuilder<RegisterController> {
             children: <TextSpan>[
               TextSpan(text:Ids.software_licensing_and_services_ordinance_1.str(),style: TextStyle(color: Colours.c_666666,fontSize: 28.sp)),
               TextSpan(text:Ids.software_licensing_and_services_ordinance_2.str(),style: TextStyle(color: Colours.c_0066FF,fontSize: 28.sp),recognizer: TapGestureRecognizer()..onTap = (){
-                  NavigatorUtils.toNamed(WebViewPage.routeName,arguments: WebviewArguments(Ids.software_licensing_and_services_ordinance_2.str(),'https://game.qq.com/contract_software.shtml'));
+                  NavigatorUtils.toNamed(WebViewPage.routeName,arguments: WebviewArguments(title:Ids.software_licensing_and_services_ordinance_2.str(),url:'https://game.qq.com/contract_software.shtml'));
               }),
               TextSpan(text:Ids.software_licensing_and_services_ordinance_3.str(),style: TextStyle(color: Colours.c_666666,fontSize: 28.sp)),
             ],

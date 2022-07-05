@@ -107,7 +107,7 @@ const Map<String, String> languageChinese = {
   Ids.item_audio: '[语音]',
   Ids.item_video: '[视频]',
   Ids.item_file: '[文件]',
-  Ids.item_location: '[路径]',
+  Ids.item_location: '[位置]',
 
   Ids.press_start_voice: '按住说话',
   Ids.press_end_voice: '松开发送',

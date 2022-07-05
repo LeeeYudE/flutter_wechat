@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
+import 'package:wechat/base/common_state_widget_x.dart';
 import 'package:wechat/base/constant.dart';
 import 'package:wechat/utils/navigator_utils.dart';
+import 'package:wechat/utils/utils.dart';
 import 'package:wechat/widget/common_btn.dart';
 import 'package:wechat/widget/remove_top_widget.dart';
 import '../../../base/base_view.dart';
@@ -11,28 +13,23 @@ import '../../../widget/tap_widget.dart';
 import 'controller/select_address_page.dart';
 import 'package:wechat/core.dart';
 
-class SelectAddressPage extends BaseGetBuilder<SelectAddressController> {
+class SelectLocationPage extends BaseGetBuilder<SelectLocationController> {
 
   static const String routeName='/SelectAddressPage';
 
   final DraggableScrollableController _draggableScrollableController = DraggableScrollableController();
 
   @override
-  void onInit() {
-    super.onInit();
-  }
+  SelectLocationController? getController() => SelectLocationController();
 
   @override
-  SelectAddressController? getController() => SelectAddressController();
-
-  @override
-  Widget controllerBuilder(BuildContext context, SelectAddressController controller) {
+  Widget controllerBuilder(BuildContext context, SelectLocationController controller) {
     return Scaffold(
       body: _buildBody(context,controller),
     );
   }
 
-  _buildBody(BuildContext context, SelectAddressController controller){
+  _buildBody(BuildContext context, SelectLocationController controller){
     return Stack(
       children: [
         Container(
@@ -61,7 +58,7 @@ class SelectAddressPage extends BaseGetBuilder<SelectAddressController> {
   _buildBottomAddress(BuildContext context){
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Container(
+      child: SizedBox(
         height: 800.w,
         child: NotificationListener<DraggableScrollableNotification>(
           onNotification: (notification){
@@ -74,14 +71,34 @@ class SelectAddressPage extends BaseGetBuilder<SelectAddressController> {
             return true;
           },
           child: DraggableScrollableSheet(builder: (BuildContext context, ScrollController scrollController) {
-            return RemoveTopPaddingWidget(
-              child: ListView.builder(itemBuilder: (context , index){
-                return Container(
-                  height: 100.w,
-                  color: Colours.white,
-                  child: Center(child: Text(index.toString(),style: TextStyle(color: Colours.theme_color,fontSize: 32.sp),)),
+            return CommonStateWidgetX(
+              controller: controller,
+              widgetBuilder: (BuildContext context) {
+                return RemoveTopPaddingWidget(
+                  child: ListView.builder(itemBuilder: (context , index){
+                    var poi = controller.poiList[index];
+                    return TapWidget(
+                      onTap: () {
+                        controller.selectedPoi(poi);
+                      },
+                      child: Container(
+                        height: 100.w,
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        color: Colours.white,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(poi.name??'',style: TextStyle(color: Colours.black,fontSize: 32.sp),),
+                            if(poi == controller.selectPoi)
+                            Image.asset(Utils.getImgPath('ic_selected',dir: Utils.DIR_ICON),width: 40.w,height: 40.w,)
+                          ],
+                        ),
+                      ),
+                    );
+                  },itemCount: controller.poiList.length,controller: scrollController,),
                 );
-              },itemCount: 100,controller: scrollController,),
+              },
             );
           }, initialChildSize: 0.6,
             minChildSize: 0.6,
@@ -112,14 +129,16 @@ class SelectAddressPage extends BaseGetBuilder<SelectAddressController> {
           },
           child: Text(Ids.cancel.str(),style: TextStyle(color: Colours.white,fontSize: 32.sp),)),
           CommonBtn(text: Ids.send.str(), width: 120.w, height: 60.w, onTap: (){
-
+            if(controller.selectPoi != null){
+              NavigatorUtils.pop(controller.selectPoi);
+            }
           })
         ],
       ),
     );
   }
 
-  Widget buildSlideTransition(BuildContext context, SelectAddressController controller) {
+  Widget buildSlideTransition(BuildContext context, SelectLocationController controller) {
     return Center(//SlideTransition 用于执行平移动画
       child: SlideTransition(
         position: controller.sliderAnimation, //将要执行动画的子view
@@ -128,7 +147,7 @@ class SelectAddressPage extends BaseGetBuilder<SelectAddressController> {
     );
   }
 
-  _buildMyLocation(BuildContext context, SelectAddressController controller){
+  _buildMyLocation(BuildContext context, SelectLocationController controller){
     return Align(alignment: Alignment.bottomRight,
       child: TapWidget(
         onTap: () {

@@ -85,8 +85,14 @@ class ChatManagerController extends BaseXController {
     return null;
   }
 
+  Future<Message> sendMessage(Conversation conversation , Message message) async {
+    Message _message = await conversation.send(message: message);
+    refresh();
+    return _message;
+  }
+
   _chatExist(String id){
-    return chatList.value.hasIndex((element) => element.id == id);
+    return chatList.hasIndex((element) => element.id == id);
   }
 
   refresh(){

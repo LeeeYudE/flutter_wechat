@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/tap_widget.dart';
@@ -7,11 +11,14 @@ import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 import '../../../../color/colors.dart';
 import '../../../../language/strings.dart';
 import '../../../../utils/utils.dart';
-import '../../map/select_address_page.dart';
+import '../../map/select_location_page.dart';
+import '../controller/chat_controller.dart';
 
 class ChatMorePanel extends StatelessWidget {
-  const ChatMorePanel({Key? key}) : super(key: key);
 
+  ChatMorePanel({Key? key}) : super(key: key);
+
+  final ChatController _chatController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +53,36 @@ class ChatMorePanel extends StatelessWidget {
       child: TapWidget(
         onTap: () async {
           switch(type){
-            case 0:
-              final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: const AssetPickerConfig(maxAssets: 1,requestType:RequestType.image ));
+            case 0:///相册
+              final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: const AssetPickerConfig(maxAssets: 1,requestType:RequestType.common ));
               if(result?.isNotEmpty??false){
-
+                File file =  (await result!.first.originFile)!;
+                if(file.filename.endsWith('mp4')){
+                  _chatController.sendVideo(file.path);
+                }else{
+                  _chatController.sendImage(file.path);
+                }
               }
               break;
-            case 1:
+            case 1:///拍摄
               final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: const CameraPickerConfig(enableRecording: true));
+              if(entity != null){
+                await entity.file;
+              }
               break;
-            case 2:
-              NavigatorUtils.toNamed(SelectAddressPage.routeName);
+            case 2:///位置
+             var poi = await NavigatorUtils.toNamed(SelectLocationPage.routeName);
+             if(poi != null){
+              _chatController.sendLocation(poi);
+             }
+              break;
+            case 3:///红包
+
+              break;
+            case 4:///文件
+              FilePickerResult? result = await FilePicker.platform.pickFiles();
+              break;
+            case 5:///收藏
               break;
           }
         },

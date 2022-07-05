@@ -12,4 +12,10 @@ extension DituExt on BMFMapController {
     }
   }
 
+  updateBaiduBMFCoordinate(BMFCoordinate? location){
+    if(location != null) {
+      setNewLatLngZoom(zoom: Constant.MAP_ZOOM, coordinate:location,animateDurationMs: 500);
+    }
+  }
+
 }

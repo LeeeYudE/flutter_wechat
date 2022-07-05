@@ -85,6 +85,7 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
       _keyboardHeight = height;
       debugPrint("_keyboardHeight $_keyboardHeight");
       setState(() {
+        inputType = INPUT_TYPE_NULL;
         isKeyboard = true;
       });
       SpUtil.putDouble('keyboardHeight', _keyboardHeight);
@@ -105,19 +106,22 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
   }
 
   _buildInputLayout(){
-    return Container(
-      color: Colours.c_F7F7F7,
-      padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.w),
-      child: Row(
-        children: [
-          _buildInputType(),
-          20.sizedBoxW,
-          Expanded(child:inputType == INPUT_TYPE_AUDIO?const PressRecordWidget(): InputField(autofocus: false,focusNode: focusNode,controller: _chatController.textController,extended: true,)),
-          20.sizedBoxW,
-          _buildInputEmoji(),
-          20.sizedBoxW,
-          _buildInputMore()
-        ],
+    return TapWidget(
+      onTap: () {  },
+      child: Container(
+        color: Colours.c_F7F7F7,
+        padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.w),
+        child: Row(
+          children: [
+            _buildInputType(),
+            20.sizedBoxW,
+            Expanded(child:inputType == INPUT_TYPE_AUDIO?const PressRecordWidget(): InputField(autofocus: false,focusNode: focusNode,controller: _chatController.textController,extended: true,)),
+            20.sizedBoxW,
+            _buildInputEmoji(),
+            20.sizedBoxW,
+            _buildInputMore()
+          ],
+        ),
       ),
     );
   }
@@ -178,7 +182,7 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
     }
     Widget? child;
     if(inputType == INPUT_TYPE_MORE){
-      child = const ChatMorePanel();
+      child = ChatMorePanel();
     }else if(inputType == INPUT_TYPE_EMOJI){
       child = EmojiGridView(onTap: (EmojiModel emoji){
         insertText(emoji.tag!);
