@@ -70,7 +70,7 @@ class FriendDetailPage extends BaseGetBuilder<FriendDetailController> {
             20.sizedBoxH,
             if(controller.isFriend)
               _buildSendMessage(controller)
-            else
+            else if(controller.friend?.username != UserController.instance.username)
               _buildAddContacts(controller)
           ],
         );

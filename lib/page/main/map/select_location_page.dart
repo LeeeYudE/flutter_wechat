@@ -19,6 +19,8 @@ class SelectLocationPage extends BaseGetBuilder<SelectLocationController> {
 
   final DraggableScrollableController _draggableScrollableController = DraggableScrollableController();
 
+  SelectLocationPage({Key? key}) : super(key: key);
+
   @override
   SelectLocationController? getController() => SelectLocationController();
 

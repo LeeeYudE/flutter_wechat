@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_reader/flutter_qr_reader.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:wechat/core.dart';
-import 'dart:math' as math;
+
+import '../language/strings.dart';
 
 /// 使用前需已经获取相关权限
 /// Relevant privileges must be obtained before usez
@@ -36,15 +37,13 @@ class QrcodeReaderView extends StatefulWidget {
 /// ```
 class QrcodeReaderViewState extends State<QrcodeReaderView>
     with TickerProviderStateMixin {
-  late QrReaderViewController _controller;
   AnimationController? _animationController;
-  bool? openFlashlight;
+  bool openFlashlight = false;
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    openFlashlight = false;
     _initAnimation();
   }
 
@@ -81,35 +80,34 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
     setState(() {});
   }
 
-  void _onCreateController(QrReaderViewController controller) async {
-    _controller = controller;
-    // _controller.onQrBack = _onQrBack;
-    // _controller.stopCamera();
-    _controller.startCamera(_onQrBack);
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? controller;
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.resumeCamera();
+    controller.scannedDataStream.listen((scanData) {
+      stopScan();
+      if (scanData.code != null) widget.onScan(scanData.code);
+    });
   }
 
   bool isScan = false;
 
-  Future _onQrBack(data, _) async {
-    if (isScan == true) return;
-    isScan = true;
-    stopScan();
-    await widget.onScan(data);
-  }
-
-  void startScan() {
+  void startScan() async {
     isScan = false;
-    _controller.startCamera(_onQrBack);
+    await controller?.resumeCamera();
     _initAnimation();
   }
 
-  void stopScan() {
+  void stopScan() async {
     _clearAnimation();
-    _controller.stopCamera();
+    await controller?.pauseCamera();
   }
 
   Future<bool?> setFlashlight() async {
-    openFlashlight = await _controller.setFlashlight();
+    await controller?.toggleFlash();
+    openFlashlight = !openFlashlight;
     setState(() {});
     return openFlashlight;
   }
@@ -121,7 +119,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
       startScan();
       return;
     }
-    final rest = await FlutterQrReader.imgScan(pickedFile.path);
+    final rest = await controller?.imgScan(pickedFile.path);
     await widget.onScan(rest);
     startScan();
   }
@@ -153,11 +151,10 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
             SizedBox(
               width: constraints.maxWidth,
               height: constraints.maxHeight,
-              child: QrReaderView(
-                width: constraints.maxWidth,
-                height: constraints.maxHeight,
-                callback: _onCreateController,
-              ),
+              child: QRView(
+                key: qrKey,
+                onQRViewCreated: _onQRViewCreated,
+              )
             ),
             if (widget.headerWidget != null) widget.headerWidget!,
             Positioned(
@@ -183,10 +180,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
               width: constraints.maxWidth,
               child: Align(
                 alignment: Alignment.center,
-                child: DefaultTextStyle(
-                  style: const TextStyle(color: Colors.white),
-                  child: widget.helpWidget ?? const Text("请对准二维码进行扫描"),
-                ),
+                child: widget.helpWidget ?? Text(Ids.scan_hint.str(),style: TextStyle(color: Colors.white,fontSize: 32.sp),),
               ),
             ),
             Positioned(
@@ -200,7 +194,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: setFlashlight,
-                  child: openFlashlight! ? flashOpen : flashClose,
+                  child: openFlashlight ? flashOpen : flashClose,
                 ),
               ),
             ),
@@ -219,15 +213,15 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                       children: <Widget>[
                         Image.asset(
                           "assets/images/scan/tool_img.png",
-                          width: 40.w,
-                          height: 40.w,
+                          width: 60.w,
+                          height: 60.w,
                           color: Colors.white54,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 8),
+                        Padding(
+                          padding: EdgeInsets.only(top: 8.w),
                           child: Text(
-                            "从相册导入",
-                            style: TextStyle(color: Colors.white),
+                            Ids.album.str(),
+                            style: TextStyle(color: Colors.white,fontSize: 32.sp),
                           ),
                         ),
                       ],
@@ -261,9 +255,7 @@ class QrScanBoxPainter extends CustomPainter {
   QrScanBoxPainter(
       {required this.animationValue,
       required this.isForward,
-      this.boxLineColor})
-      : assert(animationValue != null),
-        assert(isForward != null);
+      this.boxLineColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -281,7 +273,7 @@ class QrScanBoxPainter extends CustomPainter {
       ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
-    final path = new Path();
+    final path = Path();
     // leftTop
     path.moveTo(0, 50);
     path.lineTo(0, 12);

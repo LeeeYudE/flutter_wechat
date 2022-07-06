@@ -29,11 +29,18 @@ class ChatController extends BaseXController {
   }
 
   _initListener(){
-    
+    _managerController.addOnMessageReceive(_onMessageReceive);
   }
 
-  initConversation(){
+  _onMessageReceive(Message message){
+    if(message.conversationID == conversation?.id){
+      _insertMessage(message);
+    }
+  }
+
+  initConversation() async {
     conversation = _managerController.getChatInfo(chatId);
+    _managerController.setCurrentConversation(conversation);
     update();
     _queryMessage();
   }
@@ -84,7 +91,7 @@ class ChatController extends BaseXController {
         var sendMessage = await _managerController.sendMessage(conversation!, message);
         _insertMessage(sendMessage);
       },showloading: false,onError: (e){
-        _insertMessage(message);
+
       });
     }
   }
@@ -97,6 +104,8 @@ class ChatController extends BaseXController {
   @override
   void onClose() {
     textController.dispose();
+    _managerController.removeCurrentConversation();
+    _managerController.removeOnMessageReceive(_onMessageReceive);
     super.onClose();
   }
 

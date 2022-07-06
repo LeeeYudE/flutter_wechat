@@ -44,7 +44,7 @@ class ContactsPage extends BaseGetBuilder<FriendController>{
           if(index == 0){
             return _buildHeader();
           }
-          return FriendItem(friend: controller.friends[index-1],);
+          return FriendItem(friend: controller.friends[index-1], lastFriend: controller.friends.safetyItem(index-2),);
         },itemCount: controller.friends.length + 1,)),
         ),
         _buildIndexBar()

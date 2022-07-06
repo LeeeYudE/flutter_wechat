@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:wechat/base/constant.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/base_scaffold.dart';
@@ -26,6 +29,16 @@ class QrcodeBusinessCardPage extends StatefulWidget {
 class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
 
   final GlobalKey _repaintKey = GlobalKey(); // 可以获取到被截图组件状态的 GlobalKey
+  late String _qrcode;
+
+  @override
+  void initState() {
+    _qrcode = jsonEncode({
+      'qecode_type':Constant.QRCODE_TYPE_BUSINESS_CARD,
+      'username':UserController.instance.username
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +90,14 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
                   child: Stack(
                     children: [
                       QrImage(
-                        data: UserController.instance.user?.username??'',
+                        data: _qrcode,
                         version: QrVersions.auto,
                         size: 600.w,
                       ),
-                      Center(child: AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 150.w,decorationWidth: 10.w,)),
+                      Center(child: Container(
+                          decoration: Colours.white.boxDecoration(borderRadius: 12.w),
+                          padding: EdgeInsets.all(5.w),
+                          child: AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 120.w,decorationWidth: 10.w,))),
                     ],
                   ),
                 ),

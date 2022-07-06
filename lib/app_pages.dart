@@ -20,6 +20,7 @@ import 'package:wechat/page/main/discover/scan_qrcode_page.dart';
 import 'package:wechat/page/main/main_page.dart';
 import 'package:wechat/page/main/mine/qrcode_business_card_page.dart';
 import 'package:wechat/page/util/crop_image_page.dart';
+import 'package:wechat/page/util/photo_preview_page.dart';
 import 'package:wechat/page/util/webview_page.dart';
 
 class AppPages {
@@ -110,17 +111,23 @@ class AppPages {
       name: PreviewLocationPage.routeName,
       page: () => PreviewLocationPage(),
     ),
+    _getPage(
+      name: PhotoPreviewPage.routeName,
+      page: () => PhotoPreviewPage(),
+      transition: Transition.fadeIn
+    ),
   ];
 
   static GetPage _getPage({
     required String name,
     required GetPageBuilder page,
     Bindings? binding,
+    Transition? transition
   }) {
     return GetPage(
       name: name,
       binding: binding,
-      // transition: Transition.fadeIn,///页面过度效果
+      transition: transition,///页面过度效果
       page: () {
         debugPrint('pageName=$name');
         return page();

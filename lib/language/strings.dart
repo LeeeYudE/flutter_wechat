@@ -137,6 +137,8 @@ class Ids {
   static const String file = 'file';
   static const String send = 'send';
   static const String all_emoji = 'all_emoji';
+  static const String qecode_error = 'qecode_error';
+  static const String scan_hint = 'scan_hint';
 
 
 }

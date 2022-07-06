@@ -19,6 +19,7 @@ class MyScaffold extends StatelessWidget {
   final bool showAppbar;
   final IconData? backIcon;
   final Widget? bottomNavigationBar;
+  final VoidCallback? onBodyClick;
 
    const MyScaffold({
     Key? key,
@@ -36,7 +37,8 @@ class MyScaffold extends StatelessWidget {
     this.showLeading = true,
     this.showAppbar = true,
     this.backIcon,
-    this.bottomNavigationBar
+    this.bottomNavigationBar,
+    this.onBodyClick
   }) ;
 
   @override
@@ -56,7 +58,7 @@ class MyScaffold extends StatelessWidget {
       ):null,
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+        onTap: onBodyClick??() => FocusManager.instance.primaryFocus!.unfocus(),
         child: body,
       ),
       floatingActionButton: floatingActionButton,

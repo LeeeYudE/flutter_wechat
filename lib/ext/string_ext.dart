@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
+import '../language/strings.dart';
 import '../utils/utils.dart';
 import 'toast_ext.dart';
 
@@ -199,5 +200,14 @@ extension StringExt on String {
   }
 
   String get imgAsset => Utils.getImgPath(this);
+
+  ///复制到粘贴吧
+  void copy2Clipboard() {
+    debugPrint('copy=>$this');
+    Clipboard.setData(ClipboardData(text: this));
+    Ids.copy_success.str().toast();
+  }
+
+  String get suffix => substring(lastIndexOf('.'),length);
 
 }

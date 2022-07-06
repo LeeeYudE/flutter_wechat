@@ -233,7 +233,7 @@ packages:
     source: hosted
     version: "2.2.0"
   dio:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
@@ -389,6 +389,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_luban:
+    dependency: "direct main"
+    description:
+      name: flutter_luban
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.13"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -854,6 +861,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  pull_to_refresh:
+    dependency: "direct main"
+    description:
+      name: pull_to_refresh
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   qiniu_flutter_sdk:
     dependency: transitive
     description:
@@ -875,6 +889,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  qr_code_scanner:
+    dependency: "direct main"
+    description:
+      path: "/Users/charcolee/company/demo/qr_code_scanner"
+      relative: false
+    source: path
+    version: "1.0.0"
   qr_flutter:
     dependency: "direct main"
     description:

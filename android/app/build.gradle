@@ -26,7 +26,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -49,6 +49,22 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+    }
+
+    signingConfigs {
+        config {
+            storeFile file("../charco.keystore")
+            keyAlias "charco"
+            keyPassword "charco"
+            storePassword "charco"
+        }
+
+        debug {
+            storeFile file("../charco.keystore")
+            keyAlias "charco"
+            keyPassword "charco"
+            storePassword "charco"
+        }
     }
 
     buildTypes {

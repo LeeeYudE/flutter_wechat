@@ -12,6 +12,7 @@ import '../../../utils/navigator_utils.dart';
 import '../../../utils/utils.dart';
 import '../../../widget/avatar_widget.dart';
 import '../../../widget/right_arrow_widget.dart';
+import '../../util/photo_preview_page.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -66,7 +67,13 @@ class _MinePageState extends State<MinePage> {
       padding: EdgeInsets.only(top: 200.w,left: 40.w,right: 40.w,bottom: 40.w),
       child: Row(
         children: [
-          AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 150.w,),
+          TapWidget(onTap: () {
+            var avatar = UserController.instance.user?.avatar;
+            if(!TextUtil.isEmpty(avatar)){
+              PhotoPreviewPage.open(avatar!,heroTag: avatar);
+            }
+          },
+          child: AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 150.w,hero: true,)),
           20.sizedBoxW,
           Expanded(
             child: Column(

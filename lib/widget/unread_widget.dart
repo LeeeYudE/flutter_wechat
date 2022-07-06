@@ -6,9 +6,8 @@ class UnreadWidget extends StatelessWidget {
   int? unread_count;
   Color? bgColor;
   Color? textColor;
-  bool noZero;
 
-  UnreadWidget(this.unread_count,{this.bgColor,this.textColor,this.noZero = true});
+  UnreadWidget(this.unread_count,{this.bgColor,this.textColor});
 
 
   @override
@@ -23,7 +22,7 @@ class UnreadWidget extends StatelessWidget {
     }
 
     return Offstage(
-      offstage: unread_count == null || ( noZero && unread_count == 0),
+      offstage: unread_count == null || (unread_count == 0),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.w),
         decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(20.w)),
@@ -32,15 +31,11 @@ class UnreadWidget extends StatelessWidget {
             minWidth: 20.w,
             minHeight: 20.w,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                getCount(),
-                style: TextStyle(color: textColor, fontSize: 18.sp,fontWeight: FontWeight.bold,textBaseline: TextBaseline.alphabetic,height: 1),
-              )],
+          child: Center(
+            child: Text(
+              getCount(),
+              style: TextStyle(color: textColor, fontSize: 18.sp,fontWeight: FontWeight.bold,textBaseline: TextBaseline.alphabetic,height: 1.1),
+            ),
           ),
         ),
       ),

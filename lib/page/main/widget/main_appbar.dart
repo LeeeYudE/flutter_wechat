@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat/color/colors.dart';
 import 'package:wechat/core.dart';
-
+import 'package:wechat/page/main/contacts/friend_detail_page.dart';
+import '../../../base/constant.dart';
 import '../../../language/strings.dart';
 import '../../../utils/navigator_utils.dart';
 import '../../../utils/utils.dart';
+import '../../../utils/json_parse_utils.dart';
 import '../../../widget/base_scaffold.dart';
 import '../../../widget/tap_widget.dart';
 import '../contacts/add_friend_page.dart';
@@ -15,7 +19,6 @@ class MainScaffold extends StatefulWidget {
 
   String title;
   Widget body;
-
 
    MainScaffold(this.title,this.body,{Key? key}) : super(key: key);
 
@@ -66,7 +69,7 @@ class _MainScaffoldState extends State<MainScaffold> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: menuItems
                   .map((item) => TapWidget(
-                  onTap: () {
+                  onTap: () async {
                     _controller.hideMenu();
                     switch(item.type){
                       case 0:
@@ -75,7 +78,8 @@ class _MainScaffoldState extends State<MainScaffold> {
                         NavigatorUtils.toNamed(AddFriendPage.routeName);
                         break;
                       case 2:
-                        NavigatorUtils.toNamed(ScanQrcodePage.routeName);
+                        var result = await NavigatorUtils.toNamed(ScanQrcodePage.routeName);
+                        _pareQrcode(result);
                         break;
                       case 3:
                         break;
@@ -112,6 +116,31 @@ class _MainScaffoldState extends State<MainScaffold> {
       verticalMargin: 10.w,
       controller: _controller,
     );
+  }
+
+  _pareQrcode(String? result) {
+    debugPrint('_pareQrcode $result');
+    if(!TextUtil.isEmpty(result)){
+      try{
+        final Map<String, dynamic>  data = jsonDecode(result!);
+        if(data.containsKey('qecode_type')){
+          String qecodeType = data['qecode_type'];
+          switch(qecodeType){
+            case Constant.QRCODE_TYPE_BUSINESS_CARD:
+              String username = data.asString('username');
+              NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments: username);
+              break;
+            default:
+              Ids.qecode_error.str().toast();
+              break;
+          }
+        }else{
+          Ids.qecode_error.str().toast();
+        }
+      }on Exception {
+        Ids.qecode_error.str().toast();
+      }
+    }
   }
 
 }

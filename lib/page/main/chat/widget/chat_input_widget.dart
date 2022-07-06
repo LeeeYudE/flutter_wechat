@@ -47,7 +47,7 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
 
   void _init() async {
     WidgetsBinding.instance?.addObserver(this);
-    _keyboardHeight = SpUtil.getDouble('keyboardHeight', defValue: 300.w)!;
+    _keyboardHeight = SpUtil.getDouble('keyboardHeight', defValue: 400.w)!;
   }
 
   @override

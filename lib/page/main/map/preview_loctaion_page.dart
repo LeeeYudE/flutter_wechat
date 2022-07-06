@@ -19,6 +19,8 @@ class PreviewLocationPage extends BaseGetBuilder<BaseMapController> {
 
   late BMFCoordinate _coordinate;
 
+  PreviewLocationPage({Key? key}) : super(key: key);
+
   @override
   void onInit() {
     _coordinate = Get.arguments;

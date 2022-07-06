@@ -1,59 +1,75 @@
+import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:extended_image_library/extended_image_library.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:wechat/base/base_view.dart';
+import 'package:wechat/page/util/controller/phone_preview_controller.dart';
+import 'package:wechat/widget/base_scaffold.dart';
+import 'package:wechat/core.dart';
+import 'package:wechat/widget/dialog/dialog_bottom_widget.dart';
+import '../../color/colors.dart';
+import '../../language/strings.dart';
 import '../../utils/navigator_utils.dart';
 
-class PhotoPreviewPage extends StatefulWidget {
-
-  static open(BuildContext context , String url,{String? heroTag}){
-    if(!TextUtil.isEmpty(url)){
-      NavigatorUtils.pushTransparentPage(context, PhotoPreviewPage(url: url,heroTag: heroTag,));
-    }
-  }
-
+class PhotoPreviewArguments{
   String? url;
   String? heroTag;
 
-  PhotoPreviewPage({this.url,this.heroTag});
-
-  @override
-  _PhotoPreviewPageState createState() => _PhotoPreviewPageState();
+  PhotoPreviewArguments({this.url,this.heroTag});
 }
 
-class _PhotoPreviewPageState extends State<PhotoPreviewPage> {
+class PhotoPreviewPage extends BaseGetBuilder<PhonePreviewController> {
+
+  static const String routeName = '/PhotoPreviewPage';
+
+  PhotoPreviewPage({Key? key}) : super(key: key);
+
+  static open(String url,{String? heroTag}){
+    if(!TextUtil.isEmpty(url)){
+      NavigatorUtils.toNamed(routeName,arguments: PhotoPreviewArguments(url:url,heroTag: heroTag));
+    }
+  }
+
+  late PhotoPreviewArguments _arguments;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        Navigator.pop(context);
+  void onInit() {
+    _arguments = Get.arguments;
+    super.onInit();
+  }
+
+  @override
+  PhonePreviewController? getController() => PhonePreviewController();
+
+  @override
+  Widget controllerBuilder(BuildContext context, PhonePreviewController controller) {
+    return MyScaffold(
+      showAppbar: false,
+      backgroundColor: Colours.transparent,
+      onBodyClick: (){
+        NavigatorUtils.pop();
       },
-      onLongPress: (){
-        // showImageSaver(context,widget.url);
-        // showCommonBottomSheet(context,child: ImageSaveDialog());
-      },
-      child: Scaffold(
-        backgroundColor: const Color(0x00000000),
-        body: ExtendedImageSlidePage(
-          child: Container(
+      body: Stack(
+        children: [
+          ExtendedImageSlidePage(
             child: Center(
               child: Hero(
-                tag:widget.heroTag??widget.url!,
+                tag:_arguments.heroTag??_arguments.url!,
                 child: ExtendedImage(
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.fitWidth,
-                  image: (!widget.url!.contains('http')?FileImage(File(widget.url!)):NetworkImage(widget.url!)) as ImageProvider<Object>,
+                  image: (!_arguments.url!.contains('http')?FileImage(File(_arguments.url!)):CachedNetworkImageProvider(_arguments.url!)) as ImageProvider<Object>,
                   enableSlideOutPage: true,
                   mode: ExtendedImageMode.gesture,
                   // initGestureConfigHandler: (state){
                   //   return GestureConfig(
-                  //       inPageView: true,
-                  //       minScale: 1.0,
-                  //       animationMinScale: 1.0,
+                  //       inPageView: false,
+                  //       minScale: 0.7,
+                  //       animationMinScale: 0.7,
                   //       maxScale: 3.0,
                   //       speed: 0.7,
                   //       animationMaxScale: 3.0,
@@ -62,19 +78,49 @@ class _PhotoPreviewPageState extends State<PhotoPreviewPage> {
                 ),
               ),
             ),
+            slideAxis: SlideAxis.both,
+            slideType: SlideType.onlyImage,
+            onSlidingPage: (state) {
+              debugPrint('onSlidingPage = $state');
+            },
+            slidePageBackgroundHandler: defaultSlidePageBackgroundHandler,
+            // slidePageBackgroundHandler: (offset, pageSize){
+            //   return Colours.black_transparent;
+            // },
+
           ),
-          slideAxis: SlideAxis.both,
-          slideType: SlideType.onlyImage,
-          onSlidingPage: (state) {
-            print('onSlidingPage = $state');
-          },
-          slidePageBackgroundHandler: (offset, pageSize){
-            return Colors.black.withOpacity(0.8);
-          },
-        ),
+          Container(
+            margin: EdgeInsets.only(top: 100.w,left: 20.w,right: 20.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios,color: Colours.white,), onPressed: () {
+                  Get.back();
+                },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.more_horiz,color: Colours.white,), onPressed: () async {
+                 var result =  await NavigatorUtils.showBottomItemsDialog([DialogBottomWidgetItem(Ids.save_to_phone.str(), 0)]);
+                 if(result != null){
+                    controller.saveImage(_arguments.url);
+                 }
+                },
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
 
+  }
+
+
+  Color defaultSlidePageBackgroundHandler(Offset offset, Size pageSize) {
+    double opacity = offset.distance /
+        (Offset(pageSize.width, pageSize.height).distance / 2.0);
+    return Colours.black.withOpacity(min(1.0, max(1.0 - opacity, 0.0)));
   }
 
 

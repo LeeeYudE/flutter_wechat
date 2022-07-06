@@ -22,7 +22,7 @@ extension IntExtension on int {
   }
 
   DateTime toDateTime() {
-    return DateTime.fromMillisecondsSinceEpoch(this * 1000);
+    return DateTime.fromMillisecondsSinceEpoch(this);
   }
 
   String toAmOrPmTime() {
@@ -37,7 +37,6 @@ extension IntExtension on int {
       return '';
     }
     final int currentSeconds = DateUtil.getNowDateMs();
-
     if (isToDay(this, currentSeconds)) {
       return formatTime(format: DateFormats.h_m);
     }

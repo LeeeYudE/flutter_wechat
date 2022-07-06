@@ -20,28 +20,74 @@ class ChatManagerController extends BaseXController {
  static ChatManagerController get instance => Get.find();
 
   RxList<Conversation> chatList = <Conversation>[].obs;
+  List<ValueChanged<Message>> onMessageReceive = [];
+  Conversation? _currentConversation;
   late Client imClient;
 
   initClient() async {
     imClient = Client(id: UserController.instance.username);
     await imClient.open();
-    imClient.onMessage = onMessage;
-    imClient.onMessageUpdated = onMessageUpdated;
-    imClient.onMessageDelivered = onMessageDelivered;
+    imClient.onMessage = _onMessage;
+    imClient.onMessageUpdated = _onMessageUpdated;
+    imClient.onMessageDelivered = _onMessageDelivered;
+    imClient.onMessageRead = _onMessageRead;
+    imClient.onUnreadMessageCountUpdated = _onUnreadMessageCountUpdated;
     chatIndex();
-
   }
 
- void onMessageDelivered({required Client client, required Conversation conversation, String? messageID, String? toClientID, DateTime? atDate,}){
+  removeCurrentConversation(){
+    _currentConversation = null;
+  }
+
+  setCurrentConversation(Conversation? conversation){
+    _currentConversation = conversation;
+    _currentConversation?.read();
+  }
+
+  void addOnMessageReceive(ValueChanged<Message> callback){
+    onMessageReceive.add(callback);
+  }
+
+  void removeOnMessageReceive(ValueChanged<Message> callback){
+    onMessageReceive.remove(callback);
+  }
+
+  void _onUnreadMessageCountUpdated({required Client client, required Conversation conversation,}){
+    debugPrint('_onUnreadMessageCountUpdated ${conversation.unreadMessageCount}');
+    _updateConversation(conversation);
+  }
+
+  void _onMessageRead({required Client client, required Conversation conversation, String? messageID, String? byClientID, DateTime? atDate,}){
+    debugPrint('onMessageRead ${conversation.unreadMessageCount} ${messageID}');
+  }
+
+ void _onMessageDelivered({required Client client, required Conversation conversation, String? messageID, String? toClientID, DateTime? atDate,}){
    debugPrint('onMessageDelivered ${conversation.lastMessage?.contentText} ${messageID}');
  }
 
- void onMessageUpdated({required Client client, required Conversation conversation, required Message updatedMessage, int? patchCode, String? patchReason,}){
+ void _onMessageUpdated({required Client client, required Conversation conversation, required Message updatedMessage, int? patchCode, String? patchReason,}){
    debugPrint('onMessageUpdated ${conversation.lastMessage?.contentText} ${updatedMessage.contentText}');
  }
 
- void onMessage({required Client client,required Conversation conversation,required Message message}){
-    debugPrint('onMessage ${conversation.lastMessage?.contentText} ${message.contentText}');
+ void _onMessage({required Client client,required Conversation conversation,required Message message}){
+    debugPrint('onMessage ${conversation.unreadMessageCount} ${message.contentText}');
+    for (var element in onMessageReceive) {
+      element.call(message);
+    }
+    if(_currentConversation != null && _currentConversation?.id == conversation.id){
+      conversation.read();
+    }
+    _updateConversation(conversation);
+ }
+
+ _updateConversation(Conversation conversation){
+   var indexWhere = chatList.indexWhere((element) => element.id == conversation.id);
+   if(indexWhere != -1){
+     chatList[indexWhere] = conversation;
+   }else{
+     chatList.add(conversation);
+   }
+
  }
 
   chatIndex() async {
@@ -66,7 +112,6 @@ class ChatManagerController extends BaseXController {
         NavigatorUtils.offNamedUntil(ChatPage.routeName,MainPage.routeName,arguments: conversation.id);
       });
     }
-
   }
 
  Conversation? getChatInfo(String id){

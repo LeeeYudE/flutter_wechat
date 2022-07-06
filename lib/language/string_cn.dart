@@ -123,5 +123,7 @@ const Map<String, String> languageChinese = {
   Ids.file: '文件',
   Ids.send: '发送',
   Ids.all_emoji: '所有表情',
+  Ids.qecode_error: '无效二维码',
+  Ids.scan_hint: '请对准二维码进行扫描',
 
 };

@@ -94,9 +94,20 @@ dependencies:
 
   url_launcher: ^6.0.12
   #选择文件
-  file_picker: 4.6.1
+  file_picker: ^4.6.1
   #地图导航
-  map_launcher: 2.2.3
+  map_launcher: ^2.2.3
+  #图片压缩
+  flutter_luban: ^0.1.13
+  #网络请求
+  dio: ^4.0.6
+  #下拉刷新
+  pull_to_refresh: ^2.0.0
+  #扫一扫
+  qr_code_scanner:
+    git:
+      url: https://github.com/LeeeYudE/qr_code_scanner.git
+      ref: d85dd7b
 
   flutter_localizations:
     sdk: flutter
