@@ -892,9 +892,11 @@ packages:
   qr_code_scanner:
     dependency: "direct main"
     description:
-      path: "/Users/charcolee/company/demo/qr_code_scanner"
-      relative: false
-    source: path
+      path: "."
+      ref: "36278bf"
+      resolved-ref: "36278bf5438009bde2a44854f286a5dd069929aa"
+      url: "https://github.com/LeeeYudE/qr_code_scanner.git"
+    source: git
     version: "1.0.0"
   qr_flutter:
     dependency: "direct main"

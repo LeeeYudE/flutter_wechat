@@ -12,5 +12,6 @@ class Constant{
   static const double MAP_ZOOM = 16.0;
 
 
+  static const String OBJECT_NAME_RED_PACKET = 'red_packet';
 
 }

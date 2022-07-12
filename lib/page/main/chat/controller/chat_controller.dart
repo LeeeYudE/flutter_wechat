@@ -62,36 +62,36 @@ class ChatController extends BaseXController {
   sendText(String content){
     TextMessage textMessage = TextMessage();
     textMessage.text = content;
-    _sendMessage(textMessage);
+    sendMessage(textMessage);
   }
 
   sendImage(String path) async {
     var imageMessage = ImageMessage.from(path: path,);
-    _sendMessage(imageMessage);
+    sendMessage(imageMessage);
   }
 
   sendAudio(String path){
     var imageMessage = AudioMessage.from(path: path,);
-    _sendMessage(imageMessage);
+    sendMessage(imageMessage);
   }
 
   sendVideo(String path){
     var imageMessage = VideoMessage.from(path: path);
-    _sendMessage(imageMessage);
+    sendMessage(imageMessage);
   }
 
   sendLocation(BMFPoiInfo poi){
     var locationMessage = LocationMessage.from(latitude: poi.pt!.latitude, longitude:  poi.pt!.longitude);
-    _sendMessage(locationMessage);
+    sendMessage(locationMessage);
   }
 
-  _sendMessage(Message message){
+
+  sendMessage(Message message){
     if(conversation != null){
       lcPost(() async {
         var sendMessage = await _managerController.sendMessage(conversation!, message);
         _insertMessage(sendMessage);
       },showloading: false,onError: (e){
-
       });
     }
   }

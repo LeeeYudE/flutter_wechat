@@ -50,4 +50,14 @@ extension DensityDoubleExt on double {
   double get sp {
     return ScreenUtil.getInstance().getSp(this);
   }
+
+
+  ///屏幕宽度的倍数
+  ///Multiple of screen width
+  double get sw => ScreenUtil.getInstance().screenWidth * this;
+
+  ///屏幕高度的倍数
+  ///Multiple of screen height
+  double get sh => ScreenUtil.getInstance().screenHeight * this;
+
 }

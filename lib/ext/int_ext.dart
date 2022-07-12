@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flustars/flustars.dart';
 import 'package:sprintf/sprintf.dart';
-
+import 'package:intl/intl.dart';
 export 'package:common_utils/common_utils.dart';
 
 /// int 拓展
@@ -101,3 +101,11 @@ bool isSameYear(int time, int other) {
 }
 
 
+extension doubleExt on double{
+
+  String  get formatDecimals{
+    NumberFormat numberFormat = NumberFormat("###0.00", "zh");
+    return numberFormat.format(this);
+  }
+
+}

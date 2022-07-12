@@ -9,6 +9,8 @@ import 'package:wechat/page/login/splash_page.dart';
 import 'package:wechat/page/login/verify_machine_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
 import 'package:wechat/page/main/chat/chat_page.dart';
+import 'package:wechat/page/main/chat/page/red_packet/red_packet_preview_page.dart';
+import 'package:wechat/page/main/chat/page/red_packet/send_red_packet_page.dart';
 import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/page/main/contacts/new_friend_page.dart';
@@ -115,6 +117,15 @@ class AppPages {
       name: PhotoPreviewPage.routeName,
       page: () => PhotoPreviewPage(),
       transition: Transition.fadeIn
+    ),
+    _getPage(
+      name: SendRedPacketPage.routeName,
+      page: () => SendRedPacketPage(),
+    ),
+    _getPage(
+      name: RedPacketPreviewPage.routeName,
+      page: () => RedPacketPreviewPage(),
+        transition: Transition.fadeIn
     ),
   ];
 

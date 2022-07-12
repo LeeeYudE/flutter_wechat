@@ -5,7 +5,9 @@ import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:wechat/widget/avatar_widget.dart';
 
 import '../../../../../color/colors.dart';
+import '../../model/red_packet_message.dart';
 import 'message_location_item.dart';
+import 'message_red_packet_item.dart';
 import 'message_text_item.dart';
 
 class MessageItem extends StatelessWidget {
@@ -25,6 +27,7 @@ class MessageItem extends StatelessWidget {
         children: [
           _buildMsgTime(),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: message.isSend ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: message.isSend ?[
@@ -81,6 +84,8 @@ class MessageItem extends StatelessWidget {
         break;
       case LCMessageExt.TYPE_LOCATION:
         return MessageLocationItem(message: message as LocationMessage,);
+      case LCMessageExt.TYPE_RED_PACKET:
+        return MessageRedPacketItem(message: message as RedPacketMessage,);
     }
     return SizedBox(
       height: 100.w,

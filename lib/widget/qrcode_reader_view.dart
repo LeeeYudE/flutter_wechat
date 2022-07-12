@@ -243,6 +243,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
   @override
   void dispose() {
     _clearAnimation();
+    controller?.dispose();
     super.dispose();
   }
 }

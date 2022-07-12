@@ -121,6 +121,7 @@ class Ids {
   static const String item_video = '[video]';
   static const String item_file = '[file]';
   static const String item_location = '[location]';
+  static const String item_red_packet = '[item_red_packet]';
 
   static const String press_start_voice = 'press_start_voice';
   static const String press_end_voice = 'press_end_voice';
@@ -139,6 +140,20 @@ class Ids {
   static const String all_emoji = 'all_emoji';
   static const String qecode_error = 'qecode_error';
   static const String scan_hint = 'scan_hint';
+  static const String delete = 'delete';
+  static const String send_red_packet = 'send_red_packet';
+  static const String single_red_packet_amount = 'single_red_packet_amount';
+  static const String red_packet_count = 'red_packet_count';
+  static const String total_amount = 'total_amount';
+  static const String slip_money_into_red_packet = 'slip_money_into_red_packet';
+  static const String input_amount = 'input_amount';
+  static const String insufficient_balance = 'insufficient_balance';
+  static const String red_packet_hint = 'red_packet_hint';
+  static const String lucky_red_packet = ' lucky_red_packet';
+  static const String input_count = ' input_count';
+  static const String count = ' count';
+  static const String group_member_count = ' group_member_count';
+  static const String red_packet_max_count = ' red_packet_max_count';
 
 
 }

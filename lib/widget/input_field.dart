@@ -1,5 +1,6 @@
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wechat/widget/tap_widget.dart';
 import '../color/colors.dart';
 import 'package:wechat/core.dart';
@@ -16,9 +17,15 @@ class InputField extends StatefulWidget {
   final bool autofocus;
   final bool extended;
   final FocusNode? focusNode;
+  final bool? readOnly;
   final ValueChanged<String>? onSubmitted;
+  final GestureTapCallback? onTap;
+  final TextAlign? textAlign;
+  final int? lengthLimiting;
+  final EdgeInsetsGeometry? padding;
+  final TextInputFormatter? inputFormatter;
 
-  InputField({this.hint,this.inputType,this.controller,this.leftWidget,this.showClean = false,this.autofocus = true,this.focusNode,this.extended = false,this.onSubmitted,Key? key}) : super(key: key);
+  InputField({this.hint,this.inputType,this.controller,this.leftWidget,this.showClean = false,this.autofocus = true,this.focusNode,this.extended = false,this.onSubmitted,this.readOnly,this.onTap,this.textAlign,this.lengthLimiting,this.padding,this.inputFormatter,Key? key}) : super(key: key);
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -49,7 +56,7 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     return Container(
       decoration: Colours.white.boxDecoration(borderRadius: 12.w),
-      padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.w),
+      padding: widget.padding??EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.w),
       child: Row(
         children: [
           if(widget.leftWidget != null)
@@ -59,6 +66,9 @@ class _InputFieldState extends State<InputField> {
           Expanded(
             child: widget.extended?
             ExtendedTextField(
+              textAlign: widget.textAlign??TextAlign.start,
+              readOnly: widget.readOnly??false,
+              showCursor: true,
               controller: _controller,
               autocorrect: false,
               focusNode: widget.focusNode,
@@ -74,9 +84,19 @@ class _InputFieldState extends State<InputField> {
               ),
               specialTextSpanBuilder: MySpecialTextSpanBuilder(showAtBackground: false),
               onSubmitted: widget.onSubmitted,
+              onTap: widget.onTap,
+              inputFormatters: <TextInputFormatter>[
+                if(widget.lengthLimiting != null)
+                LengthLimitingTextInputFormatter(widget.lengthLimiting),//限制长度
+                if(widget.inputFormatter != null)
+                  widget.inputFormatter!
+              ]
             ) : TextField(
+              readOnly: widget.readOnly??false,
+              showCursor: true,
               autofocus: widget.autofocus,
-              style: TextStyle(color: Colours.black,fontSize: 32.sp),
+              textAlign: widget.textAlign??TextAlign.start,
+              style: TextStyle(color: Colours.black,fontSize: 32.sp, ),
               focusNode: widget.focusNode,
               decoration:  InputDecoration(
                 isCollapsed: true,
@@ -89,6 +109,13 @@ class _InputFieldState extends State<InputField> {
               keyboardType: widget.inputType,
               controller: widget.controller,
               onSubmitted: widget.onSubmitted,
+              onTap: widget.onTap,
+              inputFormatters: <TextInputFormatter>[
+                if(widget.lengthLimiting != null)
+                  LengthLimitingTextInputFormatter(widget.lengthLimiting),//限制长度
+                if(widget.inputFormatter != null)
+                  widget.inputFormatter!
+              ]
             ),
           ),
           if(_isShowClean)

@@ -1,0 +1,264 @@
+PODS:
+  - Alamofire (5.6.1)
+  - BaiduMapKit/Base (6.5.1)
+  - BaiduMapKit/Map (6.5.1):
+    - BaiduMapKit/Base
+  - BaiduMapKit/Search (6.5.1):
+    - BaiduMapKit/Base
+  - BaiduMapKit/Utils (6.5.1):
+    - BaiduMapKit/Base
+  - BMKLocationKit (2.0.2)
+  - camera_avfoundation (0.0.1):
+    - Flutter
+  - DKImagePickerController/Core (4.3.3):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.3)
+  - DKImagePickerController/PhotoGallery (4.3.3):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.3)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_audio_recorder2 (0.0.1):
+    - Flutter
+  - flutter_baidu_mapapi_base (3.1.0):
+    - BaiduMapKit/Utils (= 6.5.1)
+    - Flutter
+  - flutter_baidu_mapapi_map (3.1.0):
+    - BaiduMapKit/Map (= 6.5.1)
+    - Flutter
+    - flutter_baidu_mapapi_base
+  - flutter_baidu_mapapi_search (3.1.0):
+    - BaiduMapKit/Search (= 6.5.1)
+    - Flutter
+    - flutter_baidu_mapapi_base
+  - flutter_baidu_mapapi_utils (3.1.0):
+    - BaiduMapKit/Utils (= 6.5.1)
+    - Flutter
+    - flutter_baidu_mapapi_base
+  - flutter_bmflocation (2.0.1):
+    - BMKLocationKit
+    - Flutter
+  - flutter_qr_reader (0.0.1):
+    - Flutter
+  - flutter_vibrate (0.0.1):
+    - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - image_crop (0.0.1):
+    - Flutter
+  - image_gallery_saver (1.5.0):
+    - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - LeanCloud/Foundation (17.10.1):
+    - Alamofire (~> 5.4)
+  - LeanCloud/RTM-no-local-storage (17.10.1):
+    - LeanCloud/Foundation (= 17.10.1)
+    - SwiftProtobuf (~> 1.18)
+  - leancloud_official_plugin (0.0.1):
+    - Flutter
+    - LeanCloud/RTM-no-local-storage (~> 17.10)
+  - map_launcher (0.0.1):
+    - Flutter
+  - MTBBarcodeScanner (5.0.11)
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_ios (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.0.4):
+    - Flutter
+  - photo_manager (2.0.0):
+    - Flutter
+    - FlutterMacOS
+  - qr_code_scanner (0.2.0):
+    - Flutter
+    - MTBBarcodeScanner
+  - SDWebImage (5.12.5):
+    - SDWebImage/Core (= 5.12.5)
+  - SDWebImage/Core (5.12.5)
+  - shared_preferences_ios (0.0.1):
+    - Flutter
+  - shortcut (0.0.1):
+    - Flutter
+  - sqflite (0.0.2):
+    - Flutter
+    - FMDB (>= 2.7.5)
+  - SwiftProtobuf (1.19.0)
+  - SwiftyGif (5.4.3)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_audio_recorder2 (from `.symlinks/plugins/flutter_audio_recorder2/ios`)
+  - flutter_baidu_mapapi_base (from `.symlinks/plugins/flutter_baidu_mapapi_base/ios`)
+  - flutter_baidu_mapapi_map (from `.symlinks/plugins/flutter_baidu_mapapi_map/ios`)
+  - flutter_baidu_mapapi_search (from `.symlinks/plugins/flutter_baidu_mapapi_search/ios`)
+  - flutter_baidu_mapapi_utils (from `.symlinks/plugins/flutter_baidu_mapapi_utils/ios`)
+  - flutter_bmflocation (from `.symlinks/plugins/flutter_bmflocation/ios`)
+  - flutter_qr_reader (from `.symlinks/plugins/flutter_qr_reader/ios`)
+  - flutter_vibrate (from `.symlinks/plugins/flutter_vibrate/ios`)
+  - image_crop (from `.symlinks/plugins/image_crop/ios`)
+  - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - leancloud_official_plugin (from `.symlinks/plugins/leancloud_official_plugin/ios`)
+  - map_launcher (from `.symlinks/plugins/map_launcher/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
+  - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - shortcut (from `.symlinks/plugins/shortcut/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - BaiduMapKit
+    - BMKLocationKit
+    - DKImagePickerController
+    - DKPhotoGallery
+    - FMDB
+    - LeanCloud
+    - MTBBarcodeScanner
+    - SDWebImage
+    - SwiftProtobuf
+    - SwiftyGif
+
+EXTERNAL SOURCES:
+  camera_avfoundation:
+    :path: ".symlinks/plugins/camera_avfoundation/ios"
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
+  Flutter:
+    :path: Flutter
+  flutter_audio_recorder2:
+    :path: ".symlinks/plugins/flutter_audio_recorder2/ios"
+  flutter_baidu_mapapi_base:
+    :path: ".symlinks/plugins/flutter_baidu_mapapi_base/ios"
+  flutter_baidu_mapapi_map:
+    :path: ".symlinks/plugins/flutter_baidu_mapapi_map/ios"
+  flutter_baidu_mapapi_search:
+    :path: ".symlinks/plugins/flutter_baidu_mapapi_search/ios"
+  flutter_baidu_mapapi_utils:
+    :path: ".symlinks/plugins/flutter_baidu_mapapi_utils/ios"
+  flutter_bmflocation:
+    :path: ".symlinks/plugins/flutter_bmflocation/ios"
+  flutter_qr_reader:
+    :path: ".symlinks/plugins/flutter_qr_reader/ios"
+  flutter_vibrate:
+    :path: ".symlinks/plugins/flutter_vibrate/ios"
+  image_crop:
+    :path: ".symlinks/plugins/image_crop/ios"
+  image_gallery_saver:
+    :path: ".symlinks/plugins/image_gallery_saver/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  leancloud_official_plugin:
+    :path: ".symlinks/plugins/leancloud_official_plugin/ios"
+  map_launcher:
+    :path: ".symlinks/plugins/map_launcher/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_ios:
+    :path: ".symlinks/plugins/path_provider_ios/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  photo_manager:
+    :path: ".symlinks/plugins/photo_manager/ios"
+  qr_code_scanner:
+    :path: ".symlinks/plugins/qr_code_scanner/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  shortcut:
+    :path: ".symlinks/plugins/shortcut/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+
+SPEC CHECKSUMS:
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  BaiduMapKit: f227cfb43581e91466fb4f1344f655eab5788777
+  BMKLocationKit: 3b96beefb31c3b12d53e9156aa4ab19ecd695dec
+  camera_avfoundation: 07c77549ea54ad95d8581be86617c094a46280d9
+  DKImagePickerController: 72fd378f244cef3d27288e0aebf217a4467e4012
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
+  file_picker: 817ab1d8cd2da9d2da412a417162deee3500fc95
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_audio_recorder2: 0eda9d0c791d9d093e6f5f07df414d34edec4eda
+  flutter_baidu_mapapi_base: cb406be78c3a949fb58a45dc6627f139d580bd37
+  flutter_baidu_mapapi_map: 81c4e6e93dc668e311d9b521421deaf292390434
+  flutter_baidu_mapapi_search: 13a360334e91abea0bcf820546b2ef4548e42e08
+  flutter_baidu_mapapi_utils: f6a5d23da26b0e58f1ae9908da7ba87fd48384b1
+  flutter_bmflocation: d6efa0fd0e191aa7673075cf1407b408119f1954
+  flutter_qr_reader: d930dde3b2cfe2b3d0bb7d66e5ff3e514300a5e5
+  flutter_vibrate: 9f4c2ab57008965f78969472367c329dd77eb801
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  image_crop: e0a67085d3ebf3cf46ca46d61c53a082507b0bc3
+  image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  LeanCloud: e6de4b8129ab68be7f70a9b77c4304f71c5a1a2c
+  leancloud_official_plugin: 6f30dc57a7f181193f511355c17519a61dce033d
+  map_launcher: e325db1261d029ff33e08e03baccffe09593ffea
+  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
+  qr_code_scanner: 53dc4978ffb8424665627efa36ddcdcd2dc0d432
+  SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  shortcut: a4c2b6be7c17f23bf9a8b192c69ac7777e576026
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  SwiftProtobuf: 6ef3f0e422ef90d6605ca20b21a94f6c1324d6b3
+  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
+  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
+  video_player_avfoundation: e489aac24ef5cf7af82702979ed16f2a5ef84cff
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
+
+PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
+
+COCOAPODS: 1.11.2

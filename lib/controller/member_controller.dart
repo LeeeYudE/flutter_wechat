@@ -38,11 +38,12 @@ class MemberController extends BaseXController {
           }
         });
       });
-
-      List<LCUser>? results = await LCQuery.or(querys).find();
-      results?.forEach((element) {
-        _putMember(element);
-      });
+      if(querys.isNotEmpty){
+        List<LCUser>? results = await LCQuery.or(querys).find();
+        results?.forEach((element) {
+          _putMember(element);
+        });
+      }
     },showloading: false,showToast: false);
   }
 

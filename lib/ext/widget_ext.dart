@@ -24,7 +24,7 @@ extension TextEditingControllerExt on TextEditingController{
     final TextEditingValue value = this.value;
     final int start = value.selection.baseOffset;
     int end = value.selection.extentOffset;
-    if (value.selection.isValid) {
+    if (value.selection.isValid && value.text.isNotEmpty) {
       String newText = '';
       if (value.selection.isCollapsed) {
         if (end > 0) {
@@ -52,6 +52,32 @@ extension TextEditingControllerExt on TextEditingController{
         text: text,
         selection:
         TextSelection.fromPosition(TextPosition(offset: text.length)));
+  }
+
+  removeLastText(){
+    final TextEditingValue value = this.value;
+    final int start = value.selection.baseOffset;
+    int end = value.selection.extentOffset;
+    if (value.selection.isValid) {
+      String newText = '';
+      if (value.selection.isCollapsed) {
+        if (end > 0) {
+          newText += value.text.substring(0, end-1);
+        }
+        if (value.text.length > end) {
+          newText += value.text.substring(end, value.text.length);
+        }
+      } else {
+        newText = value.text.substring(end, value.text.length-1);
+        end = start;
+      }
+
+      this.value = value.copyWith(
+          text: newText,
+          selection: TextSelection.fromPosition(TextPosition(offset: start - 1)));
+    } else {
+      newValue(text);
+    }
   }
 
 }

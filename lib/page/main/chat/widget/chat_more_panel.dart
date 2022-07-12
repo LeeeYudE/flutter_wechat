@@ -13,6 +13,7 @@ import '../../../../language/strings.dart';
 import '../../../../utils/utils.dart';
 import '../../map/select_location_page.dart';
 import '../controller/chat_controller.dart';
+import '../page/red_packet/send_red_packet_page.dart';
 
 class ChatMorePanel extends StatelessWidget {
 
@@ -77,7 +78,7 @@ class ChatMorePanel extends StatelessWidget {
              }
               break;
             case 3:///红包
-
+              NavigatorUtils.toNamed(SendRedPacketPage.routeName,arguments:_chatController.conversation);
               break;
             case 4:///文件
               FilePickerResult? result = await FilePicker.platform.pickFiles();

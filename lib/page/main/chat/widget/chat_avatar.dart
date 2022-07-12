@@ -44,7 +44,7 @@ class ChatAvatar extends StatelessWidget {
 
       conversation.members?.forEach((username) {
           var avatar = memberController.getMember(username)?.avatar;
-          if(!TextUtil.isEmpty(avatar)){
+          if(!TextUtil.isEmpty(avatar) && avatars.length < 9){
             avatars.add(avatar!);
           }
       });

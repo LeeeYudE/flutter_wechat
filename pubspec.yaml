@@ -107,7 +107,7 @@ dependencies:
   qr_code_scanner:
     git:
       url: https://github.com/LeeeYudE/qr_code_scanner.git
-      ref: d85dd7b
+      ref: 36278bf
 
   flutter_localizations:
     sdk: flutter

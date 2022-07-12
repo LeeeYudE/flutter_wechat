@@ -7,8 +7,10 @@ import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
+import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:wechat/controller/friend_controller.dart';
 import 'package:wechat/controller/member_controller.dart';
+import 'package:wechat/page/main/chat/model/red_packet_message.dart';
 import 'package:wechat/utils/language_util_v2.dart';
 
 import 'app_pages.dart';
@@ -30,6 +32,8 @@ void main() async {
   LeanCloud.initialize('JN2Q4XReVkr7sQYEmma3bT6R-MdYXbMMI', 'pgktbsL98hKS2hzdi3OeJ8Pe', queryCache: LCQueryCache());
 
   await SpUtil.getInstance();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
   if(Platform.isAndroid) {
     initAndroid();
@@ -58,6 +62,12 @@ class _MyAppState extends State<MyApp> {
     Get.put(FriendController.create(),permanent: true);
     ///状态栏字体颜色
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    _initTypeMessage();
+  }
+
+  ///初始化自定义消息
+  _initTypeMessage(){
+    TypedMessage.register(() => RedPacketMessage());
   }
 
   @override
