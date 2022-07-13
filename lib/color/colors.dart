@@ -32,7 +32,7 @@ class Colours {
       brightness: Brightness.light,
       primaryColor: color,
       platform: TargetPlatform.iOS,
-      scaffoldBackgroundColor: c_EEEEEE,
+      scaffoldBackgroundColor:c_EEEEEE,
       focusColor: color,
       cursorColor: color,
       dividerColor: color,
@@ -68,6 +68,7 @@ class Colours {
 
   static const Color discover_like_bar_color = Color(0xFF2E2E3A);
   static Color black_transparent = Colors.black.withOpacity(0.8);
+  static Color white_transparent = Colors.white.withOpacity(0.8);
   static Color black_background = Colors.black.withOpacity(0.6);
 
   static const Color white = Color(0xffffffff); //暗黑系版按钮背景色
@@ -141,6 +142,7 @@ class Colours {
   static const Color c_98E165 = Color(0xFF98E165);
   static const Color c_f0f0f0 = Color(0xFFf0f0f0);
   static const Color c_FA9E3B = Color(0xFFFA9E3B);
+  static const Color c_FCE5BF = Color(0xFFFCE5BF);
 
   static const Color line_color = Color(0xFFA3A3A4);
 

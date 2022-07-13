@@ -23,7 +23,7 @@ const Map<String, String> languageChinese = {
   Ids.set_gesture_password_hint: '是否开启指纹识别解锁app',
   Ids.set_fingerprint_password: '设置指纹密码',
   Ids.close_fingerprint_password: '关闭指纹密码？',
-  Ids.check_fingerprint: '正在校验指纹',
+  Ids.check_fingerprint: '请校验指纹',
   Ids.reset_fingerprint: '重置指纹',
   Ids.check_fingerprint_error: '校验指纹错误',
   Ids.enter_home: '进入首页',
@@ -140,5 +140,11 @@ const Map<String, String> languageChinese = {
   Ids.count: '个',
   Ids.group_member_count: '本群共%s人',
   Ids.red_packet_max_count: '一次最多可发100个红包',
+  Ids.input_pay_password: '请输入支付密码',
+  Ids.used_fingerprint: '使用指纹',
+  Ids.used_password: '使用密码',
+  Ids.pay_method: '支付方式',
+  Ids.loose_change: '零钱',
+  Ids.confim_pay: '确认支付',
 
 };

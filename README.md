@@ -15,8 +15,11 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+#测试账号 18202003769 密码 Bb123456
+
 # log
 
+* 2022.07.13 发送红包增加支付流程（支持密码支付和指纹支付）,聊天记录支持加载更多。
 * 2022.07.12 聊天增加发送红包流程。
 * 2022.07.06 增加会话未读数量显示，增加消息接收流程，扫一扫增加文件选择流程。
 * 2022.07.05 增加发送文本消息流程，增加发送位置信息流程。

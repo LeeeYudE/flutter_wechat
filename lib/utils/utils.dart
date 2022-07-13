@@ -20,6 +20,10 @@ class Utils {
     return 'assets/images/${dir != null ?dir+'/':''}$name.$format';
   }
 
+  static String getIconImgPath(String name, {String format = PNG,}) {
+    return 'assets/images/icon/$name.$format';
+  }
+
   //获取图片位置
   static String getJsonPath(String name) {
     return 'assets/json/$name.json';

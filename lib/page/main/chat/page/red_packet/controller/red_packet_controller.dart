@@ -42,7 +42,6 @@ class RedPacketController extends BaseXController  {
     )..forward();
     angleCtrl = angleController.drive(Tween(begin: 1.0, end: 0.0));
 
-
     translateCtrl = translateController.drive(Tween(begin: 0.0, end: 1.0));
     colorCtrl = translateController.drive(ColorTween(
         begin: Colors.redAccent,
@@ -66,7 +65,6 @@ class RedPacketController extends BaseXController  {
       }else if(angleController.status == AnimationStatus.reverse){
         angleController.reverse();
       }
-
       tickerProvider.setState(() {
         showOpenBtn = false;
       });
@@ -77,7 +75,7 @@ class RedPacketController extends BaseXController  {
   void clickGold(TapUpDetails details) {
     if(checkClickGold(details.globalPosition)){
       if(angleController.isAnimating){
-        stop();
+        // stop();
       }else{
         angleController.repeat(reverse: true);
         tickerProvider.setState(() {
@@ -94,17 +92,12 @@ class RedPacketController extends BaseXController  {
     return  goldPath?.contains(point) == true;
   }
 
-  void handleClick(Offset point) async{
-    if(checkClickGold(point)){
-      return;
-    }
-    await scaleController.reverse();
-  }
-
-
+  @override
   void dispose(){
+    super.dispose();
     angleController.dispose();
     translateController.dispose();
     timer?.cancel();
   }
+
 }

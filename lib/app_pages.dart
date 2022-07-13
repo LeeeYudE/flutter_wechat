@@ -9,6 +9,7 @@ import 'package:wechat/page/login/splash_page.dart';
 import 'package:wechat/page/login/verify_machine_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
 import 'package:wechat/page/main/chat/chat_page.dart';
+import 'package:wechat/page/main/chat/page/pay_password/pay_password_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/red_packet_preview_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/send_red_packet_page.dart';
 import 'package:wechat/page/main/contacts/add_friend_page.dart';
@@ -116,7 +117,8 @@ class AppPages {
     _getPage(
       name: PhotoPreviewPage.routeName,
       page: () => PhotoPreviewPage(),
-      transition: Transition.fadeIn
+      opaque: false,
+      fullscreenDialog:true,
     ),
     _getPage(
       name: SendRedPacketPage.routeName,
@@ -125,7 +127,16 @@ class AppPages {
     _getPage(
       name: RedPacketPreviewPage.routeName,
       page: () => RedPacketPreviewPage(),
-        transition: Transition.fadeIn
+      opaque: false,
+      transition: Transition.fade,
+      fullscreenDialog:true
+    ),
+    _getPage(
+      name: PayPasswordPage.routeName,
+      page: () => const PayPasswordPage(),
+      transition: Transition.fade,
+      opaque: false,
+      fullscreenDialog:true
     ),
   ];
 
@@ -133,12 +144,16 @@ class AppPages {
     required String name,
     required GetPageBuilder page,
     Bindings? binding,
-    Transition? transition
+    Transition? transition,
+    bool opaque = true,
+    bool fullscreenDialog = false
   }) {
     return GetPage(
       name: name,
       binding: binding,
+      opaque: opaque,///是否透明页面
       transition: transition,///页面过度效果
+      fullscreenDialog: fullscreenDialog,
       page: () {
         debugPrint('pageName=$name');
         return page();

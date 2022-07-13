@@ -154,6 +154,12 @@ class Ids {
   static const String count = ' count';
   static const String group_member_count = ' group_member_count';
   static const String red_packet_max_count = ' red_packet_max_count';
+  static const String input_pay_password = ' input_pay_password';
+  static const String used_fingerprint = ' used_fingerprint';
+  static const String used_password = ' used_password';
+  static const String pay_method = ' pay_method';
+  static const String loose_change = ' loose_change';
+  static const String confim_pay = ' confim_pay';
 
 
 }

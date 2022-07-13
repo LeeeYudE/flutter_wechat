@@ -71,5 +71,7 @@
         <string>qqmap</string>
         <string>here-location</string>
     </array>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Using face id to unlock app</string>
 </dict>
 </plist>

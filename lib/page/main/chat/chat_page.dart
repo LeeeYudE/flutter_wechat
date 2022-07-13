@@ -50,7 +50,7 @@ class ChatPage extends BaseGetBuilder<ChatController>{
           child: RefreshWidget(
             enablePullDown: false,
             onLoading: (_con) async {
-              debugPrint('onLoading');
+              await controller.refreshMessage();
               return true;
             },
             onRefresh: (_con) async{

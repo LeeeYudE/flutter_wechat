@@ -14,6 +14,7 @@ class CustomKeyboard extends StatefulWidget {
   final VoidCallback? onClose;
   final bool showDot;
   final int? pwdLength;
+  final bool showClose;
 
   const CustomKeyboard(
       {this.onKeyDown,
@@ -21,6 +22,7 @@ class CustomKeyboard extends StatefulWidget {
       this.showDot = false,
       this.onClose,
       this.pwdLength,
+      this.showClose = true,
       Key? key})
       : super(key: key);
 
@@ -44,7 +46,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
     '7',
     '8',
     '9',
-    '.',
+    '',
     '0',
     'del'
   ];
@@ -60,12 +62,14 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: keyHeight * 4 + headHeight+1.w,
+      height: keyHeight * 4 + ((widget.showClose)?headHeight+1.w:0),
       width: double.infinity,
       color: Colors.transparent,
       child: Column(
         children: <Widget>[
+          if(widget.showClose)
           pwdWidget(),
+          if(widget.showClose)
           Colours.c_EEEEEE.toLine(1.w),
           keyboardWidget(),
         ],

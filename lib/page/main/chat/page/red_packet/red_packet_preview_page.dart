@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wechat/page/main/chat/page/red_packet/controller/red_packet_controller.dart';
 import 'package:wechat/page/main/chat/page/red_packet/red_packet_painter.dart';
 import 'package:wechat/utils/navigator_utils.dart';
+import 'package:wechat/widget/tap_widget.dart';
 
 import '../../../../../widget/base_scaffold.dart';
 
@@ -38,30 +39,32 @@ class _RedPacketPreviewPageState extends State<RedPacketPreviewPage> with Ticker
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      backgroundColor: Colours.black_transparent,
+      backgroundColor: Colours.white_transparent,
       showAppbar: false,
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: GestureDetector(
-          child: Stack(
-            children: [
-              Center(
-                child: ScaleTransition(
-                  scale: Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(parent: controller.scaleController, curve: Curves.fastOutSlowIn)),
-                  child: buildRedPacket(),
-                ),
+        child: Stack(
+          children: [
+            Center(
+              child: ScaleTransition(
+                scale: Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(parent: controller.scaleController, curve: Curves.fastOutSlowIn)),
+                child: buildRedPacket(),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 100.w),
-                  child: const Icon(Icons.close,color: Color(0xFFFCE5BF)),
-                ),
-              )
-            ],
-          ),
-          onPanDown: (d) => controller.handleClick(d.globalPosition),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 100.w),
+                decoration: Colours.c_FA9E3B.borderDecoration(borderRadius: 50.w),
+                padding: EdgeInsets.all(5.w),
+                child: TapWidget(onTap: () {
+                  NavigatorUtils.pop();
+                },
+                child: Icon(Icons.close,color: Colours.c_FA9E3B,size: 40.w,)),
+              ),
+            )
+          ],
         ),
       ),
     );

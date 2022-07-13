@@ -6,6 +6,7 @@ import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../widget/press_record_widget.dart';
+import 'package:wechat/core.dart';
 
 class ChatController extends BaseXController {
 
@@ -42,17 +43,20 @@ class ChatController extends BaseXController {
     conversation = _managerController.getChatInfo(chatId);
     _managerController.setCurrentConversation(conversation);
     update();
-    _queryMessage();
+    refreshMessage();
   }
 
-  _queryMessage(){
+  refreshMessage(){
     if(conversation != null){
       lcPost(() async {
-        List<Message> messages = await conversation!.queryMessage(
+        List<Message> _messages = await conversation!.queryMessage(
+          startMessageID: messages.safetyItem(messages.length-1)?.id,
+          startTimestamp: messages.safetyItem(messages.length-1)?.sentTimestamp,
+          startClosed: messages.isNotEmpty?false:null,
           limit: PAGE_SIZE,
         );
-        this.messages.addAll(messages.reversed);
-        debugPrint('messages $messages');
+        messages.addAll(_messages.reversed);
+        debugPrint('messages ${_messages.length}');
       },onError: (Exception e){
 
       },showloading: false);

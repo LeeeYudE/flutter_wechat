@@ -108,6 +108,8 @@ dependencies:
     git:
       url: https://github.com/LeeeYudE/qr_code_scanner.git
       ref: 36278bf
+  #生物验证
+  flutter_local_auth_invisible: ^2.2.0
 
   flutter_localizations:
     sdk: flutter
