@@ -158,4 +158,13 @@ class BaseMapController extends BaseXController {
     return mapOptions;
   }
 
+  addMarker({required BMFCoordinate position,
+    required String icon,
+  }){
+    /// 创建BMFMarker
+    var bmfMarker = BMFMarker.icon(position: position, icon: icon);
+    /// 添加Marker
+    dituController?.addMarker(bmfMarker);
+  }
+
 }

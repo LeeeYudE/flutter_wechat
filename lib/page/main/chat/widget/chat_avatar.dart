@@ -28,7 +28,7 @@ class ChatAvatar extends StatelessWidget {
     var memberController = MemberController.instance;
     var userController = UserController.instance;
 
-    if(!conversation.isSingle){///单聊
+    if(conversation.isSingle){///单聊
       String? avatar;
       conversation.members?.forEach((username) {
         if(username != userController.username){

@@ -2,20 +2,17 @@
 
 A new Wechat project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# 介绍
+wechat_flutter是flutter版微信，目前功能还在持续迭代，尽量还原原版微信功能。
 
 #测试账号 18202003769 密码 Bb123456
+
+# 效果图
+
+| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot0.gif) | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot1.gif) | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot2.gif) |
+|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot3.gif) | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot4.gif) | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot5.gif) |
+
 
 # log
 

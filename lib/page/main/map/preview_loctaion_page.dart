@@ -41,6 +41,7 @@ class PreviewLocationPage extends BaseGetBuilder<BaseMapController> {
               BMFMapWidget(
                 onBMFMapCreated: (_controller) {
                   controller.onBMFMapCreated(_controller);
+                  controller.addMarker(position: _coordinate, icon: Utils.getIconImgPath('icon_slider_location'));
                 },
                 mapOptions: controller.initMapOptions(center: _coordinate),
               ),

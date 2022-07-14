@@ -144,7 +144,7 @@ class SelectLocationPage extends BaseGetBuilder<SelectLocationController> {
     return Center(//SlideTransition 用于执行平移动画
       child: SlideTransition(
         position: controller.sliderAnimation, //将要执行动画的子view
-        child: Image.asset('icon_slider_location'.imgAsset,width: 80.w,height: 80.w,),
+        child: Image.asset(Utils.getIconImgPath('icon_slider_location'),width: 80.w,height: 80.w,),
       ),
     );
   }
