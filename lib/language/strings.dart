@@ -165,6 +165,10 @@ class Ids {
   static const String finish = ' finish';
   static const String user_center = ' user_center';
   static const String avatar = ' avatar';
+  static const String mark_readed = ' mark_readed';
+  static const String pin_chat = ' pin_chat';
+  static const String pin_cancel = ' pin_cancel';
+  static const String delete_chat = ' delete_chat';
 
 
 }

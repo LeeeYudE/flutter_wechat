@@ -72,8 +72,9 @@ class ChatManagerController extends BaseXController {
    debugPrint('onMessageUpdated ${conversation.lastMessage?.contentText} ${updatedMessage.contentText}');
  }
 
- void _onMessage({required Client client,required Conversation conversation,required Message message}){
+ void _onMessage({required Client client,required Conversation conversation,required Message message}) async {
     debugPrint('onMessage ${conversation.unreadMessageCount} ${message.contentText}');
+    await MemberController.instance.queryUser(message.fromClientID??'');
     for (var element in onMessageReceive) {
       element.call(message);
     }
@@ -98,8 +99,22 @@ class ChatManagerController extends BaseXController {
     query.includeLastMessage = true;
     var list = await query.find();
     await MemberController.instance.queryChatsUser(list);
+    chatList.clear();
     chatList.addAll(list);
+    _sortChat();
     debugPrint('chatIndex ${list.length}');
+  }
+
+  _sortChat(){
+    chatList.sort((c1,c2){
+      if(c1.isPin && !c2.isPin){
+        return -1;
+      }
+      if(!c1.isPin && c2.isPin){
+        return 1;
+      }
+      return (c1.lastMessageTimestamp??0) > (c2.lastMessageTimestamp??0) ? -1 : 1;
+    });
   }
 
   createSingleChat(String membersId){
@@ -135,7 +150,7 @@ class ChatManagerController extends BaseXController {
 
   Future<Message> sendMessage(Conversation conversation , Message message) async {
     Message _message = await conversation.send(message: message);
-    refresh();
+    _refresh(sort: true);
     return _message;
   }
 
@@ -156,9 +171,33 @@ class ChatManagerController extends BaseXController {
     return chatList.hasIndex((element) => element.id == id);
   }
 
-  refresh(){
+  _refresh({bool sort = false}){
+    if(sort){
+      _sortChat();
+    }
     chatList.refresh();
   }
+
+  _removeChat(Conversation conversation){
+    chatList.remove(conversation);
+    _refresh();
+  }
+
+  deleteChat(Conversation conversation) async {
+    lcPost(() async {
+      // await conversation.quit();
+      _removeChat(conversation);
+    });
+
+  }
+
+  updatePin(Conversation conversation,bool pin){
+    lcPost(() async {
+      await conversation.updateInfo(attributes: {'pin':pin});
+      _refresh(sort: true);
+    });
+  }
+
 
   void logout() {
     imClient.close();

@@ -49,7 +49,7 @@ class ChatAvatar extends StatelessWidget {
           }
       });
 
-      var childCount = 2;
+      var childCount = avatars.length;
 
       var columnMax;
 

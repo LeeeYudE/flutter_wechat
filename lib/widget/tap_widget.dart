@@ -9,9 +9,10 @@ class TapWidget extends StatelessWidget {
 
   Widget child;
   GestureTapCallback onTap;
+  GestureLongPressCallback? onLongPress;
   int _lastClickTime = 0;
 
-  TapWidget({Key? key, required this.child,required this.onTap}) : super(key: key);
+  TapWidget({Key? key, required this.child,required this.onTap,this.onLongPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class TapWidget extends StatelessWidget {
           onTap.call();
         }
       } ,
+      onLongPress:onLongPress ,
     );
   }
 }

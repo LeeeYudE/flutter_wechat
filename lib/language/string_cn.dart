@@ -151,5 +151,9 @@ const Map<String, String> languageChinese = {
   Ids.finish: '完成',
   Ids.user_center: '个人中心',
   Ids.avatar: '头像',
+  Ids.mark_readed: '标记已读',
+  Ids.pin_chat: '置顶该聊天',
+  Ids.pin_cancel: '取消置顶',
+  Ids.delete_chat: '删除该聊天',
 
 };

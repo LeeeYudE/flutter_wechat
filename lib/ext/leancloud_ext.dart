@@ -64,6 +64,8 @@ extension LcConversationExt on Conversation {
     }
   }
 
+  bool get isPin => attributes?['pin']??false;
+
 }
 
 extension LCMessageExt on Message{
