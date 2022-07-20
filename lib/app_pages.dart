@@ -12,6 +12,7 @@ import 'package:wechat/page/main/chat/chat_page.dart';
 import 'package:wechat/page/main/chat/page/pay_password/pay_password_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/red_packet_preview_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/send_red_packet_page.dart';
+import 'package:wechat/page/main/contacts/select_friend_page.dart';
 import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/page/main/contacts/new_friend_page.dart';
@@ -22,6 +23,7 @@ import 'package:wechat/page/main/mine/setting_page.dart';
 import 'package:wechat/page/main/discover/scan_qrcode_page.dart';
 import 'package:wechat/page/main/main_page.dart';
 import 'package:wechat/page/main/mine/qrcode_business_card_page.dart';
+import 'package:wechat/page/main/mine/user_info_page.dart';
 import 'package:wechat/page/util/crop_image_page.dart';
 import 'package:wechat/page/util/photo_preview_page.dart';
 import 'package:wechat/page/util/webview_page.dart';
@@ -137,6 +139,14 @@ class AppPages {
       transition: Transition.fade,
       opaque: false,
       fullscreenDialog:true
+    ),
+    _getPage(
+      name: SelectFriendPage.routeName,
+      page: () => const SelectFriendPage(),
+    ),
+    _getPage(
+      name: UserCenterPage.routeName,
+      page: () => const UserCenterPage(),
     ),
   ];
 

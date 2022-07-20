@@ -92,10 +92,15 @@ class _PayPasswordPageState extends State<PayPasswordPage> {
                 children: [
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Icon(
-                        Icons.close,
-                        color: Colours.c_999999,
-                        size: 50.w,
+                      child: TapWidget(
+                        onTap: () {
+                          NavigatorUtils.pop();
+                        },
+                        child: Icon(
+                          Icons.close,
+                          color: Colours.c_999999,
+                          size: 50.w,
+                        ),
                       )),
                   Center(
                     child: Text(

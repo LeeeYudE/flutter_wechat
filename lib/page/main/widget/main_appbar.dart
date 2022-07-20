@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/color/colors.dart';
+import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import '../../../base/constant.dart';
@@ -12,6 +14,7 @@ import '../../../utils/utils.dart';
 import '../../../utils/json_parse_utils.dart';
 import '../../../widget/base_scaffold.dart';
 import '../../../widget/tap_widget.dart';
+import '../contacts/select_friend_page.dart';
 import '../contacts/add_friend_page.dart';
 import '../discover/scan_qrcode_page.dart';
 
@@ -73,6 +76,10 @@ class _MainScaffoldState extends State<MainScaffold> {
                     _controller.hideMenu();
                     switch(item.type){
                       case 0:
+                        var _selectedList = await NavigatorUtils.toNamed(SelectFriendPage.routeName,arguments: SelectFriendArguments(title: Ids.create_chat.str()));
+                        if(_selectedList != null){
+                          ChatManagerController.instance.createConversation(_selectedList);
+                        }
                         break;
                       case 1:
                         NavigatorUtils.toNamed(AddFriendPage.routeName);

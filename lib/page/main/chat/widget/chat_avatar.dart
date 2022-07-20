@@ -44,8 +44,8 @@ class ChatAvatar extends StatelessWidget {
 
       conversation.members?.forEach((username) {
           var avatar = memberController.getMember(username)?.avatar;
-          if(!TextUtil.isEmpty(avatar) && avatars.length < 9){
-            avatars.add(avatar!);
+          if(avatars.length < 9){
+            avatars.add(avatar??'');
           }
       });
 
@@ -70,7 +70,6 @@ class ChatAvatar extends StatelessWidget {
 
         imgWidth = (size - (padding * columnMax) - margin.w) / columnMax;
       }
-
       for (var i = 0; i < childCount; i++) {
         icons.add(_weChatGroupChatChildIcon(avatars[i], imgWidth));
       }

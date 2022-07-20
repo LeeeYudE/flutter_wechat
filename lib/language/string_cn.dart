@@ -74,6 +74,7 @@ const Map<String, String> languageChinese = {
   Ids.create_chat: '发起群聊',
   Ids.add_friend: '添加朋友',
   Ids.scan: '扫一扫',
+  Ids.shake: '摇一摇',
   Ids.receive_payment: '收付款',
   Ids.qrcode_business_card: '二维码名片',
   Ids.scan_qrcode_business_card: '扫一扫上面的二维码图案，加我微信',
@@ -130,6 +131,7 @@ const Map<String, String> languageChinese = {
   Ids.send_red_packet: '发红包',
   Ids.single_red_packet_amount: '单个金额',
   Ids.total_amount: '总金额',
+  Ids.amont_error: '金额错误',
   Ids.red_packet_count: '红包个数',
   Ids.slip_money_into_red_packet: '塞钱进红包',
   Ids.input_amount: '请输入金额',
@@ -146,5 +148,8 @@ const Map<String, String> languageChinese = {
   Ids.pay_method: '支付方式',
   Ids.loose_change: '零钱',
   Ids.confim_pay: '确认支付',
+  Ids.finish: '完成',
+  Ids.user_center: '个人中心',
+  Ids.avatar: '头像',
 
 };

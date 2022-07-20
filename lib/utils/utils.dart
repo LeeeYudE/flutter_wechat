@@ -11,7 +11,7 @@ class Utils {
   static const String DIR_ICON = 'icon';
   static const String DIR_CHAT = 'chat';
   static const String DIR_CONTACT = 'contact';
-  static const String DIR_DICOVER = 'dicover';
+  static const String dir_discover = 'discover';
   static const String DIR_MINE = 'mine';
   static const String DIR_EMOJI = 'emoji';
 

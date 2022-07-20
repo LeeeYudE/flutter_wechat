@@ -23,10 +23,6 @@ class CropImagePage extends StatefulWidget {
 
 class _CropImagePageState extends State<CropImagePage> {
 
-  double? baseLeft; //图片左上角的x坐标
-  double? baseTop; //图片左上角的y坐标
-  double? imageWidth; //图片宽度，缩放后会变化
-  double imageScale = 1; //图片缩放比例
   late File file;
 
   final cropKey = GlobalKey<CropState>();
@@ -50,8 +46,8 @@ class _CropImagePageState extends State<CropImagePage> {
               Crop.file(
                 file,
                 key: cropKey,
-                aspectRatio: 1.0,
-                alwaysShowGrid: false,
+                aspectRatio: 1,
+                alwaysShowGrid: true,
               ),
               _buildBtn()
             ],

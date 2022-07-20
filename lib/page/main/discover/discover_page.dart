@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wechat/color/colors.dart';
 import 'package:wechat/core.dart';
+import 'package:wechat/utils/utils.dart';
 
 import '../../../language/strings.dart';
+import '../../../widget/lable_widget.dart';
 import '../widget/main_appbar.dart';
 
 class DiscoverPage extends StatefulWidget {
@@ -22,8 +24,24 @@ class _DiscoverPageState extends State<DiscoverPage> {
   }
 
   Widget _buildBody() {
-    return Container(
-      color: Colours.theme_color_3,
+    return Column(
+      children: [
+        LableWidget(lable:Ids.friends_circle.str
+          (),leftWidget: Image.asset(Utils.getImgPath('ff_Icon_album',dir: Utils.dir_discover,format:Utils.WEBP),width: 50.w,height: 50.w,),onTap:(){
+
+        }),
+        Colours.c_EEEEEE.toLine(20.w),
+        LableWidget(lable:Ids.scan.str
+          (),leftWidget: Image.asset(Utils.getImgPath('ff_Icon_qr_code',dir: Utils.dir_discover,format:Utils.WEBP ),width: 50.w,height: 50.w),onTap:(){
+
+        }),
+        Colours.c_EEEEEE.toLine(1.w),
+        LableWidget(lable:Ids.friends_circle.str
+          (),leftWidget: Image.asset(Utils.getImgPath('ff_Icon_shake',dir: Utils.dir_discover,format:Utils.WEBP ),width: 50.w,height: 50.w),onTap:(){
+
+        }),
+      ]
+      ,
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:uuid/uuid.dart';
 import 'package:wechat/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -64,23 +63,14 @@ class UserController extends BaseXController {
   }
 
   Future<bool> updateAvatar(File file) async {
-    try {
-      showLoading();
+    bool success = false;
+   await lcPost(() async {
       LCFile _file = await LCFile.fromPath(file.filename, file.path);
-       await _file.save(onProgress: (int count, int total){
-        print('count $count total $total ');
-      });
-      disimssLoading();
       user!['avatar'] = _file.url;
       user?.save();
-      update();
-      return true;
-    } on LCException catch (e) {
-      e.message.toast();
-      debugPrint('${e.code} : ${e.message}');
-      disimssLoading();
-      return false;
-    }
+      success = true;
+    });
+   return success;
   }
 
   Future<void> logout() async {

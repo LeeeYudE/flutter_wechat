@@ -84,6 +84,7 @@ class Ids {
   static const String create_chat = 'create_chat';
   static const String add_friend = 'add_friend';
   static const String scan = 'scan';
+  static const String shake = 'shake';
   static const String receive_payment  = 'receive_payment';
 
   static const String qrcode_business_card  = 'qrcode_business_card';
@@ -145,6 +146,7 @@ class Ids {
   static const String single_red_packet_amount = 'single_red_packet_amount';
   static const String red_packet_count = 'red_packet_count';
   static const String total_amount = 'total_amount';
+  static const String amont_error = 'amont_error';
   static const String slip_money_into_red_packet = 'slip_money_into_red_packet';
   static const String input_amount = 'input_amount';
   static const String insufficient_balance = 'insufficient_balance';
@@ -160,6 +162,9 @@ class Ids {
   static const String pay_method = ' pay_method';
   static const String loose_change = ' loose_change';
   static const String confim_pay = ' confim_pay';
+  static const String finish = ' finish';
+  static const String user_center = ' user_center';
+  static const String avatar = ' avatar';
 
 
 }

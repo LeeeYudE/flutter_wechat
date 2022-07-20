@@ -59,9 +59,9 @@ class ChatMorePanel extends StatelessWidget {
               if(result?.isNotEmpty??false){
                 File file =  (await result!.first.originFile)!;
                 if(file.filename.endsWith('mp4')){
-                  _chatController.sendVideo(file.path);
+                  _chatController.sendVideo(file);
                 }else{
-                  _chatController.sendImage(file.path);
+                  _chatController.sendImage(file);
                 }
               }
               break;

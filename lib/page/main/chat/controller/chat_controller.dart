@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
@@ -69,18 +71,23 @@ class ChatController extends BaseXController {
     sendMessage(textMessage);
   }
 
-  sendImage(String path) async {
-    var imageMessage = ImageMessage.from(path: path,);
+  sendImage(File file) async {
+    // LCFile _file = await LCFile.fromPath(file.filename, file.path);
+    // await _file.save();
+    var imageMessage = ImageMessage.from(path: file.path,name: file.filename);
     sendMessage(imageMessage);
   }
 
   sendAudio(String path){
-    var imageMessage = AudioMessage.from(path: path,);
+    var imageMessage = AudioMessage.from(path: path,
+      format: 'aac',
+      name: 'test.aac'
+    );
     sendMessage(imageMessage);
   }
 
-  sendVideo(String path){
-    var imageMessage = VideoMessage.from(path: path);
+  sendVideo(File file){
+    var imageMessage = VideoMessage.from(path: file.path);
     sendMessage(imageMessage);
   }
 

@@ -40,7 +40,7 @@ class AvatarWidget extends StatelessWidget {
     return Image.asset(
       Utils.getImgPath('default_nor_avatar',dir: 'avatar'),
       width:weightWidth ,
-      height: weightWidth   ,
+      height: weightWidth ,
       fit: BoxFit.fill,
     );
   }

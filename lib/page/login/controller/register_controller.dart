@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:jmessage_flutter/jmessage_flutter.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 
+import '../../../controller/jmessage_manager.dart';
 import '../../../language/strings.dart';
 import '../../../utils/md5_utils.dart';
 import '../model/zone_code.dart';
@@ -85,20 +87,38 @@ class RegisterController extends BaseXController{
   void register(String phone , String password,String nickname , File? avatar) async {
 
     lcPost(() async {
-      LCUser user = LCUser();
+      JmessageFlutter _jMessage = JMessageManager.jMessage;
+
+      await _jMessage.userRegister(
+          username: (currZone.tel! + phone).replaceAll('+', ''),
+          password: password,
+        nickname: nickname
+      );
+      phone =  currZone.tel! + phone;
       if(avatar != null){
-        LCFile _file = await LCFile.fromPath(avatar.filename, avatar.path);
-        await _file.save();
-        user['avatar'] = _file.url;
+       await _jMessage.updateMyAvatar(imgPath: avatar.path);
       }
-      phone = "+" + currZone.tel! + phone;
-      user.username = phone;
-      user.password = password;
-      user.mobile = phone;
-      user['nickname'] = nickname;
-      user['wx_id'] = "wxid_"+Md5Util.generateMd5(const Uuid().v4().toString()).substring(16);
-      await user.signUp();
-      LCUser.logout();
+      await _jMessage.updateMyInfo(
+        extras: {
+          'wxid':Md5Util.createWxId,
+          'phone':phone,
+        }
+      );
+      await _jMessage.logout();
+      // LCUser user = LCUser();
+      // if(avatar != null){
+      //   LCFile _file = await LCFile.fromPath(avatar.filename, avatar.path);
+      //   await _file.save();
+      //   user['avatar'] = _file.url;
+      // }
+      // phone = "+" + currZone.tel! + phone;
+      // user.username = phone;
+      // user.password = password;
+      // user.mobile = phone;
+      // user['nickname'] = nickname;
+
+      // await user.signUp();
+      // LCUser.logout();
       NavigatorUtils.offNamed(RegisterSuccessPage.routeName);
 
     },loadingMsg:Ids.registering.str());

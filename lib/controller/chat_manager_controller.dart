@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
@@ -9,6 +11,7 @@ import 'package:wechat/core.dart';
 import 'package:wechat/page/main/chat/chat_page.dart';
 import 'package:wechat/page/main/main_page.dart';
 
+import '../language/strings.dart';
 import '../utils/navigator_utils.dart';
 
 class ChatManagerController extends BaseXController {
@@ -136,12 +139,29 @@ class ChatManagerController extends BaseXController {
     return _message;
   }
 
+  createConversation(List<LCObject> members) async {
+    lcPost(() async {
+      HashSet<String> _member = HashSet();
+      for (var element in members) {
+        _member.add(element['followee']['username']);
+      }
+      Conversation _c =  await imClient.createConversation(members: _member,name:Ids.group_chat.str(),isUnique: false);
+      _updateConversation(_c);
+      NavigatorUtils.toNamed(ChatPage.routeName,arguments: _c.id);
+    });
+
+  }
+
   _chatExist(String id){
     return chatList.hasIndex((element) => element.id == id);
   }
 
   refresh(){
     chatList.refresh();
+  }
+
+  void logout() {
+    imClient.close();
   }
 
 }

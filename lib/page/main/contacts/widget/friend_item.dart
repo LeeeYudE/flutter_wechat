@@ -7,20 +7,27 @@ import 'package:wechat/widget/tap_widget.dart';
 
 import '../../../../color/colors.dart';
 import '../../../../utils/navigator_utils.dart';
+import '../../../../utils/utils.dart';
 import '../../../../widget/avatar_widget.dart';
 
 class FriendItem extends StatelessWidget {
 
   LCObject friend;
   LCObject? lastFriend;
+  int? selectType;///0未选中 1选中 -1 不可选中
+  ValueChanged<LCObject>? onTap;
 
-  FriendItem({required this.friend,required this.lastFriend,Key? key}) : super(key: key);
+  FriendItem({required this.friend,required this.lastFriend,this.selectType,this.onTap,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TapWidget(
-      onTap: () {
-        NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments: friend['followee']['username']);
+      onTap:() {
+        if(onTap != null){
+          onTap?.call(friend);
+        }else{
+          NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments: friend['followee']['username']);
+        }
       },
       child: Column(
         children: [
@@ -42,6 +49,10 @@ class FriendItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                if(selectType != null)
+                  Container(
+                      margin: EdgeInsets.only(right: 20.w),
+                      child: Image.asset(Utils.getIconImgPath(selectType == 0 ?'icon_no_select':'icon_selected'),width: 40.w,height: 40.w,)),
                 AvatarWidget(avatar: friend['followee']['avatar'], weightWidth: 80.w,),
                 20.sizedBoxW,
                 Expanded(

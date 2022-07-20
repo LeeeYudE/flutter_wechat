@@ -61,6 +61,8 @@ abstract class BaseXController extends GetxController {
      await function();
      if(changeState){
        setIdleState();
+     }else{
+       update();
      }
     }on LCException catch (e){
       if(showToast??false){

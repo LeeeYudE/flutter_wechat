@@ -31,7 +31,7 @@ class SendRedPacketController extends BaseXController{
       update();
     });
     countController.addListener(() {
-      if(countController.text.isEmpty){
+      if(countController.text.isNotEmpty){
         var count = int.parse(countController.text);
         if(count > 100){
           warningHint.value = Ids.red_packet_max_count.str();
@@ -53,11 +53,19 @@ class SendRedPacketController extends BaseXController{
       if(countController.text.isEmpty){
         Ids.input_count.str().toast();
         return;
+      }else if(int.parse(countController.text) < 1){
+        Ids.input_count.str().toast();
+        return;
       }
     }
     try{
       var balance = UserController.instance.user?.balance??0.0;
       var amount = double.parse(amountController.text);
+
+      if(conversation.isGroup && amount < 0.01 * int.parse(countController.text)){
+        Ids.amont_error.str().toast();
+        return;
+      }
 
       if(balance < amount){
         Ids.insufficient_balance.str().toast();

@@ -21,7 +21,7 @@ extension LcUserExt on LCObject {
    }
 
    String? get wxId{
-     String? wxId = this['wx_id'];
+     String? wxId = this['wxid'];
      return wxId;
    }
 

@@ -567,6 +567,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+  jmessage_flutter:
+    dependency: "direct main"
+    description:
+      name: jmessage_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   js:
     dependency: transitive
     description:
@@ -594,7 +601,7 @@ packages:
       name: leancloud_official_plugin
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.0"
   leancloud_storage:
     dependency: "direct main"
     description:

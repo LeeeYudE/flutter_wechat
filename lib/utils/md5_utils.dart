@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:uuid/uuid.dart';
 
 class Md5Util {
   // md5 加密
@@ -34,5 +35,7 @@ class Md5Util {
     debugPrint('calculateMD5SumAsyncWithCrypto = ' + ret);
     return ret;
   }
+
+  static String get createWxId => 'wxid_'+generateMd5(const Uuid().v4().toString()).substring(16);
 
 }
