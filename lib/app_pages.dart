@@ -22,6 +22,7 @@ import 'package:wechat/page/main/contacts/new_friend_page.dart';
 import 'package:wechat/page/main/contacts/search_friend_page.dart';
 import 'package:wechat/page/main/map/preview_loctaion_page.dart';
 import 'package:wechat/page/main/map/select_location_page.dart';
+import 'package:wechat/page/main/mine/language_setting_page.dart';
 import 'package:wechat/page/main/mine/setting_page.dart';
 import 'package:wechat/page/main/discover/scan_qrcode_page.dart';
 import 'package:wechat/page/main/main_page.dart';
@@ -162,6 +163,10 @@ class AppPages {
     _getPage(
       name: ChatGroupEditNamePage.routeName,
       page: () => const ChatGroupEditNamePage(),
+    ),
+    _getPage(
+      name: LanguageSettingPage.routeName,
+      page: () => const LanguageSettingPage(),
     ),
   ];
 

@@ -9,7 +9,7 @@ const Map<String, String> languageChinese = {
   Ids.languageSelect: '选择语言',
   Ids.change_theme_color: '切换主题颜色',
   Ids.themeColor: '主题色',
-  Ids.language: '语言',
+  Ids.language: '多语言',
   Ids.setting: '设置',
   Ids.no_data: '暂无数据',
   Ids.account: '账号',
@@ -164,5 +164,6 @@ const Map<String, String> languageChinese = {
   Ids.complaint: '投诉',
   Ids.delete_and_quit: '删除并退出',
   Ids.edit_group_chat_name: '修改群聊名称',
+  Ids.language_system: '跟随系统',
 
 };

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/page/login/splash_page.dart';
+import 'package:wechat/page/main/mine/language_setting_page.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/tap_widget.dart';
 
@@ -45,6 +46,10 @@ class SettingPage extends StatelessWidget {
         1.sizedBoxH,
         RightArrowWidget(lable: Ids.friend_permission.str(), callback: () {
 
+        },),
+        1.sizedBoxH,
+        RightArrowWidget(lable: Ids.language.str(), callback: () {
+          NavigatorUtils.toNamed(LanguageSettingPage.routeName);
         },),
         20.sizedBoxH,
         RightArrowWidget(lable: Ids.about_wechat.str(), callback: () {
