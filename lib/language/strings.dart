@@ -169,6 +169,15 @@ class Ids {
   static const String pin_chat = ' pin_chat';
   static const String pin_cancel = ' pin_cancel';
   static const String delete_chat = ' delete_chat';
+  static const String chat_info = ' chat_info';
+  static const String group_chat_name = ' group_chat_name';
+  static const String group_chat_code = ' group_chat_code';
+  static const String group_chat_announcement = ' announcement';
+  static const String message_no_disturbing = ' message_no_disturbing';
+  static const String set_chat_backgroung = ' set_chat_backgroung';
+  static const String complaint = ' complaint';
+  static const String delete_and_quit = ' delete_and_quit';
+  static const String edit_group_chat_name = ' edit_group_chat_name';
 
 
 }

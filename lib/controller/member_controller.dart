@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/base/base_getx.dart';
+import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
 
 
@@ -16,17 +17,23 @@ class MemberController extends BaseXController {
 
   Map<String,LCUser> members = {};
 
-  queryUser(String username,{bool update = false}) async {
+  updateMyUser(){
+    queryUser(UserController.instance.username,update: true);
+  }
+
+  Future<LCUser?> queryUser(String? username,{bool update = false}) async {
+    LCUser? result;
     if(update || (!members.containsKey(username) && !TextUtil.isEmpty(username))){
      await lcPost(() async {
         LCQuery<LCUser> userQueryPhone = LCUser.getQuery();
         userQueryPhone.whereEqualTo('username', username);
-        LCUser? result = await userQueryPhone.first();
+        result = await userQueryPhone.first();
         if(result != null){
-          _putMember(result);
+          _putMember(result!);
         }
-      });
+      },showloading: false,showToast: false);
     }
+    return result;
   }
 
   queryChatsUser(List<Conversation> cons) async {
@@ -56,6 +63,7 @@ class MemberController extends BaseXController {
     if(members.containsKey(username)){
       return members[username];
     }
+    queryUser(username);
     return null;
   }
 

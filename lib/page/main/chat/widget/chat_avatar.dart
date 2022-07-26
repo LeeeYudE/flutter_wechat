@@ -12,7 +12,7 @@ var row = 0, column = 0;
 
 class ChatAvatar extends StatelessWidget {
 
-  double size = 100.w;
+  double? size;
 
   double padding = 5.w;
 
@@ -20,11 +20,12 @@ class ChatAvatar extends StatelessWidget {
 
   final Conversation conversation;
 
-  ChatAvatar({required this.conversation, Key? key,}) : super(key: key);
+  ChatAvatar({required this.conversation,this.size, Key? key,}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
-
+    size ??= 100.w;
     var memberController = MemberController.instance;
     var userController = UserController.instance;
 
@@ -64,11 +65,11 @@ class ChatAvatar extends StatelessWidget {
       if (childCount >= 5) {
         columnMax = 3;
 
-        imgWidth = (size - (padding * columnMax) - margin.w) / columnMax;
+        imgWidth = (size! - (padding * columnMax) - margin.w) / columnMax;
       } else {
         columnMax = 2;
 
-        imgWidth = (size - (padding * columnMax) - margin.w) / columnMax;
+        imgWidth = (size! - (padding * columnMax) - margin.w) / columnMax;
       }
       for (var i = 0; i < childCount; i++) {
         icons.add(_weChatGroupChatChildIcon(avatars[i], imgWidth));

@@ -5,6 +5,7 @@ import 'package:wechat/core.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:wechat/page/main/chat/chat_page.dart';
 import 'package:wechat/page/main/chat/widget/chat_avatar.dart';
+import 'package:wechat/utils/utils.dart';
 import 'package:wechat/widget/tap_widget.dart';
 import 'package:wechat/widget/unread_widget.dart';
 
@@ -54,8 +55,17 @@ class ChatItem extends StatelessWidget {
                 ],
               )),
               10.sizedBoxW,
-              if(conversation.lastMessage?.sentTimestamp != null)
-                Text("${conversation.lastMessage?.sentTimestamp?.commonDateTime(showTime: true)}",style: TextStyle(color: Colours.c_999999,fontSize: 24.sp,height: 1),),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if(conversation.lastMessage?.sentTimestamp != null)
+                    Text("${conversation.lastMessage?.sentTimestamp?.commonDateTime(showTime: true)}",style: TextStyle(color: Colours.c_999999,fontSize: 24.sp,height: 1),),
+                    5.sizedBoxH,
+                    if(conversation.isMuted)
+                      Image.asset(Utils.getIconImgPath('icon_chat_mute'),width: 30.w,height: 30.w,)
+                  ],
+                ),
             ],
           ),
         ),
@@ -90,7 +100,7 @@ class ChatItem extends StatelessWidget {
               }),
               _buildPopupItem((conversation.isPin)?Ids.pin_cancel.str():Ids.pin_chat.str(),(){
                 _controller.hideMenu();
-                ChatManagerController.instance.updatePin(conversation, !conversation.isPin);
+                ChatManagerController.instance.chatPin(conversation, !conversation.isPin);
               }),
               _buildPopupItem(Ids.delete_chat.str(),()  {
                 _controller.hideMenu();

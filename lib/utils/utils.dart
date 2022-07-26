@@ -24,6 +24,10 @@ class Utils {
     return 'assets/images/icon/$name.$format';
   }
 
+  static String getChatImgPath(String name, {String format = PNG,}) {
+    return 'assets/images/chat/$name.$format';
+  }
+
   //获取图片位置
   static String getJsonPath(String name) {
     return 'assets/json/$name.json';

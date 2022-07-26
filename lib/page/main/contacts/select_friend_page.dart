@@ -16,9 +16,10 @@ import '../../../widget/remove_top_widget.dart';
 import 'widget/friend_item.dart';
 
 class SelectFriendArguments{
+  List<String>? selectedUsername;
   String? title;
 
-  SelectFriendArguments({this.title});
+  SelectFriendArguments({this.title,this.selectedUsername});
 }
 
 
@@ -86,7 +87,7 @@ class _SelectFriendPageState extends State<SelectFriendPage> {
                     key: ValueKey(index),
                     index: index,
                     controller: _scrollController,
-                    child: FriendItem(friend: _friend, lastFriend: _friends.safetyItem(index-1),selectType: _selectedList.contains(_friend)?1:0,onTap: (friend){
+                    child: FriendItem(friend: _friend, lastFriend: _friends.safetyItem(index-1),selectType: (_arguments.selectedUsername?.contains(_friend['followee']['username'])??false)?-1: _selectedList.contains(_friend)?1:0,onTap: (friend){
                         if(_selectedList.contains(friend)){
                           _selectedList.remove(friend);
                         }else{
@@ -144,7 +145,7 @@ class _SelectFriendPageState extends State<SelectFriendPage> {
       child: Align(
         alignment: Alignment.centerRight,
         child: CommonBtn(height: 60.w,width: 150.w, text: '${Ids.finish.str()}${_selectedList.isNotEmpty?'(${_selectedList.length})':''}', onTap: () {
-          NavigatorUtils.pop(_selectedList);
+          NavigatorUtils.pop(_selectedList.map<String>((e) => e['followee']['username']).toSet());
         },backgroundColor: _selectedList.isNotEmpty?Colours.theme_color:Colours.c_CCCCCC,enable:_selectedList.isNotEmpty ,),
       ),
     );

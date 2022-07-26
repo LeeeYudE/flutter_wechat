@@ -9,8 +9,9 @@ class LableWidget extends StatelessWidget {
   Widget? rightWidget;
   Widget? leftWidget;
   GestureTapCallback? onTap;
+  bool showArrow;
 
-  LableWidget({required this.lable,this.leftWidget,this.rightWidget,this.onTap,Key? key}) : super(key: key);
+  LableWidget({required this.lable,this.leftWidget,this.rightWidget,this.onTap,this.showArrow = true,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +32,11 @@ class LableWidget extends StatelessWidget {
             Text(lable,style: TextStyle(color: Colours.black,fontSize: 28.sp),),
             const Spacer(),
             if(rightWidget != null)
+              rightWidget!,
+            if(showArrow)
               Container(
-                margin: EdgeInsets.only(right: 10.w),
-                child: rightWidget,
-              ),
-            const Icon(Icons.keyboard_arrow_right,color: Colours.c_999999,)
+                  margin: EdgeInsets.only(left: 10.w),
+                  child: const Icon(Icons.keyboard_arrow_right,color: Colours.c_999999,))
           ],
         ),
       ),

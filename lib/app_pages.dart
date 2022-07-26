@@ -8,10 +8,13 @@ import 'package:wechat/page/login/safety_verify_page.dart';
 import 'package:wechat/page/login/splash_page.dart';
 import 'package:wechat/page/login/verify_machine_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
+import 'package:wechat/page/main/chat/chat_detail_page.dart';
+import 'package:wechat/page/main/chat/chat_group_edit_name_page.dart';
 import 'package:wechat/page/main/chat/chat_page.dart';
 import 'package:wechat/page/main/chat/page/pay_password/pay_password_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/red_packet_preview_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/send_red_packet_page.dart';
+import 'package:wechat/page/main/chat/qrcode_group_chat_page.dart';
 import 'package:wechat/page/main/contacts/select_friend_page.dart';
 import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
@@ -147,6 +150,18 @@ class AppPages {
     _getPage(
       name: UserCenterPage.routeName,
       page: () => const UserCenterPage(),
+    ),
+    _getPage(
+      name: ChatDetailPage.routeName,
+      page: () => ChatDetailPage(),
+    ),
+    _getPage(
+      name: QrcodeGroupChatPage.routeName,
+      page: () => const QrcodeGroupChatPage(),
+    ),
+    _getPage(
+      name: ChatGroupEditNamePage.routeName,
+      page: () => const ChatGroupEditNamePage(),
     ),
   ];
 

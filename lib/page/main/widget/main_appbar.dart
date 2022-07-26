@@ -137,6 +137,10 @@ class _MainScaffoldState extends State<MainScaffold> {
               String username = data.asString('username');
               NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments: username);
               break;
+            case Constant.QRCODE_TYPE_BUSINESS_CHAT:
+              String chat_id = data.asString('chat_id');
+              ChatManagerController.instance.joinChat(chat_id);
+              break;
             default:
               Ids.qecode_error.str().toast();
               break;

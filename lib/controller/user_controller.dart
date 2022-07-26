@@ -9,6 +9,8 @@ import 'package:wechat/page/main/main_page.dart';
 
 import '../base/base_getx.dart';
 import '../utils/navigator_utils.dart';
+import 'jmessage_manager.dart';
+import 'member_controller.dart';
 
 class UserController extends BaseXController {
 
@@ -64,11 +66,16 @@ class UserController extends BaseXController {
 
   Future<bool> updateAvatar(File file) async {
     bool success = false;
-   await lcPost(() async {
+    await lcPost(() async {
       LCFile _file = await LCFile.fromPath(file.filename, file.path);
+      await _file.save(onProgress: (int count, int total){
+        debugPrint('count $count total $total ');
+      });
       user!['avatar'] = _file.url;
       user?.save();
       success = true;
+      update();
+      MemberController.instance.updateMyUser();
     });
    return success;
   }

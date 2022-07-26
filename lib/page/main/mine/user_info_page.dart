@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:wechat/controller/member_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/base_scaffold.dart';

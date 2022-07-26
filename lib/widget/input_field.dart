@@ -16,6 +16,7 @@ class InputField extends StatefulWidget {
   final Widget? leftWidget;
   final bool autofocus;
   final bool extended;
+  final bool showDecoration;
   final FocusNode? focusNode;
   final bool? readOnly;
   final ValueChanged<String>? onSubmitted;
@@ -25,7 +26,7 @@ class InputField extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final TextInputFormatter? inputFormatter;
 
-  InputField({this.hint,this.inputType,this.controller,this.leftWidget,this.showClean = false,this.autofocus = true,this.focusNode,this.extended = false,this.onSubmitted,this.readOnly,this.onTap,this.textAlign,this.lengthLimiting,this.padding,this.inputFormatter,Key? key}) : super(key: key);
+  InputField({this.hint,this.inputType,this.controller,this.leftWidget,this.showClean = false,this.autofocus = true,this.showDecoration = true,this.focusNode,this.extended = false,this.onSubmitted,this.readOnly,this.onTap,this.textAlign,this.lengthLimiting,this.padding,this.inputFormatter,Key? key}) : super(key: key);
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -55,7 +56,7 @@ class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: Colours.white.boxDecoration(borderRadius: 12.w),
+      decoration: widget.showDecoration?Colours.white.boxDecoration(borderRadius: 12.w):null,
       padding: widget.padding??EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.w),
       child: Row(
         children: [

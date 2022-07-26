@@ -24,7 +24,9 @@ class FriendItem extends StatelessWidget {
     return TapWidget(
       onTap:() {
         if(onTap != null){
-          onTap?.call(friend);
+          if(selectType != -1) {
+            onTap?.call(friend);
+          }
         }else{
           NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments: friend['followee']['username']);
         }
@@ -52,7 +54,8 @@ class FriendItem extends StatelessWidget {
                 if(selectType != null)
                   Container(
                       margin: EdgeInsets.only(right: 20.w),
-                      child: Image.asset(Utils.getIconImgPath(selectType == 0 ?'icon_no_select':'icon_selected'),width: 40.w,height: 40.w,)),
+                      child: Opacity(opacity: selectType == -1?0.5:1,
+                      child: Image.asset(Utils.getIconImgPath(selectType == 0 ?'icon_no_select':'icon_selected'),width: 40.w,height: 40.w,))),
                 AvatarWidget(avatar: friend['followee']['avatar'], weightWidth: 80.w,),
                 20.sizedBoxW,
                 Expanded(

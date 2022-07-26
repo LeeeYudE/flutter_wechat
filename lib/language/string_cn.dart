@@ -155,5 +155,14 @@ const Map<String, String> languageChinese = {
   Ids.pin_chat: '置顶该聊天',
   Ids.pin_cancel: '取消置顶',
   Ids.delete_chat: '删除该聊天',
+  Ids.chat_info: '聊天信息',
+  Ids.group_chat_name: '群聊名称',
+  Ids.group_chat_code: '群二维码',
+  Ids.group_chat_announcement: '群公告',
+  Ids.message_no_disturbing: '消息免打扰',
+  Ids.set_chat_backgroung: '设置当前背景',
+  Ids.complaint: '投诉',
+  Ids.delete_and_quit: '删除并退出',
+  Ids.edit_group_chat_name: '修改群聊名称',
 
 };

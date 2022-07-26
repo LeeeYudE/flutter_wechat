@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
     _pages.add(const ChatListPage());
     _pages.add(ContactsPage());
     _pages.add(const DiscoverPage());
-    _pages.add(const MinePage());
+    _pages.add(MinePage());
     EmojiUtil.instance.init();
   }
 

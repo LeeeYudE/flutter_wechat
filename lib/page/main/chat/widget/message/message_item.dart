@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:wechat/controller/member_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
+import 'package:wechat/page/main/contacts/friend_detail_page.dart';
+import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/avatar_widget.dart';
+import 'package:wechat/widget/tap_widget.dart';
 
 import '../../../../../color/colors.dart';
 import '../../model/red_packet_message.dart';
@@ -33,9 +36,9 @@ class MessageItem extends StatelessWidget {
             children: message.isSend ?[
               _buildTypeItem(),
               20.sizedBoxW,
-              AvatarWidget(avatar: _memberController.getMember(message.fromClientID)?.avatar, weightWidth: 80.w,),
+              _buildAvatar(),
             ]: [
-              AvatarWidget(avatar: _memberController.getMember(message.fromClientID)?.avatar, weightWidth: 80.w,),
+              _buildAvatar(),
               20.sizedBoxW,
               _buildTypeItem(),
             ],
@@ -44,6 +47,13 @@ class MessageItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _buildAvatar(){
+    return TapWidget(onTap: () {
+      NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments:message.fromClientID);
+    },
+    child: AvatarWidget(avatar: _memberController.getMember(message.fromClientID)?.avatar, weightWidth: 80.w,));
   }
 
   Widget _buildMsgTime() {

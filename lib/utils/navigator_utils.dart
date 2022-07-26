@@ -36,6 +36,10 @@ class NavigatorUtils{
     return Get.offNamedUntil(toName, ModalRoute.withName(withName,),arguments: arguments);
   }
 
+  static until(String withName){
+    Get.until(ModalRoute.withName(withName,));
+  }
+
   static Future pushTransparentPage(BuildContext? context, Widget page, {String? pageName, Route? route , int? direction}) async {
     if (context == null) return;
     debugPrint('Navigator : pushTransparentPage => $pageName');

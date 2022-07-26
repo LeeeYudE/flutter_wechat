@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
+import 'package:wechat/controller/member_controller.dart';
 import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/navigator_utils.dart';
@@ -37,11 +38,12 @@ class FriendDetailController extends BaseXController {
 
   void friendDetail() async {
       lcPost(() async {
-        LCQuery<LCUser> userQueryPhone = LCUser.getQuery();
-        userQueryPhone.whereEqualTo('username', username);
-        List<LCUser?>? results = await userQueryPhone.find();
-        if(results?.isNotEmpty??false){
-          friend = results!.first;
+        friend = await MemberController.instance.queryUser(username,update: true);
+        // LCQuery<LCUser> userQueryPhone = LCUser.getQuery();
+        // userQueryPhone.whereEqualTo('username', username);
+        // List<LCUser?>? results = await userQueryPhone.find();
+        if(friend != null){
+          // friend = results!.first;
           isFriend = FriendController.instance.isFriend(username);
         }
       },changeState: true,showloading: false);

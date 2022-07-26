@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wechat/base/base_view.dart';
 import 'package:wechat/color/colors.dart';
 import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/page/main/mine/setting_page.dart';
@@ -15,16 +16,10 @@ import '../../../widget/avatar_widget.dart';
 import '../../../widget/right_arrow_widget.dart';
 import '../../util/photo_preview_page.dart';
 
-class MinePage extends StatefulWidget {
-  const MinePage({Key? key}) : super(key: key);
+class MinePage extends BaseGetBuilder<UserController> {
 
   @override
-  State<MinePage> createState() => _MinePageState();
-}
-
-class _MinePageState extends State<MinePage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget controllerBuilder(BuildContext context, UserController controller) {
     return MyScaffold(
       showAppbar: false,
       body: _buildBody(context),
@@ -102,6 +97,11 @@ class _MinePageState extends State<MinePage> {
       ),
     );
   }
+
+
+
+  @override
+  UserController? getController() => null;
 
 
 

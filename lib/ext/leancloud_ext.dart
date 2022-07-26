@@ -66,6 +66,8 @@ extension LcConversationExt on Conversation {
 
   bool get isPin => attributes?['pin']??false;
 
+  List<String> get membersStr => members?.map<String>((e) => e.toString()).toList()??[];
+
 }
 
 extension LCMessageExt on Message{

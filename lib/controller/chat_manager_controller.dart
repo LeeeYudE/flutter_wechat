@@ -154,17 +154,37 @@ class ChatManagerController extends BaseXController {
     return _message;
   }
 
-  createConversation(List<LCObject> members) async {
+  createConversation(Set<String> members) async {
     lcPost(() async {
-      HashSet<String> _member = HashSet();
-      for (var element in members) {
-        _member.add(element['followee']['username']);
-      }
-      Conversation _c =  await imClient.createConversation(members: _member,name:Ids.group_chat.str(),isUnique: false);
+      Conversation _c =  await imClient.createConversation(members: members,name:Ids.group_chat.str(),isUnique: false);
       _updateConversation(_c);
+      NavigatorUtils.until(MainPage.routeName);
+      await Future.delayed(const Duration(milliseconds: 500));
       NavigatorUtils.toNamed(ChatPage.routeName,arguments: _c.id);
     });
 
+  }
+
+  joinChat(String conversationId){
+    lcPost(() async {
+      ConversationQuery query = imClient.conversationQuery();
+      query.whereEqualTo('objectId', conversationId);
+      List<Conversation> conversations = await query.find();
+      if(conversations.isNotEmpty){
+        Conversation conversation = conversations.first;
+        conversation.name;
+        await conversation.join();
+        _updateConversation(conversation);
+        NavigatorUtils.toNamed(ChatPage.routeName,arguments: conversation.id);
+      }
+    });
+  }
+
+  updateChatName(Conversation conversation,String name){
+    lcPost(() async {
+      await conversation.updateInfo(attributes: {'name':name});
+      _refresh(sort: true);
+    });
   }
 
   _chatExist(String id){
@@ -183,18 +203,33 @@ class ChatManagerController extends BaseXController {
     _refresh();
   }
 
-  deleteChat(Conversation conversation) async {
-    lcPost(() async {
-      // await conversation.quit();
+ Future<bool> deleteChat(Conversation conversation) async {
+    bool result = false;
+    await lcPost(() async {
+      if(conversation.isGroup) {
+        await conversation.quit();
+      }
       _removeChat(conversation);
+      result = true;
     });
-
+  return result;
   }
 
-  updatePin(Conversation conversation,bool pin){
-    lcPost(() async {
+  chatPin(Conversation conversation,bool pin) async {
+   await lcPost(() async {
       await conversation.updateInfo(attributes: {'pin':pin});
       _refresh(sort: true);
+    });
+  }
+
+  chatMute(Conversation conversation,bool mute) async {
+    await lcPost(() async {
+      if(mute){
+        await conversation.mute();
+      }else{
+        await conversation.unmute();
+      }
+      _refresh();
     });
   }
 

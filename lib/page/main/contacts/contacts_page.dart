@@ -35,13 +35,12 @@ class ContactsPage extends BaseGetBuilder<FriendController>{
     if(tag != null){
       int _index = -1;
       controller.friends.forEachIndex((index, value) {
-        if(tag == value['pinyin']){
+        if(tag == value['pinyin'] && _index == -1){
           _index = index;
-          return;
         }
       });
       if(_index != -1){
-        _scrollController.scrollToIndex(_index + 1,duration: const Duration(milliseconds: 50),preferPosition:AutoScrollPosition.begin);
+        _scrollController.scrollToIndex(_index,duration: const Duration(milliseconds: 50),preferPosition:AutoScrollPosition.begin);
       }
     }
   }

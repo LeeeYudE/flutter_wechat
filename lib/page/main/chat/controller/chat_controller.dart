@@ -24,10 +24,15 @@ class ChatController extends BaseXController {
   final ChatManagerController _managerController = ChatManagerController.instance;
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
     chatId = Get.arguments;
     _initListener();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     initConversation();
   }
 
