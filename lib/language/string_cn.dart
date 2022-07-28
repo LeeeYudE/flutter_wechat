@@ -166,4 +166,8 @@ const Map<String, String> languageChinese = {
   Ids.edit_group_chat_name: '修改群聊名称',
   Ids.language_system: '跟随系统',
 
+  Ids.change_cover: '更换封面',
+  Ids.thought_moment: '这一刻的想法',
+  Ids.drag_to_delete: '拖动到此处删除',
+
 };

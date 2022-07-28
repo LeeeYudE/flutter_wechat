@@ -3,9 +3,14 @@ import 'dart:io';
 import 'package:wechat/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:wechat/utils/navigator_utils.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 import '../color/colors.dart';
 import '../language/strings.dart';
-import '../widget/choose_photo_methods_dialog.dart';
+import '../page/util/crop_image_page.dart';
+import '../widget/dialog/dialog_bottom_widget.dart';
+import 'luban_util.dart';
 
 
 class DialogUtil{
@@ -41,21 +46,42 @@ class DialogUtil{
         });
   }
 
-  static Future<File?> choosePhotoDialog(BuildContext context , String title ,{bool crop = false}){
-   return showModalBottomSheet(
-        backgroundColor: Colours.c_CCCCCC,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(ScreenUtilExt.setWidth(60)),
-              topRight: Radius.circular(ScreenUtilExt.setWidth(60))),
-        ),
-        context: context,
-        builder: (BuildContext _context) {
-          return ChoosePhotoMethodsDialog(
-            title: title,
-            crop: crop,
-          );
-        });
+  static Future<File?> choosePhotoDialog(BuildContext context ,{bool crop = false,double aspectRatio = 1.0,bool compress = true}) async {
+  var result =  await NavigatorUtils.showBottomItemsDialog([DialogBottomWidgetItem(Ids.album.str(),0),DialogBottomWidgetItem(Ids.shoot.str(),1)]);
+  File? file;
+    switch(result){
+      case 0:
+        final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: const AssetPickerConfig(maxAssets: 1,requestType:RequestType.image));
+        if(result?.isNotEmpty??false){
+          file = await result?.first.originFile;
+        }
+        break;
+      case 1:
+        final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: const CameraPickerConfig(enableRecording: false));
+        if(entity != null){
+          file = await entity.file;
+        }
+        break;
+    }
+    if(file != null && crop){
+      file =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: CropArguments(file: file,aspectRatio: 1.25));
+      if(file != null){
+        String? _image = await LubanUtil.compress(file);
+        if(_image != null){
+          file = File(_image);
+        }
+      }
+      return file;
+    }else{
+      if(file != null && compress){
+        String? _image = await LubanUtil.compress(file);
+        if(_image != null){
+          file = File(_image);
+        }
+      }
+      return file;
+    }
+
   }
 
 }

@@ -179,6 +179,9 @@ class Ids {
   static const String delete_and_quit = ' delete_and_quit';
   static const String edit_group_chat_name = ' edit_group_chat_name';
   static const String language_system = ' language_system';
+  static const String change_cover = ' change_cover';
+  static const String thought_moment = ' thought_moment';
+  static const String drag_to_delete = ' drag_to_delete';
 
 
 }

@@ -80,6 +80,16 @@ class UserController extends BaseXController {
    return success;
   }
 
+  updateFriendCircilBg(File file) async {
+   await lcPost(() async {
+      var lcfile = await LCFile.fromPath(file.filename, file.path);
+      await lcfile.save();
+      user!['friendCircilBg'] = lcfile.url;
+      user!.save();
+    });
+
+  }
+
   Future<void> logout() async {
    await LCUser.logout();
    user = null;

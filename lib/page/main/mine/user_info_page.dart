@@ -10,6 +10,7 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import '../../../color/colors.dart';
 import '../../../controller/user_controller.dart';
 import '../../../language/strings.dart';
+import '../../../utils/dialog_util.dart';
 import '../../../widget/avatar_widget.dart';
 import '../../../widget/lable_widget.dart';
 import '../../util/crop_image_page.dart';
@@ -36,23 +37,20 @@ class _UserCenterPageState extends State<UserCenterPage> {
   _buildBody(BuildContext context) {
     return Column(
       children: [
-        _buildAvatar(),
+        _buildAvatar(context),
         Colours.c_EEEEEE.toLine(1.w),
         _buildNickname(),
       ],
     );
   }
 
-  _buildAvatar(){
+  _buildAvatar(BuildContext context){
     return  LableWidget(lable:Ids.avatar.str(),rightWidget:AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 100.w,hero: true,),onTap:() async {
-      final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: const AssetPickerConfig(maxAssets: 1,requestType:RequestType.image ));
-      if(result?.isNotEmpty??false){
-        var avatar =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: await result!.first.originFile);
-        if(avatar != null){
-         var bool = await UserController.instance.updateAvatar(avatar);
+      var file = await DialogUtil.choosePhotoDialog(context,crop: true);
+      if(file != null){
+         var bool = await UserController.instance.updateAvatar(file);
          if(bool){
            setState(() {});
-         }
         }
       }
     });

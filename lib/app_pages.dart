@@ -20,6 +20,8 @@ import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/page/main/contacts/new_friend_page.dart';
 import 'package:wechat/page/main/contacts/search_friend_page.dart';
+import 'package:wechat/page/main/discover/create_friend_circle_page.dart';
+import 'package:wechat/page/main/discover/friend_circle_page.dart';
 import 'package:wechat/page/main/map/preview_loctaion_page.dart';
 import 'package:wechat/page/main/map/select_location_page.dart';
 import 'package:wechat/page/main/mine/language_setting_page.dart';
@@ -30,6 +32,7 @@ import 'package:wechat/page/main/mine/qrcode_business_card_page.dart';
 import 'package:wechat/page/main/mine/user_info_page.dart';
 import 'package:wechat/page/util/crop_image_page.dart';
 import 'package:wechat/page/util/photo_preview_page.dart';
+import 'package:wechat/page/util/video_perview_page.dart';
 import 'package:wechat/page/util/webview_page.dart';
 
 class AppPages {
@@ -47,6 +50,7 @@ class AppPages {
     _getPage(
       name: CropImagePage.routeName,
       page: () => CropImagePage(),
+      popGesture: false
     ),
     _getPage(
       name: ZoneCodePage.routeName,
@@ -168,6 +172,18 @@ class AppPages {
       name: LanguageSettingPage.routeName,
       page: () => const LanguageSettingPage(),
     ),
+    _getPage(
+      name: FriendCirclePage.routeName,
+      page: () => FriendCirclePage(),
+    ),
+    _getPage(
+      name: CreateFriendCirclePage.routeName,
+      page: () => CreateFriendCirclePage(),
+    ),
+    _getPage(
+      name: VideoPerviewPage.routeName,
+      page: () => const VideoPerviewPage(),
+    ),
   ];
 
   static GetPage _getPage({
@@ -176,7 +192,8 @@ class AppPages {
     Bindings? binding,
     Transition? transition,
     bool opaque = true,
-    bool fullscreenDialog = false
+    bool fullscreenDialog = false,
+    bool? popGesture
   }) {
     return GetPage(
       name: name,
@@ -184,6 +201,7 @@ class AppPages {
       opaque: opaque,///是否透明页面
       transition: transition,///页面过度效果
       fullscreenDialog: fullscreenDialog,
+      popGesture:popGesture,
       page: () {
         debugPrint('pageName=$name');
         return page();

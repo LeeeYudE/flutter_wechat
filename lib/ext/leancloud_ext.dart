@@ -30,6 +30,10 @@ extension LcUserExt on LCObject {
      return balance != null ? double.parse(balance.toString()):0.0;
    }
 
+   String? get friendCircilBg{
+     return this['friendCircilBg'];
+   }
+
    updateBalance(double balance){
      this['balance'] = balance;
      save();

@@ -63,5 +63,9 @@ abstract class BaseGetBuilder<T extends GetxController> extends GetView<T> {
   ///初始化数据
   void onReady() {}
 
+  void update(){
+    controller.update();
+  }
+
 }
 

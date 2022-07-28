@@ -48,8 +48,14 @@ class PressRecordWidgetState extends State<PressRecordWidget> with SubscriptionM
             child: Text((status == VOICE_STATUS_START?Ids.press_start_voice:status == VOICE_STATUS_END?Ids.press_end_voice:Ids.press_cancel_voice).str(),style: TextStyle(color: Colours.black,fontSize: 32.sp),),
           ),
         ),
-        onLongPress: (){
+        onLongPress: () async {
           debugPrint('onLongPress');
+          if(!((await FlutterAudioRecorder2.hasPermissions)??false)){
+            if(!await PermissionUtils.requestPermissionMicrophone()){
+              Ids.no_permission.str().toast();
+            }
+            return;
+          }
           VibrateUtil.feedback();
           _startRecord();
           _updateStatus(VOICE_STATUS_END);
@@ -87,13 +93,6 @@ class PressRecordWidgetState extends State<PressRecordWidget> with SubscriptionM
 
   //开始录音
   _startRecord() async {
-    if(!((await FlutterAudioRecorder2.hasPermissions)??false)){
-      if(!await PermissionUtils.requestPermissionMicrophone()){
-        Ids.no_permission.str().toast();
-      }
-      return;
-    }
-
     final Directory tempDir = await FileUtils.getVoiceTemporaryDirectory();
     path = '${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.aac';
     mFlutterAudioRecorder2 = FlutterAudioRecorder2(path, audioFormat: AudioFormat.AAC); // or AudioFormat.WAV

@@ -35,40 +35,35 @@ class FileUtils {
     return file;
   }
 
-  static Future<Directory> _getTemporaryDirectory() async {
+  static Future<Directory> _getTemporaryDirectory(String dirctor) async {
     final Directory tempDirectory = await getTemporaryDirectory();
-    return tempDirectory;
+    final String dirctorPath = tempDirectory.path + dirctor;
+    final Directory file = Directory(dirctorPath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
+    return file;
   }
 
   static Future<Directory> getVoiceTemporaryDirectory() async {
-    final Directory tempDirectory = await _getTemporaryDirectory();
-    final String voicePath = tempDirectory.path + '/voice';
-    final Directory file = Directory(voicePath);
-    if (!file.existsSync()) {
-      file.createSync(recursive: true);
-    }
-    return file;
+    final Directory tempDirectory = await _getTemporaryDirectory('/voice');
+    return tempDirectory;
   }
 
   static Future<Directory> getVideoTemporaryDirectory() async {
-    final Directory tempDirectory = await _getTemporaryDirectory();
-    final String voicePath = tempDirectory.path + '/video';
-    final Directory file = Directory(voicePath);
-    if (!file.existsSync()) {
-      file.createSync(recursive: true);
-    }
-    return file;
+    final Directory tempDirectory = await _getTemporaryDirectory('/video');
+    return tempDirectory;
   }
 
 
   static Future<Directory> getImageTemporaryDirectory() async {
-    final Directory tempDirectory = await _getTemporaryDirectory();
-    final String voicePath = tempDirectory.path + '/image';
-    final Directory file = Directory(voicePath);
-    if (!file.existsSync()) {
-      file.createSync(recursive: true);
-    }
-    return file;
+    final Directory tempDirectory = await _getTemporaryDirectory('/image');
+    return tempDirectory;
+  }
+
+  static Future<Directory> getFileTemporaryDirectory() async {
+    final Directory tempDirectory = await _getTemporaryDirectory('/file');
+    return tempDirectory;
   }
 
   static deleteFile(String path){

@@ -6,13 +6,13 @@ import 'package:wechat/color/colors.dart';
 import 'package:wechat/page/login/controller/register_controller.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
 import 'package:wechat/page/util/webview_page.dart';
+import 'package:wechat/utils/dialog_util.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/common_btn.dart';
 import 'package:wechat/widget/tap_widget.dart';
 
 import '../../language/strings.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import '../../utils/utils.dart';
 import '../util/crop_image_page.dart';
@@ -20,6 +20,8 @@ import '../util/crop_image_page.dart';
 class RegisterPage extends BaseGetBuilder<RegisterController> {
 
   static const String routeName = '/RegisterPage';
+
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
   RegisterController? getController() => RegisterController();
@@ -85,12 +87,9 @@ class RegisterPage extends BaseGetBuilder<RegisterController> {
   _buildAvatar(BuildContext context){
     return TapWidget(
       onTap: () async {
-        final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: const AssetPickerConfig(maxAssets: 1,requestType:RequestType.image ));
-        if(result?.isNotEmpty??false){
-          var avatar =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: await result!.first.originFile);
-          if(avatar != null){
-            controller.changeAvatar(avatar);
-          }
+        var file = await DialogUtil.choosePhotoDialog(context,crop: true);
+        if(file != null){
+          controller.changeAvatar(file);
         }
       },
       child: (controller.avatar == null)? Image.asset(

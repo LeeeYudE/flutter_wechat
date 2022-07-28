@@ -17,5 +17,6 @@ class Constant{
 
 
   static const String OBJECT_NAME_RED_PACKET = 'red_packet';
+  static const String OBJECT_NAME_FRIEND_CIRCLE = 'friend_circle';
 
 }

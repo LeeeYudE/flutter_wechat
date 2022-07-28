@@ -10,6 +10,7 @@ class CommonBtn extends StatefulWidget {
   GestureTapCallback? onTap;
   String? text;
   Color? backgroundColor;
+  Color? textColor;
   String? icon;
   double? iconSize;
   double? borderRadius;
@@ -17,7 +18,7 @@ class CommonBtn extends StatefulWidget {
   double? height;
   bool enable;
 
-  CommonBtn({Key? key, required this.text,required this.width, required this.height,required this.onTap,this.textStyle,this.backgroundColor,this.icon,this.iconSize,this.borderRadius,this.enable = true}) : super(key: key);
+  CommonBtn({Key? key, required this.text,this.width, this.height,required this.onTap,this.textStyle,this.backgroundColor,this.textColor,this.icon,this.iconSize,this.borderRadius,this.enable = true}) : super(key: key);
 
   @override
   State<CommonBtn> createState() => _CommonBtnState();
@@ -45,11 +46,11 @@ class _CommonBtnState extends State<CommonBtn> {
         opacity: _isPan && widget.enable ?0.8:1,
         child: Container(
           decoration: BoxDecoration(
-            color: widget.backgroundColor??Colours.theme_color,
+            color: widget.backgroundColor??(widget.enable?Colours.theme_color:Colours.c_F7F7F7),
             borderRadius: BorderRadius.circular(widget.borderRadius??10.w),
           ),
-          width: widget.width??80.w,
-          height:  widget.height??300.w,
+          width: widget.width??120.w,
+          height:  widget.height??70.w,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +60,7 @@ class _CommonBtnState extends State<CommonBtn> {
                 Container(
                     margin: EdgeInsets.only(right: 10.w),
                     child: Image.asset(widget.icon!,width: widget.iconSize,height: widget.iconSize,)),
-              Text(widget.text!,style: widget.textStyle??TextStyle(color: Colours.c_ffffff,fontSize: 32.sp),)
+              Text(widget.text!,style: widget.textStyle??TextStyle(color: (widget.enable?Colours.c_ffffff:Colours.c_999999),fontSize: 32.sp),)
             ],
           ),
         ),
