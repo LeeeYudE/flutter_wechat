@@ -62,7 +62,7 @@ class CreateFriendCircleController extends BaseXController{
           );
           if(mediaInfo != null){
             var file = mediaInfo.file;
-            var videoLc = await LCFile.fromPath(file!.filename, file!.path);
+            var videoLc = await LCFile.fromPath(file!.filename, file.path);
             await videoLc.save();
             lcObject['video'] = videoLc;
           }
