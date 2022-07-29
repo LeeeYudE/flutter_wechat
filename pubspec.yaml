@@ -75,8 +75,6 @@ dependencies:
   uuid: ^3.0.6
   #pop菜单
   custom_pop_up_menu: ^1.2.2
-  #扫一扫
-  flutter_qr_reader: ^1.0.5
   #生成二维码
   qr_flutter: ^4.0.0
   #保存图片到手机
@@ -122,6 +120,8 @@ dependencies:
   video_thumbnail: ^0.4.3
   #视频压缩
   video_compress: 3.1.0
+  #获取图片宽高
+  image_size_getter: ^2.1.2
 
   flutter_localizations:
     sdk: flutter

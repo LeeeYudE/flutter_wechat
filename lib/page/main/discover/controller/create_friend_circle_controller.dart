@@ -10,6 +10,7 @@ import 'package:wechat/base/constant.dart';
 import 'package:wechat/utils/luban_util.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import '../../../../utils/video_util.dart';
 import '../create_friend_circle_page.dart';
 
 class CreateFriendCircleController extends BaseXController{
@@ -44,22 +45,13 @@ class CreateFriendCircleController extends BaseXController{
         lcObject['photos'] = photos;
       }else if(mediaType == CreateFriendCirclePage.mediaTypeVideo) {
         File video = files.first;
-        final thumbnail = await VideoThumbnail.thumbnailFile(
-            video: video.path,
-            thumbnailPath: null,
-            maxHeight: 500.w.toInt(),
-            maxWidth: 500.h.toInt(),
-            quality: 10);
+        final thumbnail = await VideoUtil.videoThumbnail(video.path);
         if(thumbnail != null){
           var thumbnailFile = File(thumbnail);
            var thumbnailLc = await LCFile.fromPath(thumbnailFile.filename, thumbnailFile.path);
            await thumbnailLc.save();
           lcObject['thumbnail'] = thumbnailLc.url;
-          MediaInfo? mediaInfo = await VideoCompress.compressVideo(
-            video.path,
-            quality: VideoQuality.DefaultQuality,
-            deleteOrigin: false, // It's false by default
-          );
+          MediaInfo? mediaInfo = await VideoUtil.compressVideo(video.path);
           if(mediaInfo != null){
             var file = mediaInfo.file;
             var videoLc = await LCFile.fromPath(file!.filename, file.path);
@@ -72,7 +64,6 @@ class CreateFriendCircleController extends BaseXController{
       lcObject['user'] = UserController.instance.user;
       lcObject.save();
       NavigatorUtils.pop(true);
-
     });
 
   }

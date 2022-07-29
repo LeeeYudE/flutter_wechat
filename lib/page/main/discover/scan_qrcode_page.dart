@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_qr_reader/flutter_qr_reader.dart';
-
 import '../../../utils/navigator_utils.dart';
 import '../../../utils/permission_utils.dart';
 import '../../../widget/qrcode_reader_view.dart';
@@ -20,7 +18,6 @@ class ScanQrcodePage extends StatefulWidget {
 class _ScanQrcodePageState extends State<ScanQrcodePage> {
   bool _hasPermission = false;
   final GlobalKey<QrcodeReaderViewState> _key = GlobalKey();
-  QrReaderViewController? _controller;
 
   @override
   void initState() {
@@ -46,7 +43,6 @@ class _ScanQrcodePageState extends State<ScanQrcodePage> {
 
    Future onScan(String? result) async {
     debugPrint('onScan $result');
-    _controller?.stopCamera();
     NavigatorUtils.pop(result);
   }
 
