@@ -169,5 +169,10 @@ const Map<String, String> languageChinese = {
   Ids.change_cover: '更换封面',
   Ids.thought_moment: '这一刻的想法',
   Ids.drag_to_delete: '拖动到此处删除',
+  Ids.full_text: '全文',
+  Ids.expandable_text: '收起',
+  Ids.delete_friend_cricle: '删除朋友圈',
+  Ids.comment: '评论',
+  Ids.like: '赞',
 
 };

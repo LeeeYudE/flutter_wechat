@@ -12,6 +12,7 @@ class CacheImageWidget extends StatelessWidget {
   final bool hero;
   final double? decorationWidth;
   final double? borderRadius;
+  final bool clipRRect;
 
   const CacheImageWidget({
     required this.url,
@@ -19,22 +20,24 @@ class CacheImageWidget extends StatelessWidget {
     required this.weightHeight,
     this.hero = false,
     this.decorationWidth,
-    this.borderRadius
+    this.borderRadius,
+    this.clipRRect = true
   });
 
   @override
   Widget build(BuildContext context) {
-    return _buildAvatarWidget(url);
+    return _buildImageWidget(url);
   }
 
-  Widget _buildAvatarWidget(String? avatar) {
-    return Container(
+  Widget _buildImageWidget(String? avatar) {
+    Widget child = TextUtil.isEmpty(avatar) ? _buildEmptyImage() : hero ? Hero(tag: avatar!, child: _buildImage(avatar)): _buildImage(avatar!);
+    return SizedBox(
       width: weightWidth,
       height: weightHeight,
-      child: ClipRRect(
+      child: clipRRect?ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius??12.w,),
-        child: TextUtil.isEmpty(avatar) ? _buildEmptyImage() : hero ? Hero(tag: avatar!, child: _buildImage(avatar)): _buildImage(avatar!),
-      ),
+        child: child,
+      ):child,
     );
   }
 

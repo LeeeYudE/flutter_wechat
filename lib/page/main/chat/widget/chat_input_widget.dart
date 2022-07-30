@@ -83,7 +83,6 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
       }
       autoShowKeyboard = false;
       _keyboardHeight = height;
-      debugPrint("_keyboardHeight $_keyboardHeight");
       setState(() {
         inputType = INPUT_TYPE_NULL;
         isKeyboard = true;

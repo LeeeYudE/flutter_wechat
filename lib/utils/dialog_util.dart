@@ -10,7 +10,7 @@ import '../color/colors.dart';
 import '../language/strings.dart';
 import '../page/util/crop_image_page.dart';
 import '../widget/dialog/dialog_bottom_widget.dart';
-import 'luban_util.dart';
+import 'image_util.dart';
 
 
 class DialogUtil{
@@ -66,7 +66,7 @@ class DialogUtil{
     if(file != null && crop){
       file =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: CropArguments(file: file,aspectRatio: 1.25));
       if(file != null){
-        String? _image = await LubanUtil.compress(file);
+        String? _image = await ImageUtil.compressImage(file);
         if(_image != null){
           file = File(_image);
         }
@@ -74,7 +74,7 @@ class DialogUtil{
       return file;
     }else{
       if(file != null && compress){
-        String? _image = await LubanUtil.compress(file);
+        String? _image = await ImageUtil.compressImage(file);
         if(_image != null){
           file = File(_image);
         }

@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:wechat/controller/video_manager.dart';
 
 import '../core.dart';
 
@@ -10,18 +9,18 @@ class VidwoPlayWidget extends StatefulWidget {
   String path;
   bool autoPlay;
   bool fullScreen; //默认全屏
-  bool isPlayBack; //播放完后退出
   bool isAllowFullScreen; //是否显示全屏按钮
   bool isShowOptions; //是否显示又上角更多功能
+  bool hero;
 
   VidwoPlayWidget(
       {
       required this.path,
       this.autoPlay = true,
       this.fullScreen = false,
-      this.isPlayBack = false,
       this.isAllowFullScreen = true,
       this.isShowOptions = true,
+      this.hero = false,
       Key? key})
       : super(key: key);
 
@@ -32,8 +31,7 @@ class VidwoPlayWidget extends StatefulWidget {
 class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
   VideoPlayerController? _controller;
   ChewieController? chewieController;
-  bool _full = false;
-  bool _abort = false; //防止退出多次
+  bool _inited = false;
 
   @override
   void initState() {
@@ -43,73 +41,60 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
 
   _init() async {
     if (!TextUtil.isEmpty(widget.path)) {
-      if (widget.path.startsWith('http')) {
-        _controller = VideoPlayerController.network(widget.path);
-      } else {
-        final file = File(widget.path);
-        _controller = VideoPlayerController.file(file);
-      }
-      chewieController?.addListener(() {
-        print('chewieController addListener = ${chewieController?.isPlaying}');
-      });
-      _controller?.addListener(() async {
-        print('_controller addListener = ${chewieController?.isPlaying}');
-        if (!_full && (chewieController?.isPlaying ?? false)) {
-          _full = true;
-          print('_controller addListener = setState');
-          setState(() {});
+      _controller =  VideoManager.getVideoController(widget.path);
+      if(_controller != null){
+        Duration? duration;
+        if(_controller?.value.isInitialized??false){
+          _inited = true;
         }
-        if (widget.isPlayBack &&
-            _controller != null &&
-            !_abort &&
-            _controller!.value.position >= _controller!.value.duration) {
-          _abort = true;
-
-          Navigator.of(context).pop();
-        }
-      });
-      await _controller?.initialize();
-      if(_controller != null) {
+        print('duration $duration');
+        _controller?.addListener(_videoListener);
         chewieController = ChewieController(
-          videoPlayerController: _controller!,
-          autoPlay: widget.autoPlay,
-          autoInitialize: true,
-          showOptions: widget.isShowOptions,
-          allowFullScreen: widget.isAllowFullScreen,
-          fullScreenByDefault: widget.fullScreen,
-          placeholder: Container(
-            color: Colors.black,
-          ));
+            videoPlayerController: _controller!,
+            startAt: duration,
+            autoPlay: widget.autoPlay,
+            autoInitialize: true,
+            showOptions: widget.isShowOptions,
+            allowFullScreen: widget.isAllowFullScreen,
+            fullScreenByDefault: widget.fullScreen,
+            looping: true,
+            placeholder: Container(
+              color: Colors.black,
+            ));
       }
     }
   }
 
-  restart() async {
-    await chewieController!.seekTo(const Duration(seconds: 0));
-    chewieController!.play();
+  _videoListener(){
+    if(_controller?.value.isInitialized??false){
+      setState(() {});
+      _controller?.removeListener(_videoListener);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print('isInitialized = ${chewieController?.videoPlayerController.value.isInitialized??false}');
     return Container(
       width: double.infinity,
       height: double.infinity,
       color: Colors.black,
       child: (!TextUtil.isEmpty(widget.path))
-          ? Center(
-              child: chewieController != null &&
-                      chewieController!
-                          .videoPlayerController.value.isInitialized
-                  ? Chewie(
-                      controller: chewieController!,
-                    )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                      ],
-                    ),
-            )
+          ? Hero(
+            tag: widget.path,
+            child: Center(
+                child: chewieController?.videoPlayerController.value.isInitialized??false
+                    ? Chewie(
+                        controller: chewieController!,
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+              ),
+          )
           : Container(),
     );
   }
@@ -118,7 +103,9 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
   void dispose() {
     super.dispose();
     debugPrint('VidwoPlayWidget dispose');
-    _controller?.dispose();
+    if(!_inited){
+      _controller?.dispose();
+    }
     if(chewieController!=null){
       chewieController?.dispose();
     }

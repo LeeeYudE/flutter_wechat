@@ -29,7 +29,6 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
   List<AssetEntity>? selectedAssets;
   final Map<int, GlobalKey> _keys = {};
   int _mediaType = 0;///1 图片 2 视频
-  VideoPlayerController? _videoController;
 
   CreateFriendCirclePage({Key? key}) : super(key: key);
 
@@ -78,6 +77,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
           color: Colours.black,
           fontSize: 32.sp,
         ),
+        maxLines: null,
         decoration: InputDecoration(
           isCollapsed: true,
           contentPadding: EdgeInsets.symmetric(vertical: 5.w),
@@ -123,7 +123,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
                 selectedAssets?.clear();
                 _mediaType = mediaTypeVideo;
                 photos.add(file);
-                _initVideo(file);
+                controller.initVideo(file);
               }else{
                 _mediaType = mediaTypeImage;
                 photos.add(file);
@@ -133,6 +133,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
                 File file = (await element.file)!;
                 photos.add(file);
               });
+              _mediaType = mediaTypeImage;
             }
           }else{
             _mediaType = mediaTypeText;
@@ -218,18 +219,10 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
     );
   }
 
-  _initVideo(File file) async {
-    _videoController = VideoPlayerController.file(file);;
-    _videoController?.addListener(() {
-      if(_videoController?.value.isInitialized??false){
-        update();
-      }
-    });
-    await _videoController!.initialize();
-  }
+
 
   Widget _buildVideo() {
-    if(_videoController != null && _videoController!.value.isInitialized){
+    if(controller.videoController?.value.isInitialized??false){
       return Align(
         alignment: Alignment.topLeft,
         child: TapWidget(
@@ -250,7 +243,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
               child: ClipRectWidget(
                 child: Stack(
                   children: [
-                    VideoPlayer(_videoController!),
+                    VideoPlayer(controller.videoController!),
                     Center(child: Container(
                         decoration: Colours.white.boxDecoration(borderRadius: 60.w),
                         child: Icon(Icons.play_circle,color: Colours.c_CCCCCC,size: 60.w,)),)

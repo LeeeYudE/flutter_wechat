@@ -1,3 +1,4 @@
+import 'package:wechat/core.dart';
 
 class Constant{
 
@@ -14,9 +15,15 @@ class Constant{
   static const String QRCODE_TYPE_BUSINESS_CHAT = 'QRCODE_TYPE_BUSINESS_CHAT';///群聊二维码
 
   static const double MAP_ZOOM = 16.0;
+  static const int PAGE_SIZE = 20;
 
 
-  static const String OBJECT_NAME_RED_PACKET = '_redPacket';
-  static const String OBJECT_NAME_FRIEND_CIRCLE = '_friendCircle';
+  static const String OBJECT_NAME_RED_PACKET = 'redPacket';
+  static const String OBJECT_NAME_FRIEND_CIRCLE = 'friendCircle';
+
+  static final  double MAX_PHOTO_WIDTH = 600.w;
+  static final double MAX_PHOTO_HEIGHT = 600.w;
+  static final double MIN_PHOTO_WIDTH = 300.w;
+  static final double MIN_PHOTO_HEIGHT = 300.w;
 
 }

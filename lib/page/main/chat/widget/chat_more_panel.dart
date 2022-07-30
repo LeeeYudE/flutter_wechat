@@ -66,7 +66,7 @@ class ChatMorePanel extends StatelessWidget {
               }
               break;
             case 1:///拍摄
-              final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: const CameraPickerConfig(enableRecording: true));
+              final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: const CameraPickerConfig(enableRecording: true,resolutionPreset: ResolutionPreset.high));
               if(entity != null){
                 await entity.file;
               }

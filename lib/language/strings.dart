@@ -182,6 +182,11 @@ class Ids {
   static const String change_cover = ' change_cover';
   static const String thought_moment = ' thought_moment';
   static const String drag_to_delete = ' drag_to_delete';
+  static const String full_text = ' full_text';
+  static const String expandable_text = ' expandable_text';
+  static const String delete_friend_cricle = ' delete_friend_cricle';
+  static const String comment = ' comment';
+  static const String like = ' like';
 
 
 }
