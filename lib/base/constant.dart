@@ -15,7 +15,7 @@ class Constant{
   static const String QRCODE_TYPE_BUSINESS_CHAT = 'QRCODE_TYPE_BUSINESS_CHAT';///群聊二维码
 
   static const double MAP_ZOOM = 16.0;
-  static const int PAGE_SIZE = 20;
+  static const int PAGE_SIZE = 10;
 
 
   static const String OBJECT_NAME_RED_PACKET = 'redPacket';

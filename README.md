@@ -14,13 +14,13 @@ Flutter版本：2.10.1
 |----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot3.gif) | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot4.gif) | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot5.gif) |
 
-#api方案采用leancloud
-数据存储文档：https://zh-docs.leancloud.app/leanstorage_guide-flutter.html
-IM聊天文档：https://zh-docs.leancloud.app/realtime-guide-beginner.html
+#Api方案采用Leancloud
+* 数据存储文档：https://zh-docs.leancloud.app/leanstorage_guide-flutter.html
+* IM聊天文档：https://zh-docs.leancloud.app/realtime-guide-beginner.html
 
 # log
 
-* 2022.08.01 完成摇一摇页面。
+* 2022.08.01 完成摇一摇页面,增加朋友圈点赞/评论流程。
 * 2022.07.30 增加朋友圈列表数据显示。
 * 2022.07.26 创建朋友圈页面，完成朋友圈创建流程。
 * 2022.07.26 增加聊天详情页面，增加多语言设置。

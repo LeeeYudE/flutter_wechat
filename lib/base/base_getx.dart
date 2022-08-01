@@ -75,7 +75,7 @@ abstract class BaseXController extends GetxController {
       debugPrint('${e.code} : ${e.message}');
     }on Exception catch (e){
       if(showToast??false){
-        'Exception'.toast();
+        e.toString().toast();
       }
       if(changeState){
         setErrorState();

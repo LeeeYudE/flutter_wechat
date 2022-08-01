@@ -67,9 +67,8 @@ class Colours {
   static const Color discover_item_color = Color(0xFF161623);
 
   static const Color discover_like_bar_color = Color(0xFF2E2E3A);
-  static Color black_transparent = Colors.black.withOpacity(0.8);
-  static Color white_transparent = Colors.white.withOpacity(0.8);
-  static Color black_background = Colors.black.withOpacity(0.6);
+  static Color black_transparent = Colors.black.withOpacity(0.6);
+  static Color white_transparent = Colors.white.withOpacity(0.6);
 
   static const Color white = Color(0xffffffff); //暗黑系版按钮背景色
   static const Color black = Color(0xff000000); //暗黑系版按钮背景色

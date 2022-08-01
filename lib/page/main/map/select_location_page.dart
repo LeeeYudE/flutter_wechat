@@ -119,7 +119,7 @@ class SelectLocationPage extends BaseGetBuilder<SelectLocationController> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Colours.black_background,Colours.transparent]
+          colors: [Colours.black_transparent,Colours.transparent]
         )
       ),
       child: Row(

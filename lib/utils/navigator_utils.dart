@@ -57,6 +57,10 @@ class NavigatorUtils{
     );
   }
 
+  static Future<T?>? toBottomPage<T>(Widget page, {dynamic arguments}) {
+    return Get.to<T>(DialogBottomLayout(page,opaque: true,), arguments: arguments,opaque: false,fullscreenDialog: true,transition: Transition.downToUp);
+  }
+
   static void pop<T extends Object>([T? result]) {
     return Get.back(result: result);
   }

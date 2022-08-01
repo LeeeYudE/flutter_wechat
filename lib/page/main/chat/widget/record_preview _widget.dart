@@ -25,7 +25,7 @@ class RecordPreviewWidget extends StatelessWidget {
         child: Container(
           width: 250.w,
           height: 250.w,
-          decoration: Colours.black_background.boxDecoration(),
+          decoration: Colours.black_transparent.boxDecoration(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

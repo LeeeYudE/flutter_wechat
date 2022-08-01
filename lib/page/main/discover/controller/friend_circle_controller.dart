@@ -50,7 +50,7 @@ class FriendCircleController extends BaseXController{
 
    likeFriendCircle(LCObject lcObject) async {
    await lcPost(() async {
-     List<Map<String,dynamic>> liked = lcObject['liked']??[];
+     List liked = lcObject['liked']??[];
       bool hasIndex = liked.hasIndex((element) => element['username'] == UserController.instance.username);
       if(hasIndex){
         liked.removeWhere((element) => element['username'] == UserController.instance.username);
@@ -61,9 +61,32 @@ class FriendCircleController extends BaseXController{
         liked.add(_map);
       }
      lcObject['liked'] = liked;
-     lcObject['liked'] = liked;
       await lcObject.save();
     },updated: false);
+  }
+
+   comment(LCObject lcObject, String comment) async {
+      await lcPost(() async {
+        List comments = lcObject['comments']??[];
+        Map<String,dynamic> _comment = {};
+        _comment['comment'] = comment;
+        _comment['sender'] = {
+          'username':UserController.instance.username,
+          'nickname':UserController.instance.user?.nickname
+        };
+        comments.add(_comment);
+        lcObject['comments'] = comments;
+        await  lcObject.save();
+      },updated: false);
+  }
+
+   deleteComment(LCObject lcObject,Map comment) async {
+   await lcPost(() async {
+     List comments = lcObject['comments']??[];
+     comments.remove(comment);
+     lcObject['comments'] = comments;
+     await  lcObject.save();
+    });
   }
 
 }

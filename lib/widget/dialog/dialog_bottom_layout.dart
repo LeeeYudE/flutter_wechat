@@ -8,20 +8,22 @@ import '../../color/colors.dart';
 class DialogBottomLayout extends StatelessWidget {
 
   Widget child;
+  bool opaque;
 
-  DialogBottomLayout(this.child,{Key? key}) : super(key: key);
+  DialogBottomLayout(this.child,{Key? key,this.opaque = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
       showAppbar: false,
       backgroundColor: Colours.transparent,
+      resizeToAvoidBottomInset: true,
       body: TapWidget(
         onTap: () {
           NavigatorUtils.pop();
         },
         child: Container(
-          color: Colours.black_background,
+          color: opaque?Colours.transparent:Colours.black_transparent,
           width: double.infinity,
           height: double.infinity,
           child: Stack(

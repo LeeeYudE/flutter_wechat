@@ -174,5 +174,6 @@ const Map<String, String> languageChinese = {
   Ids.delete_friend_cricle: '删除朋友圈',
   Ids.comment: '评论',
   Ids.like: '赞',
+  Ids.delete_comment: '删除评论',
 
 };

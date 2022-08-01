@@ -58,7 +58,7 @@ class _PayPasswordPageState extends State<PayPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      backgroundColor: Colours.black_background,
+      backgroundColor: Colours.black_transparent,
       showAppbar: false,
       body: _buildBody(context),
     );
