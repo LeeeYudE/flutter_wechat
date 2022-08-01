@@ -20,6 +20,7 @@ class MyScaffold extends StatelessWidget {
   final IconData? backIcon;
   final Widget? bottomNavigationBar;
   final VoidCallback? onBodyClick;
+  final Color? backIconColor;
 
    const MyScaffold({
     Key? key,
@@ -38,7 +39,8 @@ class MyScaffold extends StatelessWidget {
     this.showAppbar = true,
     this.backIcon,
     this.bottomNavigationBar,
-    this.onBodyClick
+    this.onBodyClick,
+    this.backIconColor
   }) ;
 
   @override
@@ -79,7 +81,7 @@ class MyScaffold extends StatelessWidget {
             child: Offstage(
               offstage: !showLeading,
               child: leading??IconButton(
-                icon: Icon(backIcon??Icons.arrow_back_ios,color: Colours.black,), onPressed: () {
+                icon: Icon(backIcon??Icons.arrow_back_ios,color: backIconColor??Colours.black,), onPressed: () {
                 Get.back();
               },
               ),
@@ -91,7 +93,7 @@ class MyScaffold extends StatelessWidget {
               constraints: BoxConstraints(
                   maxWidth: 400.w
               ),
-              child: Text(title ?? '', style: TextStyle(fontSize: 32.sp, color: Colors.black, decoration: TextDecoration.none,fontWeight: FontWeight.w500)),
+              child: Text(title ?? '', style: TextStyle(fontSize: 32.sp, color: backIconColor??Colors.black, decoration: TextDecoration.none,fontWeight: FontWeight.w500)),
             )
             ),
           ),

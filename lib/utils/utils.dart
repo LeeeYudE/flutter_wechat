@@ -28,9 +28,12 @@ class Utils {
     return 'assets/images/chat/$name.$format';
   }
 
-  //获取图片位置
   static String getJsonPath(String name) {
     return 'assets/json/$name.json';
+  }
+
+  static String getLottiePath(String name) {
+    return 'assets/lottie/$name.json';
   }
 
 }
