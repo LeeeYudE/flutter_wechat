@@ -1,10 +1,13 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:extended_text_field/extended_text_field.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/color/colors.dart';
 import 'package:wechat/controller/user_controller.dart';
+import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/widget/avatar_widget.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/widget/cache_image_widget.dart';
@@ -14,17 +17,26 @@ import 'dart:math' as math ;
 import '../../../../language/strings.dart';
 import '../../../../utils/dialog_util.dart';
 import '../../../../utils/navigator_utils.dart';
+import '../../../../utils/utils.dart';
 import '../../../../widget/scale_size_image_widget.dart';
 import '../../../../widget/scale_size_video_widget.dart';
 import '../../../util/photo_preview_page.dart';
 import '../controller/friend_circle_controller.dart';
 
-class FriendCircleItem extends StatelessWidget {
+class FriendCircleItem extends StatefulWidget {
 
   LCObject lcObject;
   FriendCircleController controller;
 
+
    FriendCircleItem({required this.lcObject,required this.controller,Key? key}) : super(key: key);
+
+  @override
+  State<FriendCircleItem> createState() => _FriendCircleItemState();
+}
+
+class _FriendCircleItemState extends State<FriendCircleItem> {
+  final CustomPopupMenuController _customPopupMenuController = CustomPopupMenuController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,32 +46,34 @@ class FriendCircleItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AvatarWidget(avatar: lcObject['user']['avatar'], weightWidth: 100.w),
+          AvatarWidget(avatar: widget.lcObject['user']['avatar'], weightWidth: 100.w),
           20.sizedBoxW,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(lcObject['user']['nickname'],style: TextStyle(color: Colours.c_5B6B8D,fontSize: 32.sp),maxLines: 1,),
+                Text(widget.lcObject['user']['nickname'],style: TextStyle(color: Colours.c_5B6B8D,fontSize: 32.sp),maxLines: 1,),
                 10.sizedBoxH,
-                if(!TextUtil.isEmpty(lcObject['text']))
+                if(!TextUtil.isEmpty(widget.lcObject['text']))
                   SizedBox(
                       width: Get.width-200.w,
                       child: ExpandableText(
-                        lcObject['text'],
+                        widget.lcObject['text'],
                         expandText: Ids.full_text.str(),
                         collapseText: Ids.expandable_text.str(),
                         maxLines: 4,
                         linkColor: Colours.c_5B6B8D,
                       )),
                 20.sizedBoxH,
-                if(lcObject['mediaType'] == 1)
+                if(widget.lcObject['mediaType'] == 1)
                   _buildImage(),
-                if(lcObject['mediaType'] == 2)
+                if(widget.lcObject['mediaType'] == 2)
                   _buildVideo(),
                 20.sizedBoxH,
-                _buildFooder(context)
+                _buildFooder(context),
+                20.sizedBoxH,
+                _buildLiked(),
               ],
             ),
           ),
@@ -73,45 +87,60 @@ class FriendCircleItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text((lcObject.createdAt!.millisecondsSinceEpoch).commonDateTime(showTime: true),style: TextStyle(color: Colours.c_999999,fontSize: 24.sp,height: 1.1),),
+        Text((widget.lcObject.createdAt!.millisecondsSinceEpoch).commonDateTime(showTime: true),style: TextStyle(color: Colours.c_999999,fontSize: 24.sp,height: 1.1),),
         10.sizedBoxW,
-        if(lcObject['user']['username'] == UserController.instance.username)
+        if(widget.lcObject['user']['username'] == UserController.instance.username)
           TapWidget(onTap: () async {
            var result = await DialogUtil.showConfimDialog(context, Ids.delete.str());
            if(result??false){
-             controller.deleteFriendCircle(lcObject);
+             widget.controller.deleteFriendCircle(widget.lcObject);
            }
           },
           child: Text(Ids.delete.str(),style: TextStyle(color: Colours.c_5B6B8D,fontSize: 24.sp,height: 1.1),)),
         const Spacer(),
         CustomPopupMenu(
+          controller: _customPopupMenuController,
           pressType: PressType.singleClick,
           showArrow: false,
           horizontalMargin: 90.w,
           verticalMargin: -40.w,
           barrierColor: Colours.transparent,
           menuBuilder: () {
+            List<Map<String,dynamic>> liked = widget.lcObject['liked']??[];
+            bool _liked = liked.hasIndex((element) => element['username'] == UserController.instance.username);
             return Container(
               width: 240.w,
               height: 60.w,
               decoration: Colours.black.boxDecoration(),
               child: Row(
                 children: [
-                  Expanded(child: Row(
-                    children: [
-                      Icon(Icons.favorite_border,color: Colours.white,size: 24.sp),
-                      10.sizedBoxW,
-                      Text(Ids.like.str(),style: TextStyle(color: Colours.white,fontSize: 24.sp),)
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Expanded(child: TapWidget(
+                    onTap: () async {
+                      _customPopupMenuController.hideMenu();
+                      await widget.controller.likeFriendCircle(widget.lcObject);
+                      setState(() {});
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.favorite_border,color: Colours.white,size: 24.sp),
+                        10.sizedBoxW,
+                        Text(_liked?Ids.cancel.str():Ids.like.str(),style: TextStyle(color: Colours.white,fontSize: 24.sp),)
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
                   ),),
-                  Expanded(child: Row(
-                    children: [
-                      Icon(Icons.comment_sharp,color: Colours.white,size: 24.sp,),
-                      10.sizedBoxW,
-                      Text(Ids.comment.str(),style: TextStyle(color: Colours.white,fontSize: 24.sp),)
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Expanded(child: TapWidget(
+                    onTap: () {
+                      _customPopupMenuController.hideMenu();
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.comment_sharp,color: Colours.white,size: 24.sp,),
+                        10.sizedBoxW,
+                        Text(Ids.comment.str(),style: TextStyle(color: Colours.white,fontSize: 24.sp),)
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
                   ),),
                 ],
               ),
@@ -133,7 +162,7 @@ class FriendCircleItem extends StatelessWidget {
   }
 
   Widget _buildImage(){
-    List<dynamic> photos = lcObject['photos'];
+    List<dynamic> photos = widget.lcObject['photos'];
 
     if(photos.isEmpty){
       return Container();
@@ -147,14 +176,25 @@ class FriendCircleItem extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         double layoutWidth = constraints.maxWidth;
-        int crossCount = ((photos.length / 3) + 1).toInt();
-        double layoutHeight = layoutWidth * (math.min(crossCount,3)/3);
+        int crossCount;
+        if(photos.length < 4){
+          crossCount = 1;
+        }else if(photos.length < 7){
+          crossCount = 2;
+        }else{
+          crossCount = 3;
+        }
+
+        double layoutHeight = layoutWidth * (crossCount/3);
+        if(photos.length == 4){
+          layoutWidth = layoutWidth * 2 / 3;
+        }
         return SizedBox(
           height: layoutHeight,
           width: layoutWidth,
           child: RemoveTopPaddingWidget(
             child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: photos.length == 4 ? 2 : 3,
               mainAxisSpacing: 20.w,
               crossAxisSpacing: 20.w,
               childAspectRatio: 1,
@@ -172,7 +212,37 @@ class FriendCircleItem extends StatelessWidget {
   }
 
   Widget _buildVideo(){
-    return ScaleSizeVideoWidget(photoWidth: lcObject['thumbnail']['width'].toDouble(),videoUrl: lcObject['video']['url'], photoHeight: lcObject['thumbnail']['height'].toDouble(), photoUrl: lcObject['thumbnail']['url'],);
+    return ScaleSizeVideoWidget(photoWidth: widget.lcObject['thumbnail']['width'].toDouble(),videoUrl: widget.lcObject['video']['url'], photoHeight: widget.lcObject['thumbnail']['height'].toDouble(), photoUrl: widget.lcObject['thumbnail']['url'],);
+  }
+
+  _buildLiked(){
+    List<dynamic> liked = widget.lcObject['liked']??[];
+    if(liked.isEmpty){
+      return Container();
+    }
+
+    return Container(
+      color: Colours.c_EEEEEE,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.w),
+      child: Text.rich(
+        TextSpan(
+          children: <InlineSpan>[
+            ImageSpan(AssetImage(Utils.getIconImgPath('icon_liked')), imageWidth: 28.sp, imageHeight: 28.sp,margin: EdgeInsets.only(right: 10.w)), ...liked.map((e) => TextSpan(text:e['nickname'],style: TextStyle(color: Colours.c_5B6B8D,fontSize: 28.sp,height: 1.1),recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                NavigatorUtils.toNamed(FriendDetailPage.routeName,arguments: e['username']);
+              })),
+          ],
+        ),
+        textAlign: TextAlign.start,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _customPopupMenuController.dispose();
   }
 
 }

@@ -8,8 +8,8 @@ class VideoManager{
 
  static final Map<String,VideoPlayerController> _controllerMap = {};
 
-  static VideoPlayerController getVideoController(String url)  {
-    if(_controllerMap.containsKey(url)){
+  static VideoPlayerController getVideoController(String url,{bool cache = true})  {
+    if(_controllerMap.containsKey(url) && cache){
       return _controllerMap[url]!;
     }
     VideoPlayerController _videoPlayerController;

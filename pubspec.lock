@@ -369,7 +369,7 @@ packages:
       name: flutter_baidu_mapapi_map
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.1"
   flutter_baidu_mapapi_search:
     dependency: "direct main"
     description:

@@ -1,13 +1,12 @@
 
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/base/constant.dart';
+import 'package:wechat/controller/user_controller.dart';
+import 'package:wechat/core.dart';
 
 class FriendCircleController extends BaseXController{
 
@@ -39,14 +38,32 @@ class FriendCircleController extends BaseXController{
       }else{
         _page ++ ;
       }
-    },showloading: false);
+    },showloading: false,updated: false);
   }
 
   void deleteFriendCircle(LCObject lcObject) {
     lcPost(() async {
       await lcObject.delete();
       list.remove(lcObject);
-    });
+    },updated: false);
+  }
+
+   likeFriendCircle(LCObject lcObject) async {
+   await lcPost(() async {
+     List<Map<String,dynamic>> liked = lcObject['liked']??[];
+      bool hasIndex = liked.hasIndex((element) => element['username'] == UserController.instance.username);
+      if(hasIndex){
+        liked.removeWhere((element) => element['username'] == UserController.instance.username);
+      }else{
+        Map<String,dynamic> _map = {};
+        _map['username'] = UserController.instance.username;
+        _map['nickname'] = UserController.instance.user?.nickname;
+        liked.add(_map);
+      }
+     lcObject['liked'] = liked;
+     lcObject['liked'] = liked;
+      await lcObject.save();
+    },updated: false);
   }
 
 }

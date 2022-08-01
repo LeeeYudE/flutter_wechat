@@ -14,22 +14,35 @@ import '../../../../language/strings.dart';
 import '../../../../utils/navigator_utils.dart';
 import '../../../../utils/pattern_util.dart';
 
-class ChatItem extends StatelessWidget {
+class ChatItem extends StatefulWidget {
 
   final Conversation conversation;
-  final CustomPopupMenuController _controller = CustomPopupMenuController();
 
   ChatItem({required this.conversation, Key? key}) : super(key: key);
+
+  @override
+  State<ChatItem> createState() => _ChatItemState();
+}
+
+class _ChatItemState extends State<ChatItem> {
+
+  final CustomPopupMenuController _controller = CustomPopupMenuController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return _buildCustomPopupMenu(
       child: TapWidget(
         onTap: () {
-          NavigatorUtils.toNamed(ChatPage.routeName,arguments:conversation.id);
+          NavigatorUtils.toNamed(ChatPage.routeName,arguments:widget.conversation.id);
         },
         child: Container(
-          color: conversation.isPin?Colours.c_EEEEEE:Colours.white,
+          color: widget.conversation.isPin?Colours.c_EEEEEE:Colours.white,
           padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.w),
           child: Row(
             children: [
@@ -38,10 +51,10 @@ class ChatItem extends StatelessWidget {
                 children: [
                   Container(
                       margin: EdgeInsets.only(top: 10.w,right: 10.w),
-                      child: ChatAvatar(conversation: conversation,)),
+                      child: ChatAvatar(conversation: widget.conversation,)),
                   Container(
                       margin: EdgeInsets.only(left: 80.w,top: 10.w),
-                      child: UnreadWidget(conversation.unreadMessageCount))
+                      child: UnreadWidget(widget.conversation.unreadMessageCount))
                 ],
               ),
               10.sizedBoxW,
@@ -49,9 +62,9 @@ class ChatItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(conversation.title(),style: TextStyle(color: Colours.black,fontSize: 32.sp,height: 1),maxLines: 1,),
+                  Text(widget.conversation.title(),style: TextStyle(color: Colours.black,fontSize: 32.sp,height: 1),maxLines: 1,),
                   5.sizedBoxH,
-                  PatternUtil.transformEmoji(conversation.lastMessage?.contentText??'',TextStyle(color: Colours.c_999999,fontSize: 24.sp),imageSize: 32)
+                  PatternUtil.transformEmoji(widget.conversation.lastMessage?.contentText??'',TextStyle(color: Colours.c_999999,fontSize: 24.sp),imageSize: 32)
                 ],
               )),
               10.sizedBoxW,
@@ -59,10 +72,10 @@ class ChatItem extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    if(conversation.lastMessage?.sentTimestamp != null)
-                    Text("${conversation.lastMessage?.sentTimestamp?.commonDateTime(showTime: true)}",style: TextStyle(color: Colours.c_999999,fontSize: 24.sp,height: 1),),
+                    if(widget.conversation.lastMessage?.sentTimestamp != null)
+                    Text("${widget.conversation.lastMessage?.sentTimestamp?.commonDateTime(showTime: true)}",style: TextStyle(color: Colours.c_999999,fontSize: 24.sp,height: 1),),
                     5.sizedBoxH,
-                    if(conversation.isMuted)
+                    if(widget.conversation.isMuted)
                       Image.asset(Utils.getIconImgPath('icon_chat_mute'),width: 30.w,height: 30.w,)
                   ],
                 ),
@@ -96,15 +109,15 @@ class ChatItem extends StatelessWidget {
             children: [
               _buildPopupItem(Ids.mark_readed.str(),(){
                 _controller.hideMenu();
-                conversation.read();
+                widget.conversation.read();
               }),
-              _buildPopupItem((conversation.isPin)?Ids.pin_cancel.str():Ids.pin_chat.str(),(){
+              _buildPopupItem((widget.conversation.isPin)?Ids.pin_cancel.str():Ids.pin_chat.str(),(){
                 _controller.hideMenu();
-                ChatManagerController.instance.chatPin(conversation, !conversation.isPin);
+                ChatManagerController.instance.chatPin(widget.conversation, !widget.conversation.isPin);
               }),
               _buildPopupItem(Ids.delete_chat.str(),()  {
                 _controller.hideMenu();
-                ChatManagerController.instance.deleteChat(conversation);
+                ChatManagerController.instance.deleteChat(widget.conversation);
               }),
             ],
           ),
@@ -139,5 +152,7 @@ class ChatItem extends StatelessWidget {
       ),
    );
   }
+
+
 
 }

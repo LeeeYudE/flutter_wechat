@@ -34,7 +34,7 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> {
   }
 
   _initVideo() async {
-    _videoPlayerController = VideoManager.getVideoController(widget.videoUrl);
+    _videoPlayerController = VideoManager.getVideoController(widget.videoUrl,cache: false);
     _videoPlayerController.addListener(_videoListener);
     chewieController = ChewieController(
         videoPlayerController: _videoPlayerController,
