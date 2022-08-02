@@ -8,11 +8,18 @@ Flutter版本：2.10.1
 
 #测试账号 18202003769 密码 Bb123456
 
+下载体验(Android)
+[https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.0/app-release.apk](https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.0/app-release.apk)
+
+<img src="assets/screenshot/qrcode.png" style="zoom:30%;" />
+
 # 效果图
 
-| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot0.gif) | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot1.gif) | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot2.gif) |
-|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot3.gif) | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot4.gif) | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot5.gif) |
+| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot0.gif)   | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot1.gif)   | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot2.gif) |
+|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot3.gif)   | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot4.gif)   | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot5.gif) |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |----------------------------------------------------------------------------------------------------|
+| ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot6.gif)   | ![7.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot7.gif)   | 
 
 #Api方案采用Leancloud
 * 数据存储文档：https://zh-docs.leancloud.app/leanstorage_guide-flutter.html

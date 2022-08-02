@@ -67,7 +67,7 @@ class _FriendCircleItemState extends State<FriendCircleItem> {
                         linkColor: Colours.c_5B6B8D,
                       )),
                 _buildLocation(),
-                10.sizedBoxH,
+                20.sizedBoxH,
                 if(widget.lcObject['mediaType'] == 1)
                   _buildImage(),
                 if(widget.lcObject['mediaType'] == 2)
