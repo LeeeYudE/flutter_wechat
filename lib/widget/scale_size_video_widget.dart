@@ -7,6 +7,7 @@ import 'package:wechat/page/util/video_perview_page.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/tap_widget.dart';
 import '../base/constant.dart';
+import '../main.dart';
 import 'cache_image_widget.dart';
 
 class ScaleSizeVideoWidget extends StatefulWidget {
@@ -22,7 +23,7 @@ class ScaleSizeVideoWidget extends StatefulWidget {
   State<ScaleSizeVideoWidget> createState() => _ScaleSizeVideoWidgetState();
 }
 
-class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> {
+class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> with RouteAware {
 
   late VideoPlayerController _videoPlayerController;
   late ChewieController chewieController;
@@ -109,10 +110,41 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute); //订阅
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didPush() {
+    _videoPlayerController.pause();
+    super.didPush();
+  }
+
+  @override
+  void didPushNext() {
+    _videoPlayerController.pause();
+    super.didPushNext();
+  }
+
+  @override
+  void didPop() {
+    _videoPlayerController.play();
+    super.didPop();
+  }
+
+  @override
+  void didPopNext() {
+    _videoPlayerController.play();
+    super.didPopNext();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     chewieController.dispose();
     _videoPlayerController.dispose();
+    routeObserver.unsubscribe(this);
     VideoManager.removeChewieController(widget.videoUrl);
   }
 

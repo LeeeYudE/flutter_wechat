@@ -27,17 +27,23 @@ extension DecorationColorExt on Color {
     );
   }
 
-  Decoration bottomBorder({ double? width,Color? bgColor}){
+  Decoration bottomBorder({ double? width,Color? bgColor ,bool bottom = true,bool top = false}){
     return BoxDecoration(
         color: bgColor,
         border:Border(
-            bottom: BorderSide(
+            bottom: bottom?BorderSide(
                 color: this,
                 width: width??1.w
-            )
+            ):BorderSide.none,
+          top: top?BorderSide(
+              color: this,
+              width: width??1.w
+          ):BorderSide.none,
         )
     );
   }
+
+
 
 }
 

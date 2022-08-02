@@ -3,6 +3,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/color/colors.dart';
@@ -18,6 +19,7 @@ import '../../../../utils/utils.dart';
 import '../../../../widget/friend_circle_grid_view.dart';
 import '../../../../widget/scale_size_image_widget.dart';
 import '../../../../widget/scale_size_video_widget.dart';
+import '../../map/preview_loctaion_page.dart';
 import '../controller/friend_circle_controller.dart';
 import 'friend_circle_comment_dialog.dart';
 
@@ -64,7 +66,8 @@ class _FriendCircleItemState extends State<FriendCircleItem> {
                         maxLines: 4,
                         linkColor: Colours.c_5B6B8D,
                       )),
-                20.sizedBoxH,
+                _buildLocation(),
+                10.sizedBoxH,
                 if(widget.lcObject['mediaType'] == 1)
                   _buildImage(),
                 if(widget.lcObject['mediaType'] == 2)
@@ -198,7 +201,7 @@ class _FriendCircleItemState extends State<FriendCircleItem> {
     }
 
     return Container(
-      decoration: Colours.c_CCCCCC.bottomBorder(bgColor: Colours.c_EEEEEE),
+      color: Colours.c_EEEEEE,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
       child: Text.rich(
@@ -226,8 +229,8 @@ class _FriendCircleItemState extends State<FriendCircleItem> {
     }
 
     return Container(
-        color: Colours.c_EEEEEE,
         width: double.infinity,
+        decoration: Colours.c_CCCCCC.bottomBorder(bgColor: Colours.c_EEEEEE),
         padding: EdgeInsets.only(bottom: 10.w, left: 10.w,right: 10.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,6 +261,20 @@ class _FriendCircleItemState extends State<FriendCircleItem> {
               textAlign: TextAlign.start,
             ),
           )).toList()),
+    );
+  }
+
+  _buildLocation(){
+    if(widget.lcObject['poiInfo'] == null){
+      return Container();
+    }
+    BMFPoiInfo? poiInfo = BMFPoiInfo.fromMap(widget.lcObject['poiInfo']);
+    return Container(
+      margin: EdgeInsets.only(top: 10.w),
+      child: TapWidget(onTap: () {
+        NavigatorUtils.toNamed(PreviewLocationPage.routeName,arguments: poiInfo.pt);
+      },
+      child: Text(poiInfo.name??'',style: TextStyle(color: Colours.c_5B6B8D,fontSize: 24.sp),)),
     );
   }
 

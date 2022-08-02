@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 import 'package:wechat/controller/video_manager.dart';
 
 import '../core.dart';
+import '../main.dart';
 
 class VidwoPlayWidget extends StatefulWidget {
   String path;
@@ -28,8 +29,8 @@ class VidwoPlayWidget extends StatefulWidget {
   VidwoPlayWidgetState createState() => VidwoPlayWidgetState();
 }
 
-class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
-  VideoPlayerController? _controller;
+class VidwoPlayWidgetState extends State<VidwoPlayWidget>  with RouteAware {
+  VideoPlayerController? _videoPlayerController;
   ChewieController? chewieController;
   bool _inited = false;
 
@@ -41,16 +42,16 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
 
   _init() async {
     if (!TextUtil.isEmpty(widget.path)) {
-      _controller =  VideoManager.getVideoController(widget.path);
-      if(_controller != null){
+      _videoPlayerController =  VideoManager.getVideoController(widget.path);
+      if(_videoPlayerController != null){
         Duration? duration;
-        if(_controller?.value.isInitialized??false){
+        if(_videoPlayerController?.value.isInitialized??false){
           _inited = true;
         }
         print('duration $duration');
-        _controller?.addListener(_videoListener);
+        _videoPlayerController?.addListener(_videoListener);
         chewieController = ChewieController(
-            videoPlayerController: _controller!,
+            videoPlayerController: _videoPlayerController!,
             startAt: duration,
             autoPlay: widget.autoPlay,
             autoInitialize: true,
@@ -66,9 +67,9 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
   }
 
   _videoListener(){
-    if(_controller?.value.isInitialized??false){
+    if(_videoPlayerController?.value.isInitialized??false){
       setState(() {});
-      _controller?.removeListener(_videoListener);
+      _videoPlayerController?.removeListener(_videoListener);
     }
   }
 
@@ -99,12 +100,45 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget> {
     );
   }
 
+  
+  @override
+  void didChangeDependencies() {
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute); //订阅
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didPush() {
+    _videoPlayerController?.pause();
+    super.didPush();
+  }
+
+  @override
+  void didPushNext() {
+    _videoPlayerController?.pause();
+    super.didPushNext();
+  }
+
+  @override
+  void didPop() {
+    _videoPlayerController?.play();
+    super.didPop();
+  }
+
+  @override
+  void didPopNext() {
+    _videoPlayerController?.play();
+    super.didPopNext();
+  }
+
+
   @override
   void dispose() {
     super.dispose();
     debugPrint('VidwoPlayWidget dispose');
+    routeObserver.unsubscribe(this);
     if(!_inited){
-      _controller?.dispose();
+      _videoPlayerController?.dispose();
     }
     if(chewieController!=null){
       chewieController?.dispose();

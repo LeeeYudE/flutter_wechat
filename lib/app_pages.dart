@@ -23,6 +23,7 @@ import 'package:wechat/page/main/contacts/search_friend_page.dart';
 import 'package:wechat/page/main/discover/create_friend_circle_page.dart';
 import 'package:wechat/page/main/discover/friend_circle_page.dart';
 import 'package:wechat/page/main/discover/shake_page.dart';
+import 'package:wechat/page/main/map/nearby_location_page.dart';
 import 'package:wechat/page/main/map/preview_loctaion_page.dart';
 import 'package:wechat/page/main/map/select_location_page.dart';
 import 'package:wechat/page/main/mine/language_setting_page.dart';
@@ -188,6 +189,10 @@ class AppPages {
     _getPage(
       name: ShakePage.routeName,
       page: () => const ShakePage(),
+    ),
+    _getPage(
+      name: NearbyLocationPage.routeName,
+      page: () => NearbyLocationPage(),
     ),
   ];
 

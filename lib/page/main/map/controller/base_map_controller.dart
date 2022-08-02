@@ -27,7 +27,7 @@ class BaseMapController extends BaseXController {
 
   }
 
-  _init() async {
+  initLocation() async {
     myLocPlugin.setAgreePrivacy(true);
     BMFMapSDK.setAgreePrivacy(true);
     requestPermission();
@@ -74,8 +74,10 @@ class BaseMapController extends BaseXController {
 
     dituController?.updateLocationData(userLocation);
     myLocPlugin.stopLocation();
+    onLocationResult(result);
   }
 
+  onLocationResult(BaiduLocation result){}
 
   BaiduLocationAndroidOption initAndroidOptions() {
     BaiduLocationAndroidOption options =
@@ -125,7 +127,7 @@ class BaseMapController extends BaseXController {
       debugPrint('mapDidLoad-地图加载完成!!!');
       var showUserLocation = await dituController?.showUserLocation(true);
       debugPrint('showUserLocation $showUserLocation');
-      _init();
+      initLocation();
     });
   }
 

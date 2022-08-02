@@ -22,6 +22,7 @@ import 'language/translation_service.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,13 +85,13 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       getPages: AppPages.routes,
       onGenerateRoute: (settings){
-        print('onGenerateRoute ${settings.name}');
+        debugPrint('onGenerateRoute ${settings.name}');
         return null;
       },
       supportedLocales: const [
         Locale('zh', 'CN'),
       ],
-      navigatorObservers: [FlutterSmartDialog.observer],
+      navigatorObservers: [FlutterSmartDialog.observer,routeObserver],
       builder: FlutterSmartDialog.init(
         // loadingBuilder: (context,child){
         //   return Container(

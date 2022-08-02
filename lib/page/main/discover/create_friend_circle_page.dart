@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wechat/core.dart';
@@ -15,6 +16,7 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import '../../../color/colors.dart';
 import '../../../language/strings.dart';
 import '../../../widget/reorderableitemsview.dart';
+import '../map/nearby_location_page.dart';
 import 'controller/create_friend_circle_controller.dart';
 
 class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController> {
@@ -28,6 +30,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
   List<File> photos = [];
   List<AssetEntity>? selectedAssets;
   final Map<int, GlobalKey> _keys = {};
+  double _itemHeight = 0;
   int _mediaType = 0;///1 图片 2 视频
 
   CreateFriendCirclePage({Key? key}) : super(key: key);
@@ -61,6 +64,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
             else
               _buildVideo(),
             if (_startDrag != -1) _buildDragDelete(),
+            _buildLocation(),
           ],
         ))
       ],
@@ -101,7 +105,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
   }
 
   Widget _buildPhoto(BuildContext context) {
-    var itemHeight = (Get.width - 40 * 2 - 10.w * 2) / 3;
+    _itemHeight = (Get.width - 40 * 2 - 10.w * 2) / 3;
     var widgets = photos
         .map<Widget>((e) => Image.file(e,
               key: _getIndexKey(photos.indexOf(e)),
@@ -163,7 +167,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
           update();
         },
         feedBackWidgetBuilder: (BuildContext context, int index, Widget child) {
-          return SizedBox(width: itemHeight, height: itemHeight, child: child);
+          return SizedBox(width: _itemHeight, height: _itemHeight, child: child);
         },
         isGrid: true,
         staggeredTiles: widgets.map((e) => const StaggeredTile.count(1, 1)).toList(),
@@ -219,8 +223,6 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
     );
   }
 
-
-
   Widget _buildVideo() {
     if(controller.videoController?.value.isInitialized??false){
       return Align(
@@ -257,6 +259,43 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
     }
   }
 
+
+  Widget _buildLocation(){
+    double _marginTop = 100.w;
+    if(_mediaType == 2){
+      _marginTop += 600.w;
+    }else{
+      if(photos.length + 1 < 4){
+        _marginTop += _itemHeight * 1;
+      }else if(photos.length + 1 < 7){
+        _marginTop += _itemHeight * 2;
+      }else{
+        _marginTop += _itemHeight * 3;
+      }
+    }
+    var _poiInfo = controller.poiInfo;
+    return Container(
+      margin: EdgeInsets.only(top: _marginTop,left: 20.w,right: 20.w),
+      height: 100.w,
+      decoration: Colours.c_EEEEEE.bottomBorder(),
+      child: TapWidget(
+        onTap: () async {
+          var result = await NavigatorUtils.toNamed(NearbyLocationPage.routeName);
+          if('remove' == result){
+          }else if(result != null){
+            controller.updatePoiInfo(result);
+          }
+        },
+        child: Row(
+          children: [
+            Icon(Icons.location_on_outlined,color: _poiInfo == null ? Colours.black:Colours.theme_color,),
+            20.sizedBoxW,
+            Text(_poiInfo == null ? Ids.the_location.str():_poiInfo.name??'',style: TextStyle(color:_poiInfo== null ?  Colours.black : Colours.theme_color,fontSize: 28.sp),)
+          ],
+        ),
+      ),
+    );
+  }
 
 
 }

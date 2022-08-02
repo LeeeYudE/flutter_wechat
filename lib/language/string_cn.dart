@@ -175,5 +175,7 @@ const Map<String, String> languageChinese = {
   Ids.comment: '评论',
   Ids.like: '赞',
   Ids.delete_comment: '删除评论',
+  Ids.the_location: '所在位置',
+  Ids.no_show_location: '不显示位置',
 
 };

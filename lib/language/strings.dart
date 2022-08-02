@@ -188,6 +188,8 @@ class Ids {
   static const String comment = ' comment';
   static const String like = ' like';
   static const String delete_comment = ' delete_comment';
+  static const String the_location = ' the_location';
+  static const String no_show_location = ' no_show_location';
 
 
 }

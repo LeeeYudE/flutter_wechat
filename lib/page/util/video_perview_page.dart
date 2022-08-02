@@ -52,4 +52,5 @@ class _VideoPerviewPageState extends State<VideoPerviewPage> {
       ],
     );
   }
+
 }

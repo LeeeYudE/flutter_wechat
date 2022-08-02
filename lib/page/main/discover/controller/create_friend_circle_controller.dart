@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:video_player/video_player.dart';
@@ -18,6 +19,7 @@ class CreateFriendCircleController extends BaseXController{
   final TextEditingController textEditingController = TextEditingController();
 
   VideoPlayerController? videoController;
+  BMFPoiInfo? poiInfo;
 
   @override
   void onInit() {
@@ -93,10 +95,18 @@ class CreateFriendCircleController extends BaseXController{
       }
       lcObject['text'] = textEditingController.text.trim();
       lcObject['user'] = UserController.instance.user;
+      if(poiInfo != null){
+        lcObject['poiInfo'] = poiInfo?.toMap();
+      }
       await lcObject.save();
       NavigatorUtils.pop(true);
     });
 
+  }
+
+  updatePoiInfo(BMFPoiInfo? poiInfo){
+    this.poiInfo = poiInfo;
+    update();
   }
 
   @override

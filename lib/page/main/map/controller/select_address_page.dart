@@ -6,6 +6,7 @@ import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 
 import '../../../../base/base_getx.dart';
+import '../../../../base/constant.dart';
 import '../../../../language/strings.dart';
 import 'base_map_controller.dart';
 
@@ -65,7 +66,7 @@ class SelectLocationController extends BaseMapController with GetSingleTickerPro
     if(centerOffset != null){
       var bmfCoordinate = await dituController?.convertScreenPointToCoordinate(BMFPoint(centerOffset.dx,centerOffset.dy));
       BMFPoiNearbySearchOption poiNearbySearchOption =
-      BMFPoiNearbySearchOption(keywords: <String>['银行','酒店','餐饮','商场'], location: BMFCoordinate(22.613863,114.039066), radius: 10000, isRadiusLimit: false);
+      BMFPoiNearbySearchOption(keywords: <String>['银行','酒店','餐饮','商场'], location: BMFCoordinate(22.613863,114.039066), radius: 10000, isRadiusLimit: false,pageSize: Constant.PAGE_SIZE);
       BMFPoiNearbySearch nearbySearch = BMFPoiNearbySearch();
       nearbySearch.onGetPoiNearbySearchResult(callback: (BMFPoiSearchResult result, BMFSearchErrorCode errorCode) {
         debugPrint('poi周边检索回调 errorCode = $errorCode  \n result = ${result.toMap()}');
