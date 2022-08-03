@@ -21,7 +21,7 @@ class MessageRedPacketItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return TapWidget(
       onTap: () {
-        NavigatorUtils.toNamed(RedPacketPreviewPage.routeName);
+        NavigatorUtils.toNamed(RedPacketPreviewPage.routeName,arguments: message);
       },
       child: Container(
         width: 400.w,

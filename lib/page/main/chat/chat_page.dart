@@ -5,7 +5,7 @@ import 'package:wechat/core.dart';
 import 'package:wechat/page/main/chat/controller/chat_controller.dart';
 import 'package:wechat/page/main/chat/widget/chat_input_widget.dart';
 import 'package:wechat/page/main/chat/widget/message/message_item.dart';
-import 'package:wechat/page/main/chat/widget/record_preview%20_widget.dart';
+import 'package:wechat/page/main/chat/widget/record_preview_widget.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';

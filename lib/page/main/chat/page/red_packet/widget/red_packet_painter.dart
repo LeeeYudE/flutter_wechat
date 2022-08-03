@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:wechat/core.dart';
 
-import 'controller/red_packet_controller.dart';
+import '../controller/red_packet_controller.dart';
 
 class RedPacketPainter extends CustomPainter{
 

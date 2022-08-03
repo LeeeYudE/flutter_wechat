@@ -14,11 +14,12 @@ import '../model/zone_code.dart';
 
 class LoginPhoneController extends BaseXController{
 
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController(text: '18202003769');
   String phone = Get.arguments;
 
   @override
   onInit(){
+    super.onInit();
     passwordController.addListener(() {
       update();
     });

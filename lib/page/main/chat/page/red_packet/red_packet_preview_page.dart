@@ -1,12 +1,16 @@
+import 'package:get/get.dart';
 import 'package:wechat/color/colors.dart';
+import 'package:wechat/controller/member_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat/page/main/chat/page/red_packet/controller/red_packet_controller.dart';
-import 'package:wechat/page/main/chat/page/red_packet/red_packet_painter.dart';
+import 'package:wechat/page/main/chat/page/red_packet/widget/red_packet_painter.dart';
 import 'package:wechat/utils/navigator_utils.dart';
+import 'package:wechat/widget/avatar_widget.dart';
 import 'package:wechat/widget/tap_widget.dart';
 
 import '../../../../../widget/base_scaffold.dart';
+import '../../model/red_packet_message.dart';
 
 ///代码来源 https://juejin.cn/post/7075338022446694413
 class RedPacketPreviewPage extends StatefulWidget {
@@ -22,10 +26,12 @@ class RedPacketPreviewPage extends StatefulWidget {
 class _RedPacketPreviewPageState extends State<RedPacketPreviewPage> with TickerProviderStateMixin{
 
   late RedPacketController controller;
+  late RedPacketMessage _message;
 
   @override
   void initState() {
     super.initState();
+    _message = Get.arguments;
     controller = RedPacketController(tickerProvider: this);
   }
 
@@ -83,6 +89,7 @@ class _RedPacketPreviewPageState extends State<RedPacketPreviewPage> with Ticker
 
 
   Widget buildChild() {
+    var member = MemberController.instance.getMember(_message.fromClientID);
     return AnimatedBuilder(
       animation: controller.translateController,
       builder: (context, child) => Container(
@@ -93,15 +100,13 @@ class _RedPacketPreviewPageState extends State<RedPacketPreviewPage> with Ticker
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(3.w),
-                    child: Image.network("https://p26-passport.byteacctimg.com/img/user-avatar/32f1f514b874554f69fe265644ca84e4~300x300.image", width: 24.w,)),
+                AvatarWidget(avatar: member?.avatar, weightWidth: 48.w),
                 SizedBox(width: 5.w,),
-                Text("loongwind的红包", style: TextStyle(fontSize: 28.sp, color: const Color(0xFFF8E7CB), fontWeight: FontWeight.w500),)
+                Text("${MemberController.instance.getMember(_message.fromClientID)?.nickname}的红包", style: TextStyle(fontSize: 28.sp, color: const Color(0xFFF8E7CB), fontWeight: FontWeight.w500),)
               ],
             ),
             SizedBox(height: 15.w,),
-            Text('恭喜发财', style: TextStyle(fontSize: 28.sp, color: const Color(0xFFF8E7CB)),)
+            Text(_message.text??'', style: TextStyle(fontSize: 28.sp, color: const Color(0xFFF8E7CB)),)
           ],
         ),
       ),

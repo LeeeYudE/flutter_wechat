@@ -12,6 +12,7 @@ import 'package:wechat/page/main/chat/chat_detail_page.dart';
 import 'package:wechat/page/main/chat/chat_group_edit_name_page.dart';
 import 'package:wechat/page/main/chat/chat_page.dart';
 import 'package:wechat/page/main/chat/page/pay_password/pay_password_page.dart';
+import 'package:wechat/page/main/chat/page/red_packet/red_packet_detail_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/red_packet_preview_page.dart';
 import 'package:wechat/page/main/chat/page/red_packet/send_red_packet_page.dart';
 import 'package:wechat/page/main/chat/qrcode_group_chat_page.dart';
@@ -193,6 +194,10 @@ class AppPages {
     _getPage(
       name: NearbyLocationPage.routeName,
       page: () => NearbyLocationPage(),
+    ),
+    _getPage(
+      name: RedPacketDetailPage.routeName,
+      page: () => RedPacketDetailPage(),
     ),
   ];
 

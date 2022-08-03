@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat/base/base_getx.dart';
+import 'package:wechat/page/main/chat/page/red_packet/red_packet_detail_page.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 
 class RedPacketController extends BaseXController  {
@@ -33,7 +35,7 @@ class RedPacketController extends BaseXController  {
         vsync: tickerProvider
     );
     translateController = AnimationController(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(milliseconds: 500),
         vsync: tickerProvider
     );
     scaleController = AnimationController(
@@ -50,7 +52,7 @@ class RedPacketController extends BaseXController  {
 
     translateController.addStatusListener((status) {
       if(status == AnimationStatus.completed){
-        NavigatorUtils.pop();
+        NavigatorUtils.offNamed(RedPacketDetailPage.routeName,arguments: Get.arguments);
       }
     });
     repaint = Listenable.merge([angleController, translateController]);
