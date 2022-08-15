@@ -190,6 +190,12 @@ class Ids {
   static const String delete_comment = ' delete_comment';
   static const String the_location = ' the_location';
   static const String no_show_location = ' no_show_location';
+  static const String channels = ' channels';
+  static const String select_cover = ' select_cover';
+  static const String published = ' published';
+  static const String add_describe = ' add_describe';
+  static const String topic = ' topic';
+  static const String publish_comment = ' publish_comment';
 
 
 }

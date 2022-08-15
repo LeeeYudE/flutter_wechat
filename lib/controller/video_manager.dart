@@ -8,9 +8,9 @@ class VideoManager{
 
  static final Map<String,VideoPlayerController> _controllerMap = {};
 
-  static VideoPlayerController getVideoController(String url,{bool cache = true})  {
-    if(_controllerMap.containsKey(url) && cache){
-      return _controllerMap[url]!;
+  static VideoPlayerController getVideoController(String url,{String? cacheId})  {
+    if(cacheId != null && _controllerMap.containsKey(cacheId)){
+      return _controllerMap[cacheId]!;
     }
     VideoPlayerController _videoPlayerController;
     if (url.startsWith('http')) {
@@ -19,13 +19,17 @@ class VideoManager{
       final file = File(url);
       _videoPlayerController = VideoPlayerController.file(file);
     }
-    _videoPlayerController.initialize();
-    _controllerMap[url] = _videoPlayerController;
+    // _videoPlayerController.initialize();
+    if(cacheId != null){
+      _controllerMap[cacheId] = _videoPlayerController;
+    }
     return _videoPlayerController;
   }
 
- static removeChewieController(String url){
-    _controllerMap.remove(url);
+ static removeChewieController(String? cacheId){
+    if(cacheId != null) {
+      _controllerMap.remove(cacheId);
+    }
   }
 
 

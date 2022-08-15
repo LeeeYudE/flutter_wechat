@@ -60,7 +60,7 @@ dependencies:
   wechat_camera_picker: ^3.4.0
 
   leancloud_storage: ^0.7.8
-  leancloud_official_plugin: 1.0.0
+  leancloud_official_plugin: ^1.0.1
 
   # Flutter 城市列表，联系人列表，索引&悬停 https://github.com/flutterchina/azlistview
   azlistview: ^2.0.0
@@ -84,7 +84,7 @@ dependencies:
   #震动
   flutter_vibrate: ^1.3.0
   #富文本输入
-  extended_text_field: ^10.0.0
+  extended_text_field: ^10.1.0
   #多样式表格布局
   flutter_staggered_grid_view: ^0.4.0
   #滚动到指定位置
@@ -128,6 +128,17 @@ dependencies:
   sensors_plus: ^1.3.3
   #音频播放
   audioplayers: 0.20.1
+  #视频编辑
+  video_editor: ^1.4.1
+  helpers: ^1.1.4
+  #视频播放器
+  better_player: ^0.0.81
+  #点赞按钮
+  like_button: ^2.0.4
+  #分享
+  share_plus: ^4.0.10
+
+  easy_refresh: 3.0.4+2
 
   flutter_localizations:
     sdk: flutter
@@ -137,9 +148,12 @@ flutter_icons:
   ios: true
   android: true
 
+dependency_overrides:
+  collection: ^1.15.0
+  xml: 6.0.0
+  visibility_detector: ^0.3.3
+
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

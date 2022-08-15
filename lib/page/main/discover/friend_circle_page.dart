@@ -59,7 +59,7 @@ class FriendCirclePage extends BaseGetBuilder<FriendCircleController> {
       builder: (BuildContext context, bool value, Widget? child) {
         return Container(
           color: value ? null : Colours.c_EEEEEE,
-          padding: EdgeInsets.only(top: 100.w, left: 20.w, bottom: 20.w),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, left: 20.w, bottom: 20.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -80,10 +80,11 @@ class FriendCirclePage extends BaseGetBuilder<FriendCircleController> {
               TapWidget(
                 onTap: () async {
                   var create = await NavigatorUtils.toNamed(CreateFriendCirclePage.routeName);
-                  if (create) {
-                    WidgetsBinding.instance?.addPostFrameCallback((callback) {
+                  if (create??false) {
+                    WidgetsBinding.instance.addPostFrameCallback((callback) {
                       controller.refreshController.requestRefresh();
                     });
+
                   }
                 },
                 child: Container(

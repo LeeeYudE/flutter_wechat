@@ -20,6 +20,8 @@ class Constant{
 
   static const String OBJECT_NAME_RED_PACKET = 'redPacket';
   static const String OBJECT_NAME_FRIEND_CIRCLE = 'friendCircle';
+  static const String OBJECT_NAME_CHANNLES = 'channles';
+  static const String OBJECT_NAME_CHANNLES_COMMENTS = 'channlesComments';
 
   static final  double MAX_PHOTO_WIDTH = 600.w;
   static final double MAX_PHOTO_HEIGHT = 600.w;

@@ -1,8 +1,8 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wechat/controller/video_manager.dart';
-import 'package:wechat/core.dart';
 import 'package:wechat/page/util/video_perview_page.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/tap_widget.dart';
@@ -27,6 +27,7 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> with RouteA
 
   late VideoPlayerController _videoPlayerController;
   late ChewieController chewieController;
+  String cacheId = const Uuid().v4();
 
   @override
   void initState() {
@@ -35,11 +36,11 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> with RouteA
   }
 
   _initVideo() async {
-    _videoPlayerController = VideoManager.getVideoController(widget.videoUrl,cache: false);
+    _videoPlayerController = VideoManager.getVideoController(widget.videoUrl,cacheId: cacheId);
     _videoPlayerController.addListener(_videoListener);
     chewieController = ChewieController(
         videoPlayerController: _videoPlayerController,
-        autoPlay: false,
+        autoPlay: true,
         autoInitialize: false,
         showOptions: false,
         allowFullScreen: true,
@@ -56,7 +57,7 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> with RouteA
     if(_videoPlayerController.value.isInitialized){
       setState(() {});
       _videoPlayerController.removeListener(_videoListener);
-      await chewieController.videoPlayerController.play();
+      // await chewieController.videoPlayerController.play();
     }
   }
 
@@ -89,8 +90,7 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> with RouteA
     if(_videoPlayerController.value.isInitialized){
       return TapWidget(
         onTap: ()  async {
-         await  NavigatorUtils.toNamed(VideoPerviewPage.routeName,arguments:VideoArguments(url: widget.videoUrl,hero: true));
-         // _videoPlayerController.play();
+         await  NavigatorUtils.toNamed(VideoPerviewPage.routeName,arguments:VideoArguments(url: widget.videoUrl,hero: true,cacheId: cacheId,autoPlay: true));
         },
         child: SizedBox(
           width: _photoWidth,
@@ -145,7 +145,7 @@ class _ScaleSizeVideoWidgetState extends State<ScaleSizeVideoWidget> with RouteA
     chewieController.dispose();
     _videoPlayerController.dispose();
     routeObserver.unsubscribe(this);
-    VideoManager.removeChewieController(widget.videoUrl);
+    VideoManager.removeChewieController(cacheId);
   }
 
 }

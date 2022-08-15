@@ -46,22 +46,25 @@ class DialogUtil{
         });
   }
 
-  static Future<File?> choosePhotoDialog(BuildContext context ,{bool crop = false,double aspectRatio = 1.0,bool compress = true}) async {
-  var result =  await NavigatorUtils.showBottomItemsDialog([DialogBottomWidgetItem(Ids.album.str(),0),DialogBottomWidgetItem(Ids.shoot.str(),1)]);
+  static Future<File?> choosePhotoDialog(BuildContext context ,{bool crop = false,double aspectRatio = 1.0,bool compress = true,bool isVideo = false}) async {
+  var result =  await NavigatorUtils.showBottomItemsDialog([DialogBottomWidgetItem(Ids.shoot.str(),1),DialogBottomWidgetItem(Ids.album.str(),0)]);
   File? file;
     switch(result){
       case 0:
-        final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: const AssetPickerConfig(maxAssets: 1,requestType:RequestType.image));
+        final List<AssetEntity>? result = await AssetPicker.pickAssets(context,pickerConfig: AssetPickerConfig(maxAssets: 1,requestType:isVideo ?  RequestType.video: RequestType.image));
         if(result?.isNotEmpty??false){
           file = await result?.first.originFile;
         }
         break;
       case 1:
-        final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: const CameraPickerConfig(enableRecording: false));
+        final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: CameraPickerConfig(enableRecording: isVideo,onlyEnableRecording: isVideo));
         if(entity != null){
           file = await entity.file;
         }
         break;
+    }
+    if(isVideo){
+      return file;
     }
     if(file != null && crop){
       file =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: CropArguments(file: file,aspectRatio: 1.25));

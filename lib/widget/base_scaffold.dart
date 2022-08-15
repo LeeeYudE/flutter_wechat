@@ -28,7 +28,7 @@ class MyScaffold extends StatelessWidget {
     this.actions,
     this.leading,
     this.brightness,
-    this.body,
+    required this.body,
     this.appbarColor,
     this.backgroundColor,
     this.resizeToAvoidBottomInset = false,

@@ -177,5 +177,11 @@ const Map<String, String> languageChinese = {
   Ids.delete_comment: '删除评论',
   Ids.the_location: '所在位置',
   Ids.no_show_location: '不显示位置',
+  Ids.channels: '视频号',
+  Ids.select_cover: '选择封面',
+  Ids.published: '发表',
+  Ids.add_describe: '添加描述',
+  Ids.topic: '话题',
+  Ids.publish_comment: '发表评论',
 
 };

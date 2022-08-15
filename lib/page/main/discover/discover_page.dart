@@ -10,6 +10,7 @@ import 'package:wechat/utils/utils.dart';
 import '../../../language/strings.dart';
 import '../../../widget/lable_widget.dart';
 import '../widget/main_appbar.dart';
+import 'page/channels/channels_page.dart';
 
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage({Key? key}) : super(key: key);
@@ -43,6 +44,11 @@ class _DiscoverPageState extends State<DiscoverPage> {
         LableWidget(lable:Ids.shake.str
           (),leftWidget: Image.asset(Utils.getImgPath('ff_Icon_shake',dir: Utils.dir_discover,format:Utils.WEBP ),width: 50.w,height: 50.w),onTap:(){
           NavigatorUtils.toNamed(ShakePage.routeName);
+        }),
+        Colours.c_EEEEEE.toLine(20.w),
+        LableWidget(lable:Ids.channels.str().str
+          (),leftWidget: Image.asset(Utils.getImgPath('ff_Icon_channels',dir: Utils.dir_discover ),width: 50.w,height: 50.w),onTap:(){
+          NavigatorUtils.toNamed(ChannelsPage.routeName);
         }),
       ]
       ,

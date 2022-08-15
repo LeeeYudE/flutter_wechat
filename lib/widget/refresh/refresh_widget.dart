@@ -43,7 +43,8 @@ class _RefreshWidgetState extends State<RefreshWidget> {
     _refreshController = widget.controller;
     _refreshController ??= pull_to_refresh.RefreshController(initialRefresh: false);
     if(widget.initialRefresh){
-      WidgetsBinding.instance?.addPostFrameCallback((callback) {
+
+      WidgetsBinding.instance.addPostFrameCallback((callback) {
         _onRefresh();
       });
     }
@@ -98,7 +99,7 @@ class _RefreshWidgetState extends State<RefreshWidget> {
           return RefreshHeader(
             status: mode,
           );
-        },
+        },refreshStyle:pull_to_refresh.RefreshStyle.UnFollow ,
       ),
       child: widget.child ?? Container(),
     );

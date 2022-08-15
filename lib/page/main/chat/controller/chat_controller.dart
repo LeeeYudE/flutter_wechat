@@ -5,14 +5,13 @@ import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:wechat/base/base_getx.dart';
+import 'package:wechat/base/constant.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../widget/press_record_widget.dart';
 import 'package:wechat/core.dart';
 
 class ChatController extends BaseXController {
-
-  static const int PAGE_SIZE = 20;
 
   late String chatId;
   Conversation? conversation;
@@ -60,7 +59,7 @@ class ChatController extends BaseXController {
           startMessageID: messages.safetyItem(messages.length-1)?.id,
           startTimestamp: messages.safetyItem(messages.length-1)?.sentTimestamp,
           startClosed: messages.isNotEmpty?false:null,
-          limit: PAGE_SIZE,
+          limit: Constant.PAGE_SIZE,
         );
         messages.addAll(_messages.reversed);
         debugPrint('messages ${_messages.length}');

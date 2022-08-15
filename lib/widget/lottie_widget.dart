@@ -12,6 +12,6 @@ class LottieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Lottie.asset(assetPath,width: width,height: height);
+    return Lottie.asset(assetPath,width: width,height: height,);
   }
 }

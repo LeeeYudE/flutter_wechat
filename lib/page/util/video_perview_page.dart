@@ -15,8 +15,10 @@ class VideoArguments{
   String url;
   int? actionType;///1更多 2删除
   bool hero;
+  bool autoPlay;
+  String? cacheId;
 
-  VideoArguments({required this.url, this.actionType,this.hero = false});
+  VideoArguments({required this.url, this.actionType,this.hero = false,this.autoPlay = false,this.cacheId});
 }
 
 class VideoPerviewPage extends StatefulWidget {
@@ -42,7 +44,7 @@ class _VideoPerviewPageState extends State<VideoPerviewPage> {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      body: VidwoPlayWidget(path: _arguments.url,hero: _arguments.hero,),
+      body: VidwoPlayWidget(path: _arguments.url,hero: _arguments.hero,autoPlay: _arguments.autoPlay,cacheId: _arguments.cacheId,),
       actions: [
         if(_arguments.actionType == VideoArguments.actionTypeDelete)
           TapWidget(onTap: () {

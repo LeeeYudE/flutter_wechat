@@ -7,6 +7,9 @@ on:
     tags:
       - 'build'
 
+env:
+  tag_name : v1.0.1
+
 jobs:
 
   apk:
@@ -53,8 +56,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: v1.0.0
-          release_name: v1.0.0
+          tag_name: ${{env.tag_name}}
+          release_name: ${{env.tag_name}}
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1

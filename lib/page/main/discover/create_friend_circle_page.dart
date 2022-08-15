@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wechat/core.dart';
@@ -20,6 +19,7 @@ import '../map/nearby_location_page.dart';
 import 'controller/create_friend_circle_controller.dart';
 
 class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController> {
+
   static const String routeName = '/CreateFriendCirclePage';
 
   static const int mediaTypeText  = 0;
@@ -160,7 +160,7 @@ class CreateFriendCirclePage extends BaseGetBuilder<CreateFriendCircleController
       child: ReorderableItemsView(
         onReorder: (int oldIndex, int newIndex) {
           debugPrint('oldIndex $oldIndex newIndex $newIndex');
-          if (photos.length < 9 && oldIndex == photos.length) {
+          if (photos.length < 9 && oldIndex == photos.length || newIndex == photos.length) {
             return;
           }
           photos.insert(newIndex, photos.removeAt(oldIndex));

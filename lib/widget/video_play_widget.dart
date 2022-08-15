@@ -2,26 +2,31 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wechat/controller/video_manager.dart';
+import 'package:wechat/widget/cache_image_widget.dart';
+import 'package:wechat/widget/video_controls.dart';
 
 import '../core.dart';
 import '../main.dart';
 
+
 class VidwoPlayWidget extends StatefulWidget {
   String path;
   bool autoPlay;
-  bool fullScreen; //默认全屏
-  bool isAllowFullScreen; //是否显示全屏按钮
   bool isShowOptions; //是否显示又上角更多功能
+  bool showControls; //是否显示又上角更多功能
   bool hero;
+  String? videoCover;
+  String? cacheId;
 
   VidwoPlayWidget(
       {
       required this.path,
       this.autoPlay = true,
-      this.fullScreen = false,
-      this.isAllowFullScreen = true,
       this.isShowOptions = true,
       this.hero = false,
+      this.showControls = true,
+      this.videoCover,
+      this.cacheId,
       Key? key})
       : super(key: key);
 
@@ -42,26 +47,27 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget>  with RouteAware {
 
   _init() async {
     if (!TextUtil.isEmpty(widget.path)) {
-      _videoPlayerController =  VideoManager.getVideoController(widget.path);
+      _videoPlayerController =  VideoManager.getVideoController(widget.path,cacheId:widget.cacheId);
       if(_videoPlayerController != null){
-        Duration? duration;
         if(_videoPlayerController?.value.isInitialized??false){
           _inited = true;
         }
-        print('duration $duration');
         _videoPlayerController?.addListener(_videoListener);
         chewieController = ChewieController(
             videoPlayerController: _videoPlayerController!,
-            startAt: duration,
             autoPlay: widget.autoPlay,
-            autoInitialize: true,
+            autoInitialize: !_inited,
             showOptions: widget.isShowOptions,
-            allowFullScreen: widget.isAllowFullScreen,
-            fullScreenByDefault: widget.fullScreen,
+            fullScreenByDefault: false,
+            showControls: widget.showControls,
             looping: true,
+            customControls: const VideoControls(),
             placeholder: Container(
               color: Colors.black,
-            ));
+            ),
+          allowFullScreen: false,
+          allowMuting: false
+        );
       }
     }
   }
@@ -75,29 +81,28 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget>  with RouteAware {
 
   @override
   Widget build(BuildContext context) {
-    print('isInitialized = ${chewieController?.videoPlayerController.value.isInitialized??false}');
+    print('isInitialized = ${chewieController?.videoPlayerController.value.isInitialized} ${widget.path}');
     return Container(
       width: double.infinity,
       height: double.infinity,
       color: Colors.black,
       child: (!TextUtil.isEmpty(widget.path))
           ? Hero(
-            tag: widget.path,
-            child: Center(
-                child: chewieController?.videoPlayerController.value.isInitialized??false
-                    ? Chewie(
-                        controller: chewieController!,
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          CircularProgressIndicator(),
-                        ],
-                      ),
-              ),
-          )
-          : Container(),
+        tag: widget.path,
+        child: Center(
+          child: chewieController?.videoPlayerController.value.isInitialized??false
+              ? Chewie(
+            controller: chewieController!,
+          ) : (widget.videoCover != null)?
+          _buildCover():
+          const CircularProgressIndicator(),
+        ),
+      ) : Container(),
     );
+  }
+
+  _buildCover(){
+   return CacheImageWidget(weightWidth: double.infinity, url: widget.videoCover!, weightHeight:  double.infinity,);
   }
 
   
@@ -109,25 +114,29 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget>  with RouteAware {
 
   @override
   void didPush() {
+    debugPrint('didPush');
     _videoPlayerController?.pause();
     super.didPush();
   }
 
   @override
   void didPushNext() {
+    debugPrint('didPushNext');
     _videoPlayerController?.pause();
     super.didPushNext();
   }
 
   @override
   void didPop() {
-    _videoPlayerController?.play();
+    debugPrint('didPop');
+    // _videoPlayerController?.play();
     super.didPop();
   }
 
   @override
   void didPopNext() {
-    _videoPlayerController?.play();
+    debugPrint('didPopNext');
+    // _videoPlayerController?.play();
     super.didPopNext();
   }
 
@@ -135,13 +144,12 @@ class VidwoPlayWidgetState extends State<VidwoPlayWidget>  with RouteAware {
   @override
   void dispose() {
     super.dispose();
-    debugPrint('VidwoPlayWidget dispose');
+    debugPrint('VidwoPlayWidget dispose $_inited');
     routeObserver.unsubscribe(this);
-    if(!_inited){
+    if(widget.cacheId == null){
       _videoPlayerController?.dispose();
+      VideoManager.removeChewieController(widget.path);
     }
-    if(chewieController!=null){
-      chewieController?.dispose();
-    }
+    chewieController?.dispose();
   }
 }

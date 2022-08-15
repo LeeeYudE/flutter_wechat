@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../color/colors.dart';
+import '../../utils/utils.dart';
 import '../load_widget.dart';
+import '../lottie_widget.dart';
 
 class RefreshHeader extends StatelessWidget {
 
@@ -17,13 +19,15 @@ class RefreshHeader extends StatelessWidget {
     if(status == RefreshStatus.idle){
       return Container();
     }
+
     return SizedBox(
       height: ScreenUtilExt.setHeight(200),
       child: Center(
-        child: LoadWidget(
-          color: color??Colours.c_EEEEEE,
-          size: ScreenUtilExt.setHeight(200),
-        ),
+        child: LottieWidget(assetPath: Utils.getLottiePath('loading'), height: 200.w,width: 200.w,),
+        // child: LoadWidget(
+        //   color: color??Colours.c_EEEEEE,
+        //   size: ScreenUtilExt.setHeight(200),
+        // ),
       ),
     );
   }

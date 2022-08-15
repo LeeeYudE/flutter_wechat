@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
@@ -38,13 +40,21 @@ class PreviewLocationPage extends BaseGetBuilder<BaseMapController> {
         children: [
           Expanded(child: Stack(
             children: [
-              BMFMapWidget(
-                onBMFMapCreated: (_controller) {
-                  controller.onBMFMapCreated(_controller);
-                  controller.addMarker(position: _coordinate, icon: Utils.getIconImgPath('icon_slider_location'));
-                },
-                mapOptions: controller.initMapOptions(center: _coordinate),
-              ),
+              (Platform.isAndroid)?
+              BMFTextureMapWidget(
+                  onBMFMapCreated: (_controller) {
+                    controller.onBMFMapCreated(_controller);
+                    controller.addMarker(position: _coordinate, icon: Utils.getIconImgPath('icon_slider_location'));
+                  },
+                  mapOptions: controller.initMapOptions(center: _coordinate),
+                )
+              : BMFMapWidget(
+                  onBMFMapCreated: (_controller) {
+                    controller.onBMFMapCreated(_controller);
+                    controller.addMarker(position: _coordinate, icon: Utils.getIconImgPath('icon_slider_location'));
+                  },
+                  mapOptions: controller.initMapOptions(center: _coordinate),
+                ),
               _buildMyLocation(context,controller),
             ],
           )),

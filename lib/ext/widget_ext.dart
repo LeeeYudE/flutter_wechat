@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 extension WidgetExt on Widget{
 
   addPostFrameCallback(FrameCallback frameCallback){
-    WidgetsBinding.instance?.addPostFrameCallback(frameCallback);
+    WidgetsBinding.instance.addPostFrameCallback(frameCallback);
   }
 
 }

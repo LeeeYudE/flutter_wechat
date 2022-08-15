@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat/core.dart';
@@ -13,6 +15,7 @@ class CacheImageWidget extends StatelessWidget {
   final double? decorationWidth;
   final double? borderRadius;
   final bool clipRRect;
+  final BoxFit? fit;
 
   const CacheImageWidget({
     required this.url,
@@ -21,7 +24,8 @@ class CacheImageWidget extends StatelessWidget {
     this.hero = false,
     this.decorationWidth,
     this.borderRadius,
-    this.clipRRect = true
+    this.clipRRect = true,
+    this.fit
   });
 
   @override
@@ -49,14 +53,19 @@ class CacheImageWidget extends StatelessWidget {
     );
   }
 
-  CachedNetworkImage _buildImage(String avatar) {
-    return CachedNetworkImage(
-      width: weightWidth,
-      height: weightHeight,
-      imageUrl: avatar,
-      fit: BoxFit.cover,
-      placeholder: (context, url) => _buildEmptyImage(),
-      errorWidget: (context, url, error) => _buildEmptyImage(),
-    );
+  Widget _buildImage(String avatar) {
+    if(avatar.startsWith('http')){
+      return CachedNetworkImage(
+        width: weightWidth,
+        height: weightHeight,
+        imageUrl: avatar,
+        fit: BoxFit.cover,
+        placeholder: (context, url) => _buildEmptyImage(),
+        errorWidget: (context, url, error) => _buildEmptyImage(),
+      );
+    }else{
+      return Image.file(File(avatar),width: weightWidth,height: weightHeight,fit: BoxFit.cover,);
+    }
+
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:wechat/base/common_state_widget_x.dart';
@@ -39,6 +41,13 @@ class SelectLocationPage extends BaseGetBuilder<SelectLocationController> {
           margin: EdgeInsets.only(bottom: 480.w),
           child: Stack(
             children: [
+              (Platform.isAndroid)?
+              BMFTextureMapWidget(
+                onBMFMapCreated: (_controller) {
+                  controller.onBMFMapCreated(_controller);
+                },
+                mapOptions: controller.initMapOptions(),
+              ):
               BMFMapWidget(
                 key: controller.mapKey,
                 onBMFMapCreated: (_controller) {

@@ -12,7 +12,7 @@ abstract class BaseView<T> extends GetView<T> {
   StatelessElement createElement() {
     debugPrint('charco, createElement=> build-$this');
     onInit();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       debugPrint('charco, createElement=> onReady-$this');
       onReady();
     });
@@ -35,7 +35,7 @@ abstract class BaseGetBuilder<T extends GetxController> extends GetView<T> {
   StatelessElement createElement() {
     debugPrint('charco, createElement=> build-$this');
     onInit();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       debugPrint('charco, createElement=> onReady-$this');
       onReady();
     });
@@ -48,11 +48,14 @@ abstract class BaseGetBuilder<T extends GetxController> extends GetView<T> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<T>(
+        tag: getTag(),
         init: getController()??controller,
         builder: (controller) {
          return controllerBuilder(context,controller);
         });
   }
+
+  String? getTag() => null;
 
   ///获取控制器，为null会直接使用默认的
   T? getController();

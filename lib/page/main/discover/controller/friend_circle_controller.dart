@@ -58,6 +58,7 @@ class FriendCircleController extends BaseXController{
         Map<String,dynamic> _map = {};
         _map['username'] = UserController.instance.username;
         _map['nickname'] = UserController.instance.user?.nickname;
+        _map['avatar'] = UserController.instance.user?.avatar;
         liked.add(_map);
       }
      lcObject['liked'] = liked;

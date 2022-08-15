@@ -21,8 +21,13 @@ import 'package:wechat/page/main/contacts/add_friend_page.dart';
 import 'package:wechat/page/main/contacts/friend_detail_page.dart';
 import 'package:wechat/page/main/contacts/new_friend_page.dart';
 import 'package:wechat/page/main/contacts/search_friend_page.dart';
+import 'package:wechat/page/main/discover/page/channels/channels_create_page.dart';
+import 'package:wechat/page/main/discover/page/channels/channels_page.dart';
 import 'package:wechat/page/main/discover/create_friend_circle_page.dart';
 import 'package:wechat/page/main/discover/friend_circle_page.dart';
+import 'package:wechat/page/main/discover/page/channels/channels_preview_page.dart';
+import 'package:wechat/page/main/discover/page/channels/channels_select_cover_page.dart';
+import 'package:wechat/page/main/discover/page/channels/channels_video_edit_page.dart';
 import 'package:wechat/page/main/discover/shake_page.dart';
 import 'package:wechat/page/main/map/nearby_location_page.dart';
 import 'package:wechat/page/main/map/preview_loctaion_page.dart';
@@ -198,6 +203,29 @@ class AppPages {
     _getPage(
       name: RedPacketDetailPage.routeName,
       page: () => RedPacketDetailPage(),
+    ),
+    _getPage(
+      name: ChannelsPage.routeName,
+      page: () => ChannelsPage(),
+    ),
+    _getPage(
+      name: ChannelsVideoEditPage.routeName,
+      page: () => ChannelsVideoEditPage(),
+      popGesture: false,
+      fullscreenDialog:true,
+    ),
+    _getPage(
+      name: ChannelsCreatePage.routeName,
+      page: () => ChannelsCreatePage(),
+    ),
+    _getPage(
+      name: ChannelsSelectCoverPage.routeName,
+      page: () => const ChannelsSelectCoverPage(),
+      fullscreenDialog:true,
+    ),
+    _getPage(
+      name: ChannelsPreviewPage.routeName,
+      page: () => const ChannelsPreviewPage(),
     ),
   ];
 

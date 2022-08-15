@@ -46,14 +46,14 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
   }
 
   void _init() async {
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     _keyboardHeight = SpUtil.getDouble('keyboardHeight', defValue: 400.w)!;
   }
 
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         if(mounted){
           if (!(ModalRoute.of(context)?.isCurrent ?? true)) {
             if (isKeyboard) {
@@ -69,7 +69,7 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
   }
 
   void onKeyboardHeight(double height) {
-    debugPrint("onKeyboardHeight $isKeyboard $height $_keyboardHeight");
+    // debugPrint("onKeyboardHeight $isKeyboard $height $_keyboardHeight");
     if (height == 0) {
       //关闭键盘
       if (isKeyboard) {
@@ -156,7 +156,7 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
     setState(() {
       if (this.inputType == inputType) {
         this.inputType = INPUT_TYPE_NULL;
-        WidgetsBinding.instance?.addPostFrameCallback((_) => focusNode.showkeyboard());
+        WidgetsBinding.instance.addPostFrameCallback((_) => focusNode.showkeyboard());
         autoShowKeyboard = true;
       } else {
         this.inputType = inputType;
@@ -199,7 +199,7 @@ class _ChatInputWidgetState extends State<ChatInputWidget> with WidgetsBindingOb
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

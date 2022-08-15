@@ -45,7 +45,6 @@ class _WebViewPageState extends State<WebViewPage> {
         initialUrl: _webviewArguments.url,
         onWebViewCreated: (controller){
           _controller = controller;
-
         },
         onPageFinished: (String url){
           _initTitle(_controller);

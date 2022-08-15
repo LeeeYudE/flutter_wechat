@@ -25,8 +25,10 @@ class InputField extends StatefulWidget {
   final int? lengthLimiting;
   final EdgeInsetsGeometry? padding;
   final TextInputFormatter? inputFormatter;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final bool? showTopic;
 
-  InputField({this.hint,this.inputType,this.controller,this.leftWidget,this.showClean = false,this.autofocus = true,this.showDecoration = true,this.focusNode,this.extended = false,this.onSubmitted,this.readOnly,this.onTap,this.textAlign,this.lengthLimiting,this.padding,this.inputFormatter,Key? key}) : super(key: key);
+  InputField({this.hint,this.inputType,this.controller,this.leftWidget,this.showClean = false,this.autofocus = true,this.showDecoration = true,this.focusNode,this.extended = false,this.onSubmitted,this.readOnly,this.onTap,this.textAlign,this.lengthLimiting,this.padding,this.inputFormatter,this.crossAxisAlignment,this.showTopic,Key? key}) : super(key: key);
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -59,6 +61,7 @@ class _InputFieldState extends State<InputField> {
       decoration: widget.showDecoration?Colours.white.boxDecoration(borderRadius: 12.w):null,
       padding: widget.padding??EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.w),
       child: Row(
+        crossAxisAlignment: widget.crossAxisAlignment??CrossAxisAlignment.center,
         children: [
           if(widget.leftWidget != null)
             Container(
@@ -83,7 +86,7 @@ class _InputFieldState extends State<InputField> {
                 focusedBorder: const UnderlineInputBorder(borderSide: BorderSide.none),
                 border: const UnderlineInputBorder(borderSide: BorderSide.none),
               ),
-              specialTextSpanBuilder: MySpecialTextSpanBuilder(showAtBackground: false),
+              specialTextSpanBuilder: MySpecialTextSpanBuilder(showAt: widget.showTopic??false),
               onSubmitted: widget.onSubmitted,
               onTap: widget.onTap,
               inputFormatters: <TextInputFormatter>[
@@ -99,6 +102,7 @@ class _InputFieldState extends State<InputField> {
               textAlign: widget.textAlign??TextAlign.start,
               style: TextStyle(color: Colours.black,fontSize: 32.sp, ),
               focusNode: widget.focusNode,
+              maxLines: null,
               decoration:  InputDecoration(
                 isCollapsed: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 5.w),
@@ -135,7 +139,7 @@ class _InputFieldState extends State<InputField> {
       ),
       onTap: () {
         // 保证在组件build的第一帧时才去触发取消清空内
-        WidgetsBinding.instance?.addPostFrameCallback((_) => _controller!.clear());
+        WidgetsBinding.instance.addPostFrameCallback((_) => _controller!.clear());
         setState(() {
           _isShowClean = false;
         });

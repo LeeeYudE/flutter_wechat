@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../color/colors.dart';
 import '../language/strings.dart';
+import '../utils/utils.dart';
 import '../widget/load_widget.dart';
 import 'package:wechat/core.dart';
+
+import '../widget/lottie_widget.dart';
 
 /// @author Barry
 /// @date 2020/11/17
@@ -72,7 +75,7 @@ class AppUI extends AbstractAppUI {
     return Column(
       children:  [
         const Spacer(flex: 1),
-        LoadWidget(size: 100.w,color: Colours.c_999999),
+        LottieWidget(assetPath: Utils.getLottiePath('loading'), height: 200.w,width: 200.w,),
         const Spacer(flex: 2),
       ],
     );

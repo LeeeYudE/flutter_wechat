@@ -12,8 +12,9 @@ class ScaleSizeImageWidget extends StatelessWidget {
   double photoWidth;
   double photoHeight;
   String photoUrl;
+  bool tapDetail;
 
-  ScaleSizeImageWidget({required this.photoWidth , required this.photoHeight , required this.photoUrl,Key? key}) : super(key: key);
+  ScaleSizeImageWidget({required this.photoWidth , required this.photoHeight , required this.photoUrl,this.tapDetail = true,Key? key}) : super(key: key);
 
 
   @override
@@ -44,9 +45,16 @@ class ScaleSizeImageWidget extends StatelessWidget {
       }
     }
 
-    return TapWidget(onTap: () {
-      NavigatorUtils.toNamed(PhotoPreviewPage.routeName,arguments: PhotoPreviewArguments(heroTag: photoUrl,url: photoUrl));
-    },
-    child: CacheImageWidget(url: photoUrl, weightWidth: photoWidth, weightHeight: photoHeight,hero: true,));
+    Widget image = CacheImageWidget(url: photoUrl, weightWidth: photoWidth, weightHeight: photoHeight,hero: true,);
+
+    if(tapDetail){
+      return TapWidget(onTap: () {
+        NavigatorUtils.toNamed(PhotoPreviewPage.routeName,arguments: PhotoPreviewArguments(heroTag: photoUrl,url: photoUrl));
+      }, child:image );
+    }else{
+      return image;
+    }
+
+
   }
 }

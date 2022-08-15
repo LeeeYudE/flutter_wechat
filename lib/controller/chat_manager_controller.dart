@@ -28,14 +28,21 @@ class ChatManagerController extends BaseXController {
   late Client imClient;
 
   initClient() async {
-    imClient = Client(id: UserController.instance.username);
-    await imClient.open();
-    imClient.onMessage = _onMessage;
-    imClient.onMessageUpdated = _onMessageUpdated;
-    imClient.onMessageDelivered = _onMessageDelivered;
-    imClient.onMessageRead = _onMessageRead;
-    imClient.onUnreadMessageCountUpdated = _onUnreadMessageCountUpdated;
-    chatIndex();
+    lcPost(() async {
+      imClient = Client(id: UserController.instance.username);
+      await imClient.open();
+      imClient.onMessage = _onMessage;
+      imClient.onMessageUpdated = _onMessageUpdated;
+      imClient.onMessageDelivered = _onMessageDelivered;
+      imClient.onMessageRead = _onMessageRead;
+      imClient.onUnreadMessageCountUpdated = _onUnreadMessageCountUpdated;
+      chatIndex();
+    },onError: (e){
+      Future.delayed(const Duration(seconds: 3),(){
+        initClient();
+      });
+    },showloading: false,showToast: false);
+
   }
 
   removeCurrentConversation(){
