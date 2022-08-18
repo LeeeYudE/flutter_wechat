@@ -9,7 +9,7 @@ Flutter版本：3.0.0
 #测试账号 18202003769 密码 Bb123456
 
 下载体验(Android)
-[https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.1/app-release.apk](https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.1/app-release.apk)
+[https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.2/app-release.apk](https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.2/app-release.apk)
 
 <img src="screenshot/qrcode.png" style="zoom:30%;" />
 
