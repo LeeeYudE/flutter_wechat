@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:wechat/base/base_getx.dart';
+import 'package:wechat/controller/auido_manager.dart';
 import 'package:wechat/controller/member_controller.dart';
 import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
@@ -87,6 +88,8 @@ class ChatManagerController extends BaseXController {
     }
     if(_currentConversation != null && _currentConversation?.id == conversation.id){
       conversation.read();
+    }else{
+      AudioManager().receiveMessage();
     }
     _updateConversation(conversation);
  }

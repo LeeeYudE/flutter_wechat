@@ -11,22 +11,24 @@ Flutter版本：3.0.0
 下载体验(Android)
 [https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.1/app-release.apk](https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.1/app-release.apk)
 
-<img src="assets/screenshot/qrcode.png" style="zoom:30%;" />
+<img src="screenshot/qrcode.png" style="zoom:30%;" />
 
 # 效果图
 
-| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot0.gif)     | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot1.gif)     | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot2.gif)   |
-|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot3.gif)     | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot4.gif)     | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot5.gif)   |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot6.gif)     | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot7.gif)     | ![8.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot8.gif)   |
+| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot0.gif)            | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot1.gif)           | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot2.gif)   |
+|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot3.gif)            | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot4.gif)           | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot5.gif)   |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| ![7.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot6.gif)            | ![8.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master//screenshot/screenshot7.gif)          | ![9.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/assets/screenshot/screenshot8.gif)   |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| ![10.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot9.gif)           | 
 
 #Api方案采用Leancloud
 * 数据存储文档：https://zh-docs.leancloud.app/leanstorage_guide-flutter.html
 * IM聊天文档：https://zh-docs.leancloud.app/realtime-guide-beginner.html
 
 # log
-
+* 2022.08.18 首页增加Uniapp小程序跳转，设置页增加小程序wgt文件上传。
 * 2022.08.15 增加视频号流程，支持上传视频。
 * 2022.08.02 创建朋友圈增加定位选择流程。
 * 2022.08.01 完成摇一摇页面,增加朋友圈点赞/评论流程。
@@ -46,8 +48,7 @@ Flutter版本：3.0.0
 * 2022.06.25 完成登录和注册流程
 
 # todo
-* 播放器增加缓存
-* 支持Uniapp小程序跳转
+* 视频播放器增加缓存
 * IMSDK有BUG，图片/录音/文件类型的发送流程暂未完成，等待官方修复。
 
 #git type用于说明 commit 的类别，只允许使用下面7个标识

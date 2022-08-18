@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/base/base_getx.dart';
+import 'package:wechat/base/constant.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/controller/member_controller.dart';
 import 'package:wechat/controller/user_controller.dart';
@@ -18,6 +19,7 @@ class FriendDetailController extends BaseXController {
   late String username;
   LCUser? friend;
   bool isFriend = false;
+  RxList<String> friendCircles = <String>[].obs;
 
 
   @override
@@ -39,12 +41,19 @@ class FriendDetailController extends BaseXController {
   void friendDetail() async {
       lcPost(() async {
         friend = await MemberController.instance.queryUser(username,update: true);
-        // LCQuery<LCUser> userQueryPhone = LCUser.getQuery();
-        // userQueryPhone.whereEqualTo('username', username);
-        // List<LCUser?>? results = await userQueryPhone.find();
         if(friend != null){
-          // friend = results!.first;
           isFriend = FriendController.instance.isFriend(username);
+           var lcQuery = LCQuery(Constant.OBJECT_NAME_FRIEND_CIRCLE);
+          lcQuery.whereEqualTo('user', friend);
+          lcQuery.whereEqualTo('mediaType', 1);
+          lcQuery.limit(10);
+          var friendFind = await lcQuery.find();
+          List<String> _list = [];
+          friendFind?.forEach((element) {
+            List<dynamic> photos = element['photos'];
+            _list.addAll(photos.map<String>((e) => e['url']).toList());
+          });
+          friendCircles.addAll(_list);
         }
       },changeState: true,showloading: false);
   }

@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
+import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/base/constant.dart';
+import 'package:wechat/controller/auido_manager.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../widget/press_record_widget.dart';
@@ -76,18 +78,31 @@ class ChatController extends BaseXController {
   }
 
   sendImage(File file) async {
-    // LCFile _file = await LCFile.fromPath(file.filename, file.path);
-    // await _file.save();
-    var imageMessage = ImageMessage.from(path: file.path,name: file.filename);
-    sendMessage(imageMessage);
+    lcPost(() async {
+      var lcFile = await LCFile.fromPath(file.filename, file.path);
+      await lcFile.save();
+      var imageMessage = ImageMessage.from(
+          url: lcFile.url,
+          format: file.suffix,
+          name: file.filename
+      );
+      sendMessage(imageMessage);
+    },showloading: false);
   }
 
   sendAudio(String path){
-    var imageMessage = AudioMessage.from(path: path,
-      format: 'aac',
-      name: 'test.aac'
-    );
-    sendMessage(imageMessage);
+    lcPost(() async {
+      var file = File(path);
+      var lcFile = await LCFile.fromPath(file.filename, path);
+      await lcFile.save();
+      var imageMessage = AudioMessage.from(
+          url: lcFile.url,
+          format: file.suffix,
+          name: file.filename
+      );
+      sendMessage(imageMessage);
+    },showloading: false);
+
   }
 
   sendVideo(File file){
@@ -106,6 +121,7 @@ class ChatController extends BaseXController {
       lcPost(() async {
         var sendMessage = await _managerController.sendMessage(conversation!, message);
         _insertMessage(sendMessage);
+        AudioManager().sendMessage();
       },showloading: false,onError: (e){
       });
     }

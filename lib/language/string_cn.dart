@@ -183,5 +183,9 @@ const Map<String, String> languageChinese = {
   Ids.add_describe: '添加描述',
   Ids.topic: '话题',
   Ids.publish_comment: '发表评论',
+  Ids.mini_program_update_util: '小程序上传工具',
+  Ids.recently_used_mini_program: '最近使用的小程序',
+  Ids.file_format_error: '文件格式错误',
+  Ids.update: '上传',
 
 };

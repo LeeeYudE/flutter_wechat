@@ -45,8 +45,7 @@ class ChannelItemWidget extends BaseGetBuilder<ChannelsCommentsController> {
   final double _panelHeight = 800.w;
   double _pos = 0;
   double _keyboardHeight = 0;
-  bool _isDraggable = true;
-  bool _isStartDraggable = false;
+
   final GlobalKey<SlidingUpPanelState> _panelKey = GlobalKey();
 
   @override
@@ -59,8 +58,6 @@ class ChannelItemWidget extends BaseGetBuilder<ChannelsCommentsController> {
       parallaxEnabled:false,
       parallaxOffset: 1,
       backdropOpacity: 0,
-      color: Colours.black,
-      isDraggable: true,
       body: Container(
         padding: EdgeInsets.only(bottom: _panelHeight * _pos ),
         child: Column(
@@ -256,37 +253,7 @@ class ChannelItemWidget extends BaseGetBuilder<ChannelsCommentsController> {
                       child: PanelListView.builder(itemBuilder: (context , index){
                         return ChannelsCommentItem(comment: controller.list[index],);
                       },itemCount: controller.list.length,controller: controller.scrollController,
-                        onGestureStart: (details){
-                          _isDraggable = (controller.scrollController.position.pixels == 0);
-                          return _isDraggable;
-                        },
-                        onGestureSlide: (details){
-                          if(_isDraggable){
-                            if(details.delta.dy > 0){///向下滑动
-                              if(controller.scrollController.position.pixels == 0){///列表处于最顶部，可以拖动面板
-                                _isStartDraggable = true;
-                                _panelKey.state?.onGestureSlide(details.delta.dy);
-                                return true;
-                              }
-                            }else{///向上滑动
-                              if(controller.scrollController.position.pixels == 0){
-                                return false;
-                              }else if(_isStartDraggable){
-                                _panelKey.state?.onGestureSlide(details.delta.dy);
-                                return true;
-                              }
-                            }
-                          }
-                          return false;
-                        },
-                        onGestureEnd: (details){
-                          if(_isStartDraggable){
-                            _panelKey.state?.onGestureEnd(details.velocity);
-                            _isStartDraggable = false;
-                            return true;
-                          }
-                          return false;
-                        },
+                        panelKey: _panelKey,
                       ),
                     ),
                   ),

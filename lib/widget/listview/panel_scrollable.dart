@@ -11,6 +11,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import '../sliding_up_panel.dart';
+
 
 export 'package:flutter/physics.dart' show Tolerance;
 
@@ -78,6 +80,7 @@ class PanelScrollable extends StatefulWidget {
     this.onGestureSlide,
     this.onGestureEnd,
     this.onGestureStart,
+    this.panelKey,
   }) : assert(axisDirection != null),
         assert(dragStartBehavior != null),
         assert(viewportBuilder != null),
@@ -116,6 +119,7 @@ class PanelScrollable extends StatefulWidget {
   final OnGestureSlide? onGestureSlide;
   final OnGestureEnd? onGestureEnd;
   final OnGestureStart? onGestureStart;
+  final GlobalKey<SlidingUpPanelState>? panelKey;
 
   /// How the widgets should respond to user input.
   ///
@@ -634,22 +638,26 @@ class PanelScrollableState extends State<PanelScrollable> with TickerProviderSta
     if(_drag == null){
       return;
     }
-    assert(_drag == null);
+    // assert(_drag == null);
     assert(_hold == null);
 
     _hold = position.hold(_disposeHold);
   }
 
+  bool _isDraggable = false;
+  bool _isStartDraggable = false;
+
   void _handleDragStart(DragStartDetails details) {
-    print('_handleDragStart ${details}');
     // It's possible for _hold to become null between _handleDragDown and
     // _handleDragStart, for example if some user code calls jumpTo or otherwise
     // triggers a new activity to begin.
-    assert(_drag == null);
-    if(widget.onGestureStart?.call(details)??false){
-      return;
+    // assert(_drag == null);
+    if(widget.panelKey != null && widget.controller != null){
+      _isDraggable = (widget.controller!.position.pixels == 0);
+      // return;
     }
-    debugPrint('_handleDragStart');
+
+    debugPrint('_handleDragStart ${widget.panelKey} ${widget.controller!.position.pixels}');
     _drag = position.drag(details, _disposeDrag);
     assert(_drag != null);
     assert(_hold == null);
@@ -659,17 +667,32 @@ class PanelScrollableState extends State<PanelScrollable> with TickerProviderSta
     // _drag might be null if the drag activity ended and called _disposeDrag.
 
     assert(_hold == null || _drag == null);
-    if(widget.onGestureSlide?.call(details)??false){
-      return;
+
+    if(_isDraggable && widget.controller != null){
+      if(details.delta.dy > 0){///向下滑动
+        if(widget.controller!.position.pixels == 0){///列表处于最顶部，可以拖动面板
+          _isStartDraggable = true;
+          widget.panelKey?.currentState?.onGestureSlide(details.delta.dy);
+          return;
+        }
+      }else{///向上滑动
+       if(widget.controller!.position.pixels == 0 && _isStartDraggable){
+         widget.panelKey?.currentState?.onGestureSlide(details.delta.dy);
+          return ;
+        }
+      }
     }
-    debugPrint('_handleDragUpdate');
+    debugPrint('_handleDragUpdate $_isDraggable');
     _drag?.update(details);
   }
 
   void _handleDragEnd(DragEndDetails details) {
     // _drag might be null if the drag activity ended and called _disposeDrag.
     assert(_hold == null || _drag == null);
-    if(widget.onGestureEnd?.call(details)??false){
+
+    if(_isStartDraggable){
+      widget.panelKey?.currentState?.onGestureEnd(details.velocity);
+      _isStartDraggable = false;
       return;
     }
     debugPrint('_handleDragEnd');

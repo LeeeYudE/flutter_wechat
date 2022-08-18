@@ -66,6 +66,11 @@ class FileUtils {
     return tempDirectory;
   }
 
+  static Future<Directory> getUniappTemporaryDirectory() async {
+    final Directory tempDirectory = await _getTemporaryDirectory('/uniapp');
+    return tempDirectory;
+  }
+
   static deleteFile(String path){
     if(!TextUtil.isEmpty(path)){
       final lrsFloor = File(path);

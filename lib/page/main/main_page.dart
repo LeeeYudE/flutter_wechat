@@ -5,6 +5,7 @@ import 'package:wechat/page/main/discover/discover_page.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/lazy_indexed_stack.dart';
 import '../../controller/friend_controller.dart';
+import '../../plugin/uniapp/uniapp_plugin_method_channel.dart';
 import '../../utils/emoji_text.dart';
 import 'chat/chat_list_page.dart';
 import 'mine/mine_page.dart';

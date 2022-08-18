@@ -159,6 +159,8 @@ class SlidingUpPanel extends StatefulWidget {
   /// by default the Panel is open and must be swiped closed by the user.
   final PanelState defaultPanelState;
 
+  final bool onWillPop;
+
   SlidingUpPanel(
       {Key? key,
         this.panel,
@@ -195,7 +197,8 @@ class SlidingUpPanel extends StatefulWidget {
         this.slideDirection = SlideDirection.UP,
         this.defaultPanelState = PanelState.CLOSED,
         this.header,
-        this.footer})
+        this.footer,
+        this.onWillPop = true})
       : assert(panel != null || panelBuilder != null),
         assert(0 <= backdropOpacity && backdropOpacity <= 1.0),
         assert(snapPoint == null || 0 < snapPoint && snapPoint < 1.0),
@@ -252,7 +255,7 @@ class SlidingUpPanelState extends State<SlidingUpPanel>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if(!_isPanelClosed){
+        if(!_isPanelClosed && widget.onWillPop){
           _close();
           return false;
         }else{

@@ -6,6 +6,7 @@ import 'package:wechat/page/login/register_page.dart';
 import 'package:wechat/page/login/register_success_page.dart';
 import 'package:wechat/page/login/safety_verify_page.dart';
 import 'package:wechat/page/login/splash_page.dart';
+import 'package:wechat/page/login/test_accounts_page.dart';
 import 'package:wechat/page/login/verify_machine_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
 import 'package:wechat/page/main/chat/chat_detail_page.dart';
@@ -40,6 +41,7 @@ import 'package:wechat/page/main/mine/qrcode_business_card_page.dart';
 import 'package:wechat/page/main/mine/user_info_page.dart';
 import 'package:wechat/page/util/crop_image_page.dart';
 import 'package:wechat/page/util/photo_preview_page.dart';
+import 'package:wechat/page/util/uniapp_util_page.dart';
 import 'package:wechat/page/util/video_perview_page.dart';
 import 'package:wechat/page/util/webview_page.dart';
 
@@ -226,6 +228,14 @@ class AppPages {
     _getPage(
       name: ChannelsPreviewPage.routeName,
       page: () => const ChannelsPreviewPage(),
+    ),
+    _getPage(
+      name: UniappUtilPage.routeName,
+      page: () => UniappUtilPage(),
+    ),
+    _getPage(
+      name: TestAccountsPage.routeName,
+      page: () => const TestAccountsPage(),
     ),
   ];
 

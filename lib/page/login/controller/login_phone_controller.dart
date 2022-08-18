@@ -14,7 +14,7 @@ import '../model/zone_code.dart';
 
 class LoginPhoneController extends BaseXController{
 
-  TextEditingController passwordController = TextEditingController(text: '18202003769');
+  TextEditingController passwordController = TextEditingController(text: 'Bb123456');
   String phone = Get.arguments;
 
   @override
@@ -33,7 +33,6 @@ class LoginPhoneController extends BaseXController{
        NavigatorUtils.offAllNamed(MainPage.routeName);
      }
     });
-
   }
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wechat/core.dart';
+import 'package:wechat/page/login/test_accounts_page.dart';
 import 'package:wechat/page/login/zone_code_page.dart';
 import '../../base/base_view.dart';
 import '../../color/colors.dart';
@@ -62,6 +63,14 @@ class LoginPhoneCheckPage extends BaseGetBuilder<LoginPhoneCheckController> {
                 controller: controller.phoneController,
                 inputType: TextInputType.phone,
               )),
+          20.sizedBoxH,
+          TapWidget(onTap: () async {
+           var account =  await NavigatorUtils.toNamed(TestAccountsPage.routeName);
+           if(account != null){
+             controller.phoneController.newValue(account);
+           }
+          },
+          child: Text('测试账号',style: TextStyle(color: Colours.c_999999,fontSize: 32.sp),)),
           const Spacer(),
           Text(
             Ids.phone_only_use_check.str(),

@@ -72,12 +72,16 @@ class AppUI extends AbstractAppUI {
 
   @override
   Widget loadingPage(BuildContext context) {
-    return Column(
-      children:  [
-        const Spacer(flex: 1),
-        LottieWidget(assetPath: Utils.getLottiePath('loading'), height: 200.w,width: 200.w,),
-        const Spacer(flex: 2),
-      ],
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:  [
+          const Spacer(flex: 1),
+          LottieWidget(assetPath: Utils.getLottiePath('loading'), height: 200.w,width: 200.w,),
+          const Spacer(flex: 2),
+        ],
+      ),
     );
   }
 

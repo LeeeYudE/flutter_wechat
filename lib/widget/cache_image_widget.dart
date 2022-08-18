@@ -15,6 +15,7 @@ class CacheImageWidget extends StatelessWidget {
   final double? decorationWidth;
   final double? borderRadius;
   final bool clipRRect;
+  final bool icCircle;
   final BoxFit? fit;
 
   const CacheImageWidget({
@@ -25,6 +26,7 @@ class CacheImageWidget extends StatelessWidget {
     this.decorationWidth,
     this.borderRadius,
     this.clipRRect = true,
+    this.icCircle = false,
     this.fit
   });
 
@@ -39,7 +41,7 @@ class CacheImageWidget extends StatelessWidget {
       width: weightWidth,
       height: weightHeight,
       child: clipRRect?ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius??12.w,),
+        borderRadius: BorderRadius.circular(icCircle?weightWidth:borderRadius??12.w,),
         child: child,
       ):child,
     );

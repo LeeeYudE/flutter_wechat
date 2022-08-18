@@ -3,6 +3,7 @@ import 'package:wechat/controller/user_controller.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/page/login/splash_page.dart';
 import 'package:wechat/page/main/mine/language_setting_page.dart';
+import 'package:wechat/page/util/uniapp_util_page.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/tap_widget.dart';
 
@@ -58,6 +59,10 @@ class SettingPage extends StatelessWidget {
         20.sizedBoxH,
         RightArrowWidget(lable: Ids.help_and_feedback.str(), callback: () {
 
+        },),
+        20.sizedBoxH,
+        RightArrowWidget(lable: Ids.mini_program_update_util.str(), callback: () {
+            NavigatorUtils.toNamed(UniappUtilPage.routeName);
         },),
         20.sizedBoxH,
         TapWidget(

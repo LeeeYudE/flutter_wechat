@@ -67,7 +67,7 @@ class DialogUtil{
       return file;
     }
     if(file != null && crop){
-      file =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: CropArguments(file: file,aspectRatio: 1.25));
+      file =  await NavigatorUtils.toNamed(CropImagePage.routeName,arguments: CropArguments(file: file,aspectRatio: 1.00));
       if(file != null){
         String? _image = await ImageUtil.compressImage(file);
         if(_image != null){

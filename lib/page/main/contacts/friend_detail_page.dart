@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat/base/base_view.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/core.dart';
+import 'package:wechat/widget/cache_image_widget.dart';
 import '../../../base/common_state_widget_x.dart';
 import '../../../color/colors.dart';
 import '../../../controller/user_controller.dart';
@@ -31,7 +33,6 @@ class FriendDetailPage extends BaseGetBuilder<FriendDetailController> {
       body: _buildBody(context,controller),
     );
   }
-
 
   Widget _buildBody(BuildContext context, FriendDetailController controller) {
     return CommonStateWidgetX(
@@ -86,7 +87,17 @@ class FriendDetailPage extends BaseGetBuilder<FriendDetailController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(Ids.friends_circle.str(),style: TextStyle(color: Colours.black,fontSize: 32.sp),)
+          Text(Ids.friends_circle.str(),style: TextStyle(color: Colours.black,fontSize: 32.sp),),
+          20.sizedBoxW,
+          Expanded(
+            child: Obx(()=> ListView.builder(itemBuilder: (context , index){
+                return Container(
+                    margin: EdgeInsets.only(right: 20.w),
+                    padding: EdgeInsets.symmetric(vertical: 10.w),
+                    child: CacheImageWidget(url: controller.friendCircles[index], weightWidth: 100.w, weightHeight: 100.w));
+              },scrollDirection: Axis.horizontal,itemCount: controller.friendCircles.length,),
+            ),
+          )
         ],
       ),
     );

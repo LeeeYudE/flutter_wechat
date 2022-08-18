@@ -7,8 +7,8 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
 
+import '../sliding_up_panel.dart';
 import 'panel_scrollable.dart';
 
 
@@ -89,7 +89,8 @@ abstract class ScrollView extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.onGestureSlide,
     this.onGestureEnd,
-    this.onGestureStart
+    this.onGestureStart,
+    this.panelKey,
   }) : assert(!(controller != null && (primary ?? false)),
         'Primary ScrollViews obtain their ScrollController via inheritance from a PrimaryScrollController widget. '
             'You cannot both set primary to true and pass an explicit controller.',
@@ -300,6 +301,7 @@ abstract class ScrollView extends StatelessWidget {
   final OnGestureSlide? onGestureSlide;
   final OnGestureEnd? onGestureEnd;
   final OnGestureStart? onGestureStart;
+  final GlobalKey<SlidingUpPanelState>? panelKey;
 
   /// Returns the [AxisDirection] in which the scroll view scrolls.
   ///
@@ -396,6 +398,7 @@ abstract class ScrollView extends StatelessWidget {
       onGestureSlide: onGestureSlide,
       onGestureEnd: onGestureEnd,
       onGestureStart: onGestureStart,
+      panelKey:panelKey,
       viewportBuilder: (BuildContext context, ViewportOffset offset) {
         return buildViewport(context, offset, axisDirection, slivers);
       },
@@ -637,6 +640,7 @@ abstract class BoxScrollView extends ScrollView {
     OnGestureSlide? onGestureSlide,
     OnGestureEnd? onGestureEnd,
     OnGestureStart? onGestureStart,
+    GlobalKey<SlidingUpPanelState>? panelKey
   }) : super(
     key: key,
     scrollDirection: scrollDirection,
@@ -652,7 +656,8 @@ abstract class BoxScrollView extends ScrollView {
     restorationId: restorationId,
     clipBehavior: clipBehavior,
     onGestureSlide:onGestureSlide,
-    onGestureEnd: onGestureEnd
+    onGestureEnd: onGestureEnd,
+    panelKey:panelKey
   );
 
   /// The amount of space by which to inset the children.
@@ -1163,6 +1168,7 @@ class PanelListView extends BoxScrollView {
     OnGestureSlide? onGestureSlide,
     OnGestureEnd? onGestureEnd,
     OnGestureStart? onGestureStart,
+    GlobalKey<SlidingUpPanelState>? panelKey,
   }) : assert(itemCount == null || itemCount >= 0),
         assert(semanticChildCount == null || semanticChildCount <= itemCount!),
         assert(
@@ -1194,7 +1200,8 @@ class PanelListView extends BoxScrollView {
         clipBehavior: clipBehavior,
         onGestureSlide: onGestureSlide,
         onGestureEnd: onGestureEnd,
-        onGestureStart: onGestureStart
+        onGestureStart: onGestureStart,
+        panelKey: panelKey
       );
 
   /// Creates a fixed-length scrollable linear array of list "items" separated

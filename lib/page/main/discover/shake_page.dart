@@ -42,7 +42,7 @@ class _ShakePageState extends State<ShakePage> with SingleTickerProviderStateMix
           _shake = true;
           //延时两秒匹配到用户
           _controller.forward();
-          AudioManager.instance.shake();
+          AudioManager().shake();
           delay(3000, (value) {
             _controller.reverse();
             _shake = false;
