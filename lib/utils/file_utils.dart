@@ -71,6 +71,11 @@ class FileUtils {
     return tempDirectory;
   }
 
+  static Future<Directory> getAudioTemporaryDirectory() async {
+    final Directory tempDirectory = await _getTemporaryDirectory('/audio');
+    return tempDirectory;
+  }
+
   static deleteFile(String path){
     if(!TextUtil.isEmpty(path)){
       final lrsFloor = File(path);

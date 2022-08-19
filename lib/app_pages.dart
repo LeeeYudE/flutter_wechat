@@ -192,7 +192,7 @@ class AppPages {
     ),
     _getPage(
       name: VideoPerviewPage.routeName,
-      page: () => const VideoPerviewPage(),
+      page: () => VideoPerviewPage(),
     ),
     _getPage(
       name: ShakePage.routeName,

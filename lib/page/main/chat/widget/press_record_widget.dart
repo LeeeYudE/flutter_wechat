@@ -123,7 +123,7 @@ class PressRecordWidgetState extends State<PressRecordWidget> with SubscriptionM
         Ids.record_too_short.str().toast();
         return;
       }
-      _controller.sendAudio(value.path!);
+      _controller.sendAudio(value.path!,_second);
     });
   }
 

@@ -40,6 +40,11 @@ class DownLoadManage {
         ValueChanged<String>? done,
         ValueChanged? failed}) async {
     int downloadStart = 0;
+    var saveFile = File(savePath);
+    if(saveFile.existsSync()){
+      done?.call(savePath);
+      return;
+    }
     bool fileExists = false;
     final String tempFile = savePath+ Md5Util.generateMd5(url);
     final File file = File(tempFile);

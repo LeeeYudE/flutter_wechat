@@ -9,9 +9,13 @@ import 'package:wechat/widget/tap_widget.dart';
 
 import '../../../../../color/colors.dart';
 import '../../model/red_packet_message.dart';
+import 'message_audio_item.dart';
+import 'message_file_item.dart';
+import 'message_image_item.dart';
 import 'message_location_item.dart';
 import 'message_red_packet_item.dart';
 import 'message_text_item.dart';
+import 'message_video_item.dart';
 
 class MessageItem extends StatelessWidget {
 
@@ -90,12 +94,17 @@ class MessageItem extends StatelessWidget {
       case LCMessageExt.TYPE_TEXT:
         return MessageTextItem(message: message as TextMessage,);
       case LCMessageExt.TYPE_IMAGE:
-        ImageMessage imageMessage = message as ImageMessage;
-        break;
+        return MessageImageItem(message:message as ImageMessage);
       case LCMessageExt.TYPE_LOCATION:
         return MessageLocationItem(message: message as LocationMessage,);
       case LCMessageExt.TYPE_RED_PACKET:
         return MessageRedPacketItem(message: message as RedPacketMessage,);
+      case LCMessageExt.TYPE_AUDIO:
+        return MessageAudioItem(message: message as AudioMessage);
+      case LCMessageExt.TYPE_VIDEO:
+        return MessageVideoItem(message : message as VideoMessage);
+      case LCMessageExt.TYPE_FILE:
+        return MessageFileItem(message: message as FileMessage);
     }
     return SizedBox(
       height: 100.w,

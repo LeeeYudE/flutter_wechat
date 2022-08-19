@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wechat/base/base_view.dart';
 import 'package:wechat/color/colors.dart';
+import 'package:wechat/core.dart';
+import 'package:wechat/utils/dialog_util.dart';
 import 'package:wechat/utils/navigator_utils.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/tap_widget.dart';
 
+import '../../language/strings.dart';
+import '../../widget/dialog/dialog_bottom_widget.dart';
 import '../../widget/video_play_widget.dart';
+import 'controller/phone_preview_controller.dart';
 
 class VideoArguments{
 
@@ -18,31 +24,25 @@ class VideoArguments{
   bool autoPlay;
   String? cacheId;
 
-  VideoArguments({required this.url, this.actionType,this.hero = false,this.autoPlay = false,this.cacheId});
+  VideoArguments({required this.url, this.actionType = actionTypeMore,this.hero = false,this.autoPlay = false,this.cacheId});
 }
 
-class VideoPerviewPage extends StatefulWidget {
+class VideoPerviewPage extends BaseGetBuilder<PhonePreviewController> {
 
   static const String routeName = '/VideoPerviewPage';
 
-  const VideoPerviewPage({Key? key}) : super(key: key);
-
-  @override
-  State<VideoPerviewPage> createState() => _VideoPerviewPageState();
-}
-
-class _VideoPerviewPageState extends State<VideoPerviewPage> {
+  VideoPerviewPage({Key? key}) : super(key: key);
 
   late VideoArguments _arguments;
 
   @override
-  void initState() {
+  void onInit() {
     _arguments = Get.arguments;
-    super.initState();
+    super.onInit();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget controllerBuilder(BuildContext context, PhonePreviewController controller) {
     return MyScaffold(
       body: VidwoPlayWidget(path: _arguments.url,hero: _arguments.hero,autoPlay: _arguments.autoPlay,cacheId: _arguments.cacheId,),
       actions: [
@@ -50,9 +50,19 @@ class _VideoPerviewPageState extends State<VideoPerviewPage> {
           TapWidget(onTap: () {
             NavigatorUtils.pop(VideoArguments.actionTypeDelete);
           },
-          child: const Icon(Icons.delete,color: Colours.black,))
+              child: const Icon(Icons.delete,color: Colours.black,)),
+        if(_arguments.actionType == VideoArguments.actionTypeMore)
+          TapWidget(onTap: () async {
+            var result = await NavigatorUtils.showBottomItemsDialog([DialogBottomWidgetItem(Ids.save_to_phone.str(),0)]);
+            if(result == 0){
+              controller.saveMedia(_arguments.url);
+            }
+          }, child: const Icon(Icons.more_horiz_outlined,color: Colours.black,)),
       ],
     );
   }
+
+  @override
+  PhonePreviewController? getController() => PhonePreviewController();
 
 }

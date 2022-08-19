@@ -18,7 +18,7 @@ class PhotoPreviewArguments{
   String? url;
   String? heroTag;
 
-  PhotoPreviewArguments({this.url,this.heroTag});
+  PhotoPreviewArguments({required this.url,this.heroTag});
 }
 
 class PhotoPreviewPage extends BaseGetBuilder<PhonePreviewController> {
@@ -103,7 +103,7 @@ class PhotoPreviewPage extends BaseGetBuilder<PhonePreviewController> {
                   icon: const Icon(Icons.more_horiz,color: Colours.white,), onPressed: () async {
                  var result =  await NavigatorUtils.showBottomItemsDialog([DialogBottomWidgetItem(Ids.save_to_phone.str(), 0)]);
                  if(result != null){
-                    controller.saveImage(_arguments.url);
+                    controller.saveMedia(_arguments.url);
                  }
                 },
                 )

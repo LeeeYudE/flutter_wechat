@@ -24,9 +24,9 @@ class Constant{
   static const String OBJECT_NAME_CHANNLES_COMMENTS = 'channlesComments';
   static const String OBJECT_NAME_UNIAPP = 'uniapp';
 
-  static final  double MAX_PHOTO_WIDTH = 600.w;
+  static final  double MAX_PHOTO_WIDTH = 400.w;
   static final double MAX_PHOTO_HEIGHT = 600.w;
-  static final double MIN_PHOTO_WIDTH = 300.w;
-  static final double MIN_PHOTO_HEIGHT = 300.w;
+  static final double MIN_PHOTO_WIDTH = 200.w;
+  static final double MIN_PHOTO_HEIGHT = 200.w;
 
 }

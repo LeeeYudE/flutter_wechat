@@ -1,16 +1,16 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/core.dart';
 import 'package:wechat/utils/permission_utils.dart';
+import 'package:wechat/utils/range_download_manage.dart';
 import '../../../language/strings.dart';
 import '../../../utils/file_utils.dart';
 
 class PhonePreviewController extends BaseXController{
 
-  Future<bool> saveImage(String? url) async {
+  Future<bool> saveMedia(String? url) async {
     if(url == null){
       return  false;
     }
@@ -27,19 +27,16 @@ class PhonePreviewController extends BaseXController{
 
         showLoading();
 
-        final response = await Dio().download(url, savePath,
-            onReceiveProgress: (count, total) {
-              debugPrint('saveMessageMeida count = $count  ## total = $total ');
-            });
-        disimssLoading();
-        if (response.statusCode == 200) {
+        await DownLoadManage().download(url, savePath,done: (path) async {
+          disimssLoading();
           await ImageGallerySaver.saveFile(savePath);
           Ids.save_success.str().toast();
-          return true;
-        } else {
-          Ids.save_success.str().toast();
-          return true;
-        }
+
+        },failed: (e){
+          disimssLoading();
+          Ids.save_fail.str().toast();
+        });
+
       } else {
         await ImageGallerySaver.saveFile(url);
         Ids.save_success.str().toast();

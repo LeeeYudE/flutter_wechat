@@ -68,7 +68,14 @@ class ChatMorePanel extends StatelessWidget {
             case 1:///拍摄
               final AssetEntity? entity = await CameraPicker.pickFromCamera(context,pickerConfig: const CameraPickerConfig(enableRecording: true,resolutionPreset: ResolutionPreset.high));
               if(entity != null){
-                await entity.file;
+                var file = await entity.file;
+                if(file != null){
+                  if(file.filename.endsWith('mp4')){
+                    _chatController.sendVideo(file);
+                  }else{
+                    _chatController.sendImage(file);
+                  }
+                }
               }
               break;
             case 2:///位置
@@ -82,6 +89,9 @@ class ChatMorePanel extends StatelessWidget {
               break;
             case 4:///文件
               FilePickerResult? result = await FilePicker.platform.pickFiles();
+              if(result?.files.isNotEmpty??false){
+                _chatController.sendFile(File(result!.files.first.path!));
+              }
               break;
             case 5:///收藏
               break;

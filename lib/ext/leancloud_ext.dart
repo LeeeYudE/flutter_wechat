@@ -86,6 +86,7 @@ extension LCMessageExt on Message{
 
   bool get isSend => fromClientID == UserController.instance.username;
 
+
   int get messageType {
     if(this is TextMessage){
       return TYPE_TEXT;
@@ -137,12 +138,79 @@ extension LCMessageExt on Message{
     return '';
   }
 
+
+}
+
+extension TypeMessageExt on TypedMessage{
+
+  Map get metaData{
+    var _lcfile = rawData['_lcfile'];
+    if(_lcfile == null){
+      rawData['_lcfile'] = {};
+    }
+    var metaData = rawData['_lcfile']['metaData'];
+    if(metaData == null){
+      metaData = {};
+      rawData['_lcfile']['metaData'] = metaData;
+    }
+    return metaData;
+  }
+
+  String get filename {
+    String? _filename;
+    final Map? metaDataMap = metaData;
+    if (metaDataMap != null) {
+      _filename = metaDataMap['filename']?.toString();
+    }
+    return _filename??'';
+  }
+
+  String get fileSize {
+    String? _filename;
+    final Map? metaDataMap = metaData;
+    if (metaDataMap != null) {
+      _filename = metaDataMap['size']?.toString();
+    }
+    return _filename??'';
+  }
+
 }
 
 extension LocationMessageExt on LocationMessage{
 
   String get addressUrl {
     return 'http://api.map.baidu.com/staticimage?center=$longitude,$latitude&maker=$longitude,$latitude&width=${400.w}&height=${150.w}&zoom=14';
+  }
+
+}
+
+extension VideoMessageExt on VideoMessage{
+
+  double get thumbnailWidth {
+    double? _thumbnailWidth;
+    final Map? metaDataMap = metaData;
+    if (metaDataMap != null) {
+      _thumbnailWidth = metaDataMap['_thumbnailWidth'];
+    }
+    return _thumbnailWidth??0.0;
+  }
+
+  double get thumbnailHeight {
+    double? _thumbnailHeight;
+    final Map? metaDataMap = metaData;
+    if (metaDataMap != null) {
+      _thumbnailHeight = metaDataMap['thumbnailHeight']?.toDouble();
+    }
+    return _thumbnailHeight??0.0;
+  }
+
+  String? get thumbnailUrl {
+    String? _thumbnailHeight;
+    final Map? metaDataMap = metaData;
+    if (metaDataMap != null) {
+      _thumbnailHeight = metaDataMap['thumbnailUrl'];
+    }
+    return _thumbnailHeight;
   }
 
 }

@@ -351,6 +351,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.6.1"
+  filesize:
+    dependency: "direct main"
+    description:
+      name: filesize
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   flustars:
     dependency: "direct main"
     description:
@@ -758,6 +765,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  open_file:
+    dependency: "direct main"
+    description:
+      name: open_file
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.1"
   package_config:
     dependency: transitive
     description:

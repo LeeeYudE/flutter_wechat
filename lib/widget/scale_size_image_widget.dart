@@ -44,7 +44,6 @@ class ScaleSizeImageWidget extends StatelessWidget {
         photoWidth = photoHeight * scale;
       }
     }
-
     Widget image = CacheImageWidget(url: photoUrl, weightWidth: photoWidth, weightHeight: photoHeight,hero: true,);
 
     if(tapDetail){

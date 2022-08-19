@@ -6,6 +6,7 @@ A new Wechat project.
 wechat_flutter是flutter版微信，目前功能还在持续迭代，尽量还原原版微信功能。
 Flutter版本：3.0.0
 
+
 #测试账号 18202003769 密码 Bb123456
 
 下载体验(Android)
@@ -15,19 +16,19 @@ Flutter版本：3.0.0
 
 # 效果图
 
-| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot0.gif)            | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot1.gif)           | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot2.gif) |
-|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot3.gif)            | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot4.gif)           | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot5.gif) |
+| ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot0.gif)            | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot1.gif)           | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot9.gif)          |
+|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot3.gif)            | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot4.gif)           | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot5.gif)          |
 | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| ![7.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot6.gif)            | ![8.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master//screenshot/screenshot7.gif)          | ![9.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot8.gif) |
+| ![7.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot6.gif)            | ![8.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master//screenshot/screenshot7.gif)          | ![9.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot8.gif)          |
 | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| ![10.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot9.gif)           | 
 
 #Api方案采用Leancloud
 * 数据存储文档：https://zh-docs.leancloud.app/leanstorage_guide-flutter.html
 * IM聊天文档：https://zh-docs.leancloud.app/realtime-guide-beginner.html
 
 # log
+* 2022.08.19 聊天页增加（录音/图片/视频/文件）消息发送流程。
 * 2022.08.18 首页增加Uniapp小程序跳转，设置页增加小程序wgt文件上传。
 * 2022.08.15 增加视频号流程，支持上传视频。
 * 2022.08.02 创建朋友圈增加定位选择流程。
@@ -49,9 +50,9 @@ Flutter版本：3.0.0
 
 # todo
 * 视频播放器增加缓存
-* IMSDK有BUG，图片/录音/文件类型的发送流程暂未完成，等待官方修复。
+* 寻找好心人适配iOS平台。
 
-#git type用于说明 commit 的类别，只允许使用下面7个标识
+# git type用于说明 commit 的类别，只允许使用下面7个标识
 * feat：新功能（feature）
 * fix：修补bug
 * docs：文档（documentation）

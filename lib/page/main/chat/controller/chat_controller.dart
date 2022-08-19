@@ -5,11 +5,14 @@ import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:get/get.dart';
 import 'package:leancloud_official_plugin/leancloud_plugin.dart';
 import 'package:leancloud_storage/leancloud.dart';
+import 'package:video_compress/video_compress.dart';
 import 'package:wechat/base/base_getx.dart';
 import 'package:wechat/base/constant.dart';
 import 'package:wechat/controller/auido_manager.dart';
 import 'package:wechat/controller/chat_manager_controller.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:wechat/utils/video_util.dart';
+import '../../../../utils/image_util.dart';
 import '../widget/press_record_widget.dart';
 import 'package:wechat/core.dart';
 
@@ -79,35 +82,102 @@ class ChatController extends BaseXController {
 
   sendImage(File file) async {
     lcPost(() async {
-      var lcFile = await LCFile.fromPath(file.filename, file.path);
-      await lcFile.save();
-      var imageMessage = ImageMessage.from(
-          url: lcFile.url,
-          format: file.suffix,
-          name: file.filename
-      );
-      sendMessage(imageMessage);
-    },showloading: false);
+      var compressImage = await ImageUtil.compressImage(file);
+      if(compressImage != null){
+        var lcFile = await LCFile.fromPath(file.filename, compressImage);
+        await lcFile.save();
+        var imageMessage = ImageMessage.from(
+            url: lcFile.url,
+            format: file.suffix,
+            name: file.filename
+        );
+        var imageSize = await ImageUtil.imageSize(file);
+        var metaData = imageMessage.metaData;
+        metaData['filename'] = file.filename;
+        metaData['width'] = imageSize.width;
+        metaData['height'] = imageSize.height;
+
+        sendMessage(imageMessage);
+      }
+
+    },showloading: true);
   }
 
-  sendAudio(String path){
+  sendAudio(String path, int duration){
     lcPost(() async {
       var file = File(path);
       var lcFile = await LCFile.fromPath(file.filename, path);
+      lcFile.metaData = {
+        'duration':duration,
+      };
       await lcFile.save();
-      var imageMessage = AudioMessage.from(
+      var audioMessage = AudioMessage.from(
           url: lcFile.url,
           format: file.suffix,
           name: file.filename
       );
-      sendMessage(imageMessage);
-    },showloading: false);
+      var metaData = audioMessage.metaData;
+      metaData['duration'] = duration;
+      metaData['filename'] = file.filename;
+      sendMessage(audioMessage);
+    },showloading: true);
 
   }
 
   sendVideo(File file){
-    var imageMessage = VideoMessage.from(path: file.path);
-    sendMessage(imageMessage);
+
+    lcPost(() async {
+
+      var videoThumbnail = await VideoUtil.videoThumbnail(file.path);
+
+      var thumbnailLc = await LCFile.fromPath(videoThumbnail.filename, videoThumbnail.path);
+
+      var compressVideo = await VideoUtil.compressVideo(file.path);
+      if(compressVideo != null && compressVideo.path != null){
+
+        await thumbnailLc.save();
+
+        var lcVideo = await LCFile.fromPath(file.filename, compressVideo.path!);
+
+        await lcVideo.save();
+        var videoMessage = VideoMessage.from(
+            url: lcVideo.url,
+            format: file.suffix,
+            name: file.filename
+        );
+        var imageSize = await ImageUtil.imageSize(videoThumbnail);
+        var metaData = videoMessage.metaData;
+        metaData['filename'] = file.filename;
+        metaData['duration'] = compressVideo.duration;
+        metaData['videoWidth'] = compressVideo.height;
+        metaData['videoHeight'] =  compressVideo.width;
+
+        metaData['thumbnailWidth'] = imageSize.width;
+        metaData['thumbnailHeight'] =  imageSize.height;
+        metaData['thumbnailUrl'] =  thumbnailLc.url;
+
+        sendMessage(videoMessage);
+      }
+    },showloading: true);
+
+  }
+
+  sendFile(File file) async {
+    lcPost(() async {
+        var lcFile = await LCFile.fromPath(file.filename, file.path);
+        await lcFile.save();
+        var imageMessage = FileMessage.from(
+            url: lcFile.url,
+            format: file.suffix,
+            name: file.filename
+        );
+        var metaData = imageMessage.metaData;
+        metaData['filename'] = file.filename;
+        metaData['size'] = file.lengthSync();
+
+        sendMessage(imageMessage);
+
+    },showloading: true);
   }
 
   sendLocation(BMFPoiInfo poi){
@@ -137,6 +207,7 @@ class ChatController extends BaseXController {
     textController.dispose();
     _managerController.removeCurrentConversation();
     _managerController.removeOnMessageReceive(_onMessageReceive);
+    AudioManager().dispose();
     super.onClose();
   }
 
