@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.3+1
+version: 1.0.4+1
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -47,7 +47,6 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   flutter_smart_dialog: ^3.4.2+2
   permission_handler: ^9.2.0
-  image_crop: ^0.4.0
   image_picker: ^0.8.4+2
   cached_network_image: ^3.1.0
   # https://github.com/renefloor/flutter_cached_network_image
@@ -108,8 +107,6 @@ dependencies:
       ref: 36278bf
   #生物验证
   flutter_local_auth_invisible: ^2.2.0
-  #极光推送SDK
-  jmessage_flutter: ^2.2.0
   #图片裁剪
   crop_your_image: ^0.7.2
   #播放视频
@@ -143,6 +140,8 @@ dependencies:
   open_file: ^3.2.1
   #格式化文件大小
   filesize: ^2.0.1
+  #通知
+  flutter_local_notifications: 9.6.0
 
   flutter_localizations:
     sdk: flutter

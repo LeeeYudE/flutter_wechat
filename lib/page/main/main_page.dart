@@ -5,9 +5,12 @@ import 'package:wechat/page/main/discover/discover_page.dart';
 import 'package:wechat/widget/base_scaffold.dart';
 import 'package:wechat/widget/lazy_indexed_stack.dart';
 import '../../controller/friend_controller.dart';
-import '../../plugin/uniapp/uniapp_plugin_method_channel.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../utils/emoji_text.dart';
+import '../../utils/navigator_utils.dart';
+import '../../utils/notification_util.dart';
 import 'chat/chat_list_page.dart';
+import 'chat/chat_page.dart';
 import 'mine/mine_page.dart';
 import 'widget/main_bottom_bar.dart';
 
@@ -36,6 +39,56 @@ class _MainPageState extends State<MainPage> {
     _pages.add(const DiscoverPage());
     _pages.add(MinePage());
     EmojiUtil.instance.init();
+    _initNotification();
+
+  }
+
+  _initNotification() async {
+
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = NotificationUtil.flutterLocalNotificationsPlugin;
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
+    final IOSInitializationSettings initializationSettingsIOS =
+    IOSInitializationSettings(
+        requestAlertPermission: false,
+        requestBadgePermission: false,
+        requestSoundPermission: false,
+        onDidReceiveLocalNotification: (
+            int id,
+            String? title,
+            String? body,
+            String? payload,
+            ) async {
+          _onSelectNotification(payload);
+        });
+    const MacOSInitializationSettings initializationSettingsMacOS =
+    MacOSInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
+    final LinuxInitializationSettings initializationSettingsLinux =
+    LinuxInitializationSettings(
+      defaultActionName: 'Open notification',
+      defaultIcon: AssetsLinuxIcon('icons/app_icon.png'),
+    );
+    final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+      macOS: initializationSettingsMacOS,
+      linux: initializationSettingsLinux,
+    );
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: _onSelectNotification);
+    NotificationUtil.isAndroidPermissionGranted();
+  }
+
+  _onSelectNotification(String? payload) async {
+    debugPrint('onSelectNotification $payload');
+    if (payload != null) {
+      if(payload.startsWith('chatId:')){
+        NavigatorUtils.offNamedUntil(ChatPage.routeName,MainPage.routeName,arguments: payload.replaceAll('chatId:', ''));
+      }
+    }
   }
 
   @override

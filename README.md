@@ -3,14 +3,14 @@
 A new Wechat project.
 
 # 介绍
-wechat_flutter是flutter版微信，目前功能还在持续迭代，尽量还原原版微信功能。
-Flutter版本：3.0.0
+wechat_flutter是flutter版微信，目前只支持Android端，功能还在持续迭代，尽量还原原版微信功能。
+Flutter版本：3.0.0 
 
 
 #测试账号 18202003769 密码 Bb123456
 
 下载体验(Android)
-[https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.2/app-release.apk](https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.2/app-release.apk)
+[https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.4/app-release.apk](https://github.com/LeeeYudE/flutter_wechat/releases/download/v1.0.4/app-release.apk)
 
 <img src="screenshot/qrcode.png" style="zoom:30%;" />
 
@@ -19,15 +19,16 @@ Flutter版本：3.0.0
 | ![1.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot0.gif)            | ![2.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot1.gif)           | ![3.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot9.gif)          |
 |--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | ![4.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot3.gif)            | ![5.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot4.gif)           | ![6.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot5.gif)          |
-| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | ![7.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot6.gif)            | ![8.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master//screenshot/screenshot7.gif)          | ![9.gif](https://github.com/LeeeYudE/flutter_wechat/blob/master/screenshot/screenshot8.gif)          |
-| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+
 
 #Api方案采用Leancloud
 * 数据存储文档：https://zh-docs.leancloud.app/leanstorage_guide-flutter.html
 * IM聊天文档：https://zh-docs.leancloud.app/realtime-guide-beginner.html
 
 # log
+* 2022.08.22 增加聊天通知栏弹出，增加修改昵称。
 * 2022.08.19 聊天页增加（录音/图片/视频/文件）消息发送流程。
 * 2022.08.18 首页增加Uniapp小程序跳转，设置页增加小程序wgt文件上传。
 * 2022.08.15 增加视频号流程，支持上传视频。
@@ -60,3 +61,34 @@ Flutter版本：3.0.0
 * refactor：重构（即不是新增功能，也不是修改bug的代码变动）
 * test：增加测试
 * chore：构建过程或辅助工具的变动
+
+# 第三方框架
+
+| 库                            | 功能        |
+|------------------------------|-----------|
+| leancloud                    | 即时通讯和数据储存 |
+| getx                         | 状态管理      |
+| cached_network_image         | 图片缓存      |
+| wechat_assets_picker         | 微信选图      |
+| wechat_camera_picker         | 微信拍照      |
+| flutter_baidu_mapapi_map     | 百度地图      |
+| flustars                     | 常用工具类     |
+| permission_handler           | 权限申请      |
+| extended_image_library       | 图片预览      |
+| webview_flutter              | web页面     |
+| image_gallery_saver          | 保存图片      |
+| flutter_audio_recorder2      | 录音        |
+| extended_text_field          | 富文本输入     |
+| flutter_luban                | 图片压缩      |
+| qr_code_scanner              | 扫一扫       |
+| flutter_local_auth_invisible | 生物验证      |
+| chewie                       | 视频播放      |
+| video_compress               | 视频压缩      |
+| video_editor                 | 视频编辑      |
+| audioplayers                 | 音频播放      |
+| flutter_local_notifications  | 本地通知      |
+| lottie                       | lottie动画  |
+
+项目部分参考： https://github.com/fluttercandies/wechat_flutter
+如有什么微信的功能需要开发，欢迎提到Issues。
+

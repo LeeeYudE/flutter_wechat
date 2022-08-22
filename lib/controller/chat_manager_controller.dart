@@ -14,6 +14,7 @@ import 'package:wechat/page/main/main_page.dart';
 
 import '../language/strings.dart';
 import '../utils/navigator_utils.dart';
+import '../utils/notification_util.dart';
 
 class ChatManagerController extends BaseXController {
 
@@ -88,8 +89,9 @@ class ChatManagerController extends BaseXController {
     }
     if(_currentConversation != null && _currentConversation?.id == conversation.id){
       conversation.read();
-    }else{
+    }else if(!conversation.isMuted) {
       AudioManager().receiveMessage();
+      NotificationUtil.showNotificationWithNoSound(conversation.title(), message.contentText,payload: "chatId:${conversation.id}");
     }
     _updateConversation(conversation);
  }

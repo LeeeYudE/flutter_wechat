@@ -30,7 +30,7 @@ class RecordPreviewWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                Image.asset(Utils.getImgPath(value == PressRecordWidgetState.VOICE_STATUS_END?"record_power_6":"record_cancel",dir: Utils.DIR_CHAT),width: 150.w,height: 150.w,),
+                Image.asset(Utils.getImgPath(value == PressRecordWidgetState.VOICE_STATUS_END?"record_power_${_controller.peakPower.value}":"record_cancel",dir: Utils.DIR_CHAT),width: 150.w,height: 150.w,),
                 Text(value == PressRecordWidgetState.VOICE_STATUS_END?Ids.up_for_cancel.str():Ids.loosen_to_cancle.str(),style: TextStyle(color: Colours.white,fontSize: 32.sp),)
             ],
           ),

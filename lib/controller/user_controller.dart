@@ -85,8 +85,16 @@ class UserController extends BaseXController {
       var lcfile = await LCFile.fromPath(file.filename, file.path);
       await lcfile.save();
       user!['friendCircilBg'] = lcfile.url;
-      user!.save();
+      await user!.save();
     });
+
+  }
+
+  Future<bool>  editNickname(String nickname) async {
+   return await lcPost(() async {
+      user!['nickname'] = nickname;
+      await user!.save();
+    },pop: true);
 
   }
 

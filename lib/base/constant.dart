@@ -4,6 +4,10 @@ class Constant{
 
   Constant._();
 
+
+  ///隐私条例
+  static const String SOFTWARE_LICENSING = 'https://weixin.qq.com/cgi-bin/readtemplate?lang=en&t=weixin_agreement&s=default&cc=CN';
+
   static const String JMESSAGE_APP_KEY = '2bb8339fd8bddd6634505ab6';///极光appkey
   static const String JMESSAGE_MASTER_SECRET = '6f1be8e4bd1cfa39ea3d8bcd';///极光appkey
 

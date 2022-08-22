@@ -14,6 +14,7 @@ import '../../../utils/dialog_util.dart';
 import '../../../widget/avatar_widget.dart';
 import '../../../widget/lable_widget.dart';
 import '../../util/crop_image_page.dart';
+import 'edit_nickname_page.dart';
 
 class UserCenterPage extends StatefulWidget {
 
@@ -58,7 +59,7 @@ class _UserCenterPageState extends State<UserCenterPage> {
 
   _buildNickname(){
     return LableWidget(lable:Ids.nickname.str(),rightWidget:Text(UserController.instance.user?.nickname??'',style: TextStyle(color: Colours.black,fontSize: 28.sp,),),onTap:(){
-
+      NavigatorUtils.toNamed(EditNicknamePage.routeName);
     });
   }
 

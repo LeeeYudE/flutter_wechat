@@ -98,10 +98,15 @@ class PressRecordWidgetState extends State<PressRecordWidget> with SubscriptionM
     mFlutterAudioRecorder2 = FlutterAudioRecorder2(path, audioFormat: AudioFormat.AAC); // or AudioFormat.WAV
     await mFlutterAudioRecorder2!.initialized;
     mFlutterAudioRecorder2?.start();
-    periodic(200,(time){
+    periodic(50,(time){
       _powerTimer = time;
       mFlutterAudioRecorder2?.current().then((value){
         debugPrint('metering ${value?.metering?.peakPower} ${value?.metering?.averagePower}');
+        var peakPower = (value?.metering?.peakPower?.toInt().abs()??10)~/10;
+        if(peakPower > 6){
+          peakPower = 6;
+        }
+        _controller.peakPower.value = peakPower;
       });
     });
   }

@@ -20,7 +20,6 @@ import 'controller/chat_manager_controller.dart';
 import 'controller/user_controller.dart';
 import 'language/translation_service.dart';
 import 'package:leancloud_storage/leancloud.dart';
-import 'package:jmessage_flutter/jmessage_flutter.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver();
 
@@ -34,7 +33,7 @@ void main() async {
   // LeanCloud.initialize('ugJfJQ7FWkwaPfex5af1R5Pb-gzGzoHsz', 'qHQJqjsXzj5XK9gwGLB59OYI',server: 'https://www.douyin.com', queryCache: LCQueryCache());
   // LeanCloud.initialize('JN2Q4XReVkr7sQYEmma3bT6R-MdYXbMMI', 'pgktbsL98hKS2hzdi3OeJ8Pe', queryCache: LCQueryCache());
   LeanCloud.initialize('jjdYaY3R8guscltQUDvkKnrt-gzGzoHsz', 'Sh3f3Pw9E7wDdRnEW7ik3dIU',server: 'https://jjdyay3r.lc-cn-n1-shared.com', queryCache: LCQueryCache());
-  JmessageFlutter().init(isOpenMessageRoaming: true, appkey: Constant.JMESSAGE_APP_KEY);
+  // JmessageFlutter().init(isOpenMessageRoaming: true, appkey: Constant.JMESSAGE_APP_KEY);
   await SpUtil.getInstance();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

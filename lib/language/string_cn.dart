@@ -37,6 +37,7 @@ const Map<String, String> languageChinese = {
 
   Ids.phone_register: '手机号注册',
   Ids.nickname: '昵称',
+  Ids.edit_nickname: '编辑昵称',
   Ids.nickname_example: '例如：李晨',
   Ids.phone: '手机号',
   Ids.phone_input_hint: '请填写手机号',

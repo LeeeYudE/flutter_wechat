@@ -22,6 +22,7 @@ class ChatController extends BaseXController {
   Conversation? conversation;
   RxBool startAudioRecord = false.obs;
   RxInt recordStatus = PressRecordWidgetState.VOICE_STATUS_START.obs;
+  RxInt peakPower = 1.obs;
   RxList<Message> messages = <Message>[].obs;
   final TextEditingController textController = TextEditingController();
   final AutoScrollController listScrollerController = AutoScrollController(keepScrollOffset: false);

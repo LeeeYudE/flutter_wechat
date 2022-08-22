@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:leancloud_storage/leancloud.dart';
 import 'package:wechat/utils/dialog_util.dart';
 
+import '../utils/navigator_utils.dart';
+
 enum ViewState { Init, Idle, Busy, Error, Empty }
 
 ///Controller
@@ -50,7 +52,7 @@ abstract class BaseXController extends GetxController {
     DialogUtil.disimssLoading();
   }
 
-  Future<bool> lcPost(Function function,{ValueChanged<Exception>? onError,bool? showloading = true,bool? showToast = true,String? loadingMsg,bool changeState = false , bool updated = true,}) async {
+  Future<bool> lcPost(Function function,{ValueChanged<Exception>? onError,bool? showloading = true,bool? showToast = true,String? loadingMsg,bool changeState = false , bool updated = true,bool pop = false}) async {
     if(showloading??false) {
       showLoading(msg: loadingMsg);
     }
@@ -66,6 +68,9 @@ abstract class BaseXController extends GetxController {
      }
      if(showloading??false) {
        disimssLoading();
+     }
+     if(pop){
+       NavigatorUtils.pop(true);
      }
      return true;
     }on Exception catch (e){

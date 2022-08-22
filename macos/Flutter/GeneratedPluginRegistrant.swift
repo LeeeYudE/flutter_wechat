@@ -7,6 +7,7 @@ import Foundation
 
 import audioplayers
 import ffmpeg_kit_flutter_min_gpl
+import flutter_local_notifications
 import package_info_plus_macos
 import path_provider_macos
 import photo_manager
@@ -20,6 +21,7 @@ import wakelock_macos
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AudioplayersPlugin.register(with: registry.registrar(forPlugin: "AudioplayersPlugin"))
   FFmpegKitFlutterPlugin.register(with: registry.registrar(forPlugin: "FFmpegKitFlutterPlugin"))
+  FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
   FLTPackageInfoPlusPlugin.register(with: registry.registrar(forPlugin: "FLTPackageInfoPlusPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   PhotoManagerPlugin.register(with: registry.registrar(forPlugin: "PhotoManagerPlugin"))

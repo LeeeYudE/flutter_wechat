@@ -47,6 +47,7 @@ class Ids {
 
   static const String phone_register = 'phone_register';
   static const String nickname = 'nickname';
+  static const String edit_nickname = 'edit_nickname';
   static const String nickname_example = 'nickname_example';
   static const String country_and_area = 'con_and_area';
   static const String phone = 'phone';

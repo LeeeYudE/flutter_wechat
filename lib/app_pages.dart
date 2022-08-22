@@ -33,6 +33,7 @@ import 'package:wechat/page/main/discover/shake_page.dart';
 import 'package:wechat/page/main/map/nearby_location_page.dart';
 import 'package:wechat/page/main/map/preview_loctaion_page.dart';
 import 'package:wechat/page/main/map/select_location_page.dart';
+import 'package:wechat/page/main/mine/edit_nickname_page.dart';
 import 'package:wechat/page/main/mine/language_setting_page.dart';
 import 'package:wechat/page/main/mine/setting_page.dart';
 import 'package:wechat/page/main/discover/scan_qrcode_page.dart';
@@ -236,6 +237,10 @@ class AppPages {
     _getPage(
       name: TestAccountsPage.routeName,
       page: () => const TestAccountsPage(),
+    ),
+    _getPage(
+      name: EditNicknamePage.routeName,
+      page: () => EditNicknamePage(),
     ),
   ];
 
