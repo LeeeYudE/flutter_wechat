@@ -88,6 +88,6 @@ Flutter版本：3.0.0
 | flutter_local_notifications  | 本地通知      |
 | lottie                       | lottie动画  |
 
-项目部分参考： https://github.com/fluttercandies/wechat_flutter
-如有什么微信的功能需要开发，欢迎提到Issues。
+* 项目部分参考： https://github.com/fluttercandies/wechat_flutter
+* 如有什么微信的功能需要开发，欢迎提到Issues。
 

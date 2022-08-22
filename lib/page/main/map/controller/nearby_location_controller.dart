@@ -26,7 +26,7 @@ class NearbyLocationController extends BaseMapController{
       return;
     }
     BMFPoiNearbySearchOption poiNearbySearchOption =
-    BMFPoiNearbySearchOption(keywords: <String>['银行','酒店','餐饮','商场'], location: BMFCoordinate(22.613863,114.039066), radius: 10000, isRadiusLimit: false,pageSize: Constant.PAGE_SIZE);
+    BMFPoiNearbySearchOption(keywords: <String>['银行','酒店','餐饮','商场'], location: BMFCoordinate(result.latitude??22.613863,result.longitude??114.039066), radius: 10000, isRadiusLimit: false,pageSize: Constant.PAGE_SIZE);
     BMFPoiNearbySearch nearbySearch = BMFPoiNearbySearch();
     nearbySearch.onGetPoiNearbySearchResult(callback: (BMFPoiSearchResult result, BMFSearchErrorCode errorCode) {
       debugPrint('poi周边检索回调 errorCode = $errorCode  \n result = ${result.poiInfoList?.length}');
