@@ -2,7 +2,7 @@
 
 # 打包显示的日志
 
-_tag=v1.0.3
+_tag=v1.0.4
 
 git tag ${_tag}
 git push --tags
