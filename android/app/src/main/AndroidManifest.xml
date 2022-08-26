@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.charco.wechat">
 
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
@@ -53,7 +54,8 @@
         <!-- 即时通讯和推送 START -->
         <!-- 即时通讯和推送都需要 PushService -->
         <service android:name="cn.leancloud.push.PushService"/>
-        <receiver android:name="cn.leancloud.push.LCBroadcastReceiver">
+        <receiver android:name="cn.leancloud.push.LCBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.USER_PRESENT"/>

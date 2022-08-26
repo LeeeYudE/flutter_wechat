@@ -47,7 +47,7 @@ class ChatController extends BaseXController {
 
   _onMessageReceive(Message message){
     if(message.conversationID == conversation?.id){
-      _insertMessage(message);
+      _insertMessage(message,scrollTobottom: true);
     }
   }
 
@@ -198,9 +198,11 @@ class ChatController extends BaseXController {
     }
   }
 
-  _insertMessage(Message message){
+  _insertMessage(Message message,{bool scrollTobottom = true}){
     messages.insert(0,message);
-    listScrollerController.scrollToIndex(0);
+    if(scrollTobottom){
+      listScrollerController.scrollToIndex(0);
+    }
   }
 
   @override
