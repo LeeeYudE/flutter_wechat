@@ -64,7 +64,7 @@ class _ChatItemState extends State<ChatItem> {
                 children: [
                   Text(widget.conversation.title(),style: TextStyle(color: Colours.black,fontSize: 32.sp,height: 1),maxLines: 1,),
                   5.sizedBoxH,
-                  PatternUtil.transformEmoji(widget.conversation.lastMessage?.contentText??'',TextStyle(color: Colours.c_999999,fontSize: 24.sp),imageSize: 32)
+                  PatternUtil.transformEmoji(widget.conversation.lastMessage?.contentText??'',TextStyle(color: Colours.c_999999,fontSize: 24.sp),imageSize: 32,maxLines: 1)
                 ],
               )),
               10.sizedBoxW,

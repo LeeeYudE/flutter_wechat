@@ -80,6 +80,7 @@ class _VideoCoverSelectionState extends State<VideoCoverSelection> with Automati
     _transform.value = TransformData.fromRect(
       _rect.value,
       _layout,
+      Size.zero,
       widget.controller,
     );
 

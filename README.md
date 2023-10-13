@@ -3,7 +3,7 @@
 A new Wechat project.
 
 # 功能介绍
-1. wechat_flutter是flutter版微信，目前只支持Android端，功能还在持续迭代，尽量还原原版微信功能，Flutter版本：3.0.0 。
+1. wechat_flutter是flutter版微信，目前只支持Android端，功能还在持续迭代，尽量还原原版微信功能，Flutter版本：3.10.0 。
 2. Demo使用leancloud做为后端的SDK，所有数据均为真实有效数据，支持用户注册/登陆，也可以使用测试账号登陆，18202003769 密码 Bb123456。
 3. 使用GetX状态管理，已支持全局多语言设置。
 4. 安卓端支持从Flutter调用Navite代码用打开Uniapp小程序，可从设置页面上传自己的Uniapp组件测试。
@@ -35,6 +35,7 @@ A new Wechat project.
 * IM聊天文档：https://zh-docs.leancloud.app/realtime-guide-beginner.html
 
 # log
+* 2023.10.13 升级Flutter版本到3.10.0。
 * 2022.08.22 增加聊天通知栏弹出，增加修改昵称。
 * 2022.08.19 聊天页增加（录音/图片/视频/文件）消息发送流程。
 * 2022.08.18 首页增加Uniapp小程序跳转，设置页增加小程序wgt文件上传。

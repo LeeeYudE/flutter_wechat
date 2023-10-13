@@ -15,10 +15,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.4+1
+version: 2.0.0+2
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,28 +35,28 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  flutter_baidu_mapapi_map: ^3.2.0
-  flutter_baidu_mapapi_search: ^3.2.0
-  flutter_baidu_mapapi_utils: ^3.2.0
-  flutter_bmflocation: ^3.1.0
+  flutter_baidu_mapapi_map: ^3.4.1+1
+  flutter_baidu_mapapi_search: ^3.4.1
+  flutter_baidu_mapapi_utils: ^3.4.1
+  flutter_bmflocation: ^3.4.1+1
   flustars: ^2.0.1
   # https://github.com/Sky24n/sp_util
   get: ^4.6.1
   sprintf: ^6.0.0
-  package_info_plus: ^1.4.2
+  package_info_plus: ^4.0.0
   font_awesome_flutter: ^10.1.0
   flutter_smart_dialog: ^3.4.2+2
   permission_handler: ^9.2.0
   image_picker: ^0.8.4+2
   cached_network_image: ^3.1.0
   # https://github.com/renefloor/flutter_cached_network_image
-  extended_image_library: ^3.1.2
-  extended_image: ^6.0.3
-  icons_launcher: ^1.1.0
+  extended_image_library: ^3.5.0
+  extended_image: ^8.0.0
+  icons_launcher: ^2.1.4
   #微信选图
-  wechat_assets_picker: ^7.1.2
+  wechat_assets_picker: ^8.6.0
   #微信拍照
-  wechat_camera_picker: ^3.4.0
+  wechat_camera_picker: ^4.0.2
 
   leancloud_storage: ^0.7.8
   leancloud_official_plugin: ^1.0.1
@@ -83,7 +83,7 @@ dependencies:
   #震动
   flutter_vibrate: ^1.3.0
   #富文本输入
-  extended_text_field: ^10.1.0
+  extended_text_field: ^12.0.1
   #多样式表格布局
   flutter_staggered_grid_view: ^0.4.0
   #滚动到指定位置
@@ -91,11 +91,9 @@ dependencies:
 
   url_launcher: ^6.0.12
   #选择文件
-  file_picker: ^4.6.1
+  file_picker: ^5.3.2
   #地图导航
   map_launcher: ^2.2.3
-  #图片压缩
-  flutter_luban: ^0.1.13
   #网络请求
   dio: ^4.0.6
   #下拉刷新
@@ -108,13 +106,13 @@ dependencies:
   #生物验证
   flutter_local_auth_invisible: ^2.2.0
   #图片裁剪
-  crop_your_image: ^0.7.2
+  crop_your_image: ^0.7.5
   #播放视频
   video_player: ^2.4.2
   #播放视频
   chewie: ^1.3.4
   #视频压缩
-  video_compress: 3.1.0
+  video_compress: ^3.1.2
   #获取图片宽高
   image_size_getter: ^2.1.2
   #折叠文本
@@ -124,12 +122,12 @@ dependencies:
   #传感器
   sensors_plus: ^1.3.3
   #音频播放
-  audioplayers: 0.20.1
+  audioplayers: ^5.2.0
   #视频编辑
   video_editor: ^1.4.1
   helpers: ^1.1.4
   #视频播放器
-  better_player: ^0.0.81
+  better_player: ^0.0.83
   #点赞按钮
   like_button: ^2.0.4
   #分享
@@ -142,6 +140,8 @@ dependencies:
   filesize: ^2.0.1
   #通知
   flutter_local_notifications: 9.6.0
+  #图片压缩
+  flutter_image_compress: ^2.0.4
 
   flutter_localizations:
     sdk: flutter
@@ -155,6 +155,9 @@ dependency_overrides:
   collection: ^1.15.0
   xml: 6.0.0
   visibility_detector: ^0.3.3
+  intl: 0.18.0
+  wakelock: 0.6.1+2
+  win32: 5.0.2
 
 dev_dependencies:
 

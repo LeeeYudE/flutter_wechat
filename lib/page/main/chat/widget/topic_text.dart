@@ -11,7 +11,7 @@ class TopicText extends SpecialText {
   final bool showAtBackground;
 
   TopicText(TextStyle textStyle, SpecialTextGestureTapCallback? onTap,
-      {this.showAtBackground: false, this.start = 0})
+      {this.showAtBackground = false, this.start = 0})
       : super(
     flag,
     " ",

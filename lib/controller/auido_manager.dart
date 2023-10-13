@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +12,6 @@ class AudioManager  {
   static AudioManager? _instance;
 
   static final AudioPlayer _audioPlayer = AudioPlayer();
-  static final AudioCache _audioCache = AudioCache(prefix: 'assets/audio/');
 
   static final AudioMessage _initAudioMessage =  AudioMessage();
 
@@ -38,14 +36,10 @@ class AudioManager  {
     _audioPlayer.onPlayerStateChanged.listen((event) {
       debugPrint('onPlayerStateChanged = ' + event.toString());
     });
-    _audioPlayer.onPlayerCompletion.listen((event) {
+    _audioPlayer.onPlayerComplete.listen((event) {
       debugPrint('onPlayerCompletion');
       playAudioMessage.value = _initAudioMessage;
       _clearAudio();
-    });
-    _audioPlayer.onPlayerError.listen((event) {
-      debugPrint('onPlayerError $event');
-      playAudioMessage.value = _initAudioMessage;
     });
     //获取音频的真实时长
     _audioPlayer.onDurationChanged.listen((Duration event) {
@@ -54,7 +48,7 @@ class AudioManager  {
   }
 
   playMessage(AudioMessage message) async {
-    if(_audioPlayer.state == PlayerState.PLAYING && playAudioMessage.value == message){
+    if(_audioPlayer.state == PlayerState.playing && playAudioMessage.value == message){
       _audioPlayer.stop();
       _clearAudio();
       return;
@@ -65,26 +59,21 @@ class AudioManager  {
       return;
     }
     DownLoadManage().download(message.url, audioTemporaryDirectory.path + '/'+filename,done: (path){
-      var file = File(path);
-      if(Platform.isAndroid){
-        _audioPlayer.playBytes(file.readAsBytesSync());
-      }else{
-        _audioPlayer.play(path,isLocal:true);
-      }
+      _audioPlayer.play(DeviceFileSource(path));
       playAudioMessage.value = message;
     });
   }
 
   shake(){
-    _audioCache.play('shake.mp3');
+    _audioPlayer.play(AssetSource('audio/shake.mp3'));
   }
 
   sendMessage(){
-    _audioCache.play('send_message.mp3');
+    _audioPlayer.play(AssetSource('audio/send_message.mp3'));
   }
 
   receiveMessage(){
-    _audioCache.play('receive_message.mp3');
+    _audioPlayer.play(AssetSource('audio/receive_message.mp3'));
   }
 
   static _clearAudio(){
@@ -92,7 +81,7 @@ class AudioManager  {
   }
 
   dispose() {
-    if(_audioPlayer.state == PlayerState.PLAYING){
+    if(_audioPlayer.state == PlayerState.playing){
       _audioPlayer.stop();
       _clearAudio();
     }

@@ -210,7 +210,7 @@ class _FriendCircleItemState extends State<FriendCircleItem> {
             ImageSpan(AssetImage(Utils.getIconImgPath('icon_liked')), imageWidth: 28.sp,
                 imageHeight: 28.sp,
                 margin: EdgeInsets.only(right: 10.w)), ...liked.map((e) =>
-                TextSpan(text: e['nickname']+(liked.indexOf(e) != liked.length - 1 ?',':''), style: TextStyle(color: Colours.c_5B6B8D, fontSize: 28.sp, height: 1.1),
+                TextSpan(text: (e['nickname']??'')+(liked.indexOf(e) != liked.length - 1 ?',':''), style: TextStyle(color: Colours.c_5B6B8D, fontSize: 28.sp, height: 1.1),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
                         NavigatorUtils.toNamed(FriendDetailPage.routeName, arguments: e['username']);

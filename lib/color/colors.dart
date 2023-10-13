@@ -34,7 +34,6 @@ class Colours {
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor:c_EEEEEE,
       focusColor: color,
-      cursorColor: color,
       dividerColor: color,
       hoverColor: color,
       visualDensity: VisualDensity.adaptivePlatformDensity,

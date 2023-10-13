@@ -49,8 +49,6 @@ class MyScaffold extends StatelessWidget {
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       backgroundColor: backgroundColor,
       appBar: showAppbar?AppBar(
-        //状态栏颜色
-        brightness: brightness ?? Brightness.dark,
         centerTitle: true,
         backgroundColor: appbarColor??Colours.c_EEEEEE,
         automaticallyImplyLeading: false,

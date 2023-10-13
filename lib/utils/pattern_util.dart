@@ -20,7 +20,7 @@ class PatternUtil {
 
   static RichText transformEmoji(String content, TextStyle textStyle,
       {double imageSize = 40,
-      overflow = TextOverflow.visible,
+      overflow = TextOverflow.ellipsis ,
       List<RegExpMatch>? allMatches,
       int? maxLines,OnURLClick? onURLClick}) {
     final hasMatch = emojiPattern.hasMatch(content);
