@@ -8,7 +8,7 @@ on:
       - '[Build]'
 
 env:
-  tag_name : v1.0.4
+  tag_name : v2.0.0
 
 jobs:
 
@@ -26,7 +26,7 @@ jobs:
           java-version: 8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.0.0'
+          flutter-version: '3.10.0'
       - uses: finnp/create-file-action@master
         env:
           FILE_NAME: lib/common/config/ignoreConfig.dart
