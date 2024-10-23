@@ -75,7 +75,7 @@ dependencies:
   #pop菜单
   custom_pop_up_menu: ^1.2.2
   #生成二维码
-  qr_flutter: ^4.0.0
+  qr_flutter: ^4.1.0
   #保存图片到手机
   image_gallery_saver: ^1.7.1
   #录音
@@ -152,7 +152,7 @@ flutter_icons:
   android: true
 
 dependency_overrides:
-  collection: ^1.15.0
+  collection: 1.18.0
   xml: 6.0.0
   visibility_detector: ^0.3.3
   intl: 0.18.0

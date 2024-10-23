@@ -14,10 +14,8 @@ import '../../../utils/utils.dart';
 import '../../../widget/avatar_widget.dart';
 import '../../../widget/dialog/dialog_bottom_widget.dart';
 
-
 ///二维码名片页面
 class QrcodeBusinessCardPage extends StatefulWidget {
-
   static const String routeName = '/QrcodeBusinessCardPage';
 
   const QrcodeBusinessCardPage({Key? key}) : super(key: key);
@@ -27,15 +25,14 @@ class QrcodeBusinessCardPage extends StatefulWidget {
 }
 
 class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
-
   final GlobalKey _repaintKey = GlobalKey(); // 可以获取到被截图组件状态的 GlobalKey
   late String _qrcode;
 
   @override
   void initState() {
     _qrcode = jsonEncode({
-      'qecode_type':Constant.QRCODE_TYPE_BUSINESS_CARD,
-      'username':UserController.instance.username
+      'qecode_type': Constant.QRCODE_TYPE_BUSINESS_CARD,
+      'username': UserController.instance.username
     });
     super.initState();
   }
@@ -47,16 +44,22 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
       appbarColor: Colours.c_EEEEEE,
       body: _buildBody(context),
       actions: [
-        TapWidget(onTap: () async {
-         var result = await  NavigatorUtils.showBottomItemsDialog(
-            [
-              DialogBottomWidgetItem(Ids.save_to_phone.str(),0)
-            ]
-          );
-         if(result == 0) {
-           _repaintKey.doSaveImage();
-         }
-        }, child: Image.asset(Utils.getImgPath('ic_more_black',dir: Utils.DIR_ICON,),width: 40.w,height: 40.w,))
+        TapWidget(
+            onTap: () async {
+              var result = await NavigatorUtils.showBottomItemsDialog(
+                  [DialogBottomWidgetItem(Ids.save_to_phone.str(), 0)]);
+              if (result == 0) {
+                _repaintKey.doSaveImage();
+              }
+            },
+            child: Image.asset(
+              Utils.getImgPath(
+                'ic_more_black',
+                dir: Utils.DIR_ICON,
+              ),
+              width: 40.w,
+              height: 40.w,
+            ))
       ],
     );
   }
@@ -64,7 +67,7 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
   _buildBody(BuildContext context) {
     return Container(
       color: Colours.c_EEEEEE,
-      padding: EdgeInsets.only(left: 40.w,right: 40.w),
+      padding: EdgeInsets.only(left: 40.w, right: 40.w),
       child: Center(
         child: Container(
           decoration: Colours.white.boxDecoration(borderRadius: 12.w),
@@ -75,9 +78,15 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 150.w,),
+                  AvatarWidget(
+                    avatar: UserController.instance.user?.avatar,
+                    weightWidth: 150.w,
+                  ),
                   20.sizedBoxW,
-                  Text(UserController.instance.user?.nickname??'name',style: TextStyle(color: Colours.black,fontSize: 48.sp),),
+                  Text(
+                    UserController.instance.user?.nickname ?? 'name',
+                    style: TextStyle(color: Colours.black, fontSize: 48.sp),
+                  ),
                 ],
               ),
               40.sizedBoxH,
@@ -89,21 +98,30 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
                   color: Colours.white,
                   child: Stack(
                     children: [
-                      QrImage(
+                      QrImageView(
                         data: _qrcode,
                         version: QrVersions.auto,
                         size: 600.w,
                       ),
-                      Center(child: Container(
-                          decoration: Colours.white.boxDecoration(borderRadius: 12.w),
-                          padding: EdgeInsets.all(5.w),
-                          child: AvatarWidget(avatar: UserController.instance.user?.avatar, weightWidth: 120.w,decorationWidth: 10.w,))),
+                      Center(
+                          child: Container(
+                              decoration: Colours.white
+                                  .boxDecoration(borderRadius: 12.w),
+                              padding: EdgeInsets.all(5.w),
+                              child: AvatarWidget(
+                                avatar: UserController.instance.user?.avatar,
+                                weightWidth: 120.w,
+                                decorationWidth: 10.w,
+                              ))),
                     ],
                   ),
                 ),
               ),
               40.sizedBoxH,
-              Text(Ids.scan_qrcode_business_card.str(),style: TextStyle(color: Colours.c_CCCCCC,fontSize: 28.sp),),
+              Text(
+                Ids.scan_qrcode_business_card.str(),
+                style: TextStyle(color: Colours.c_CCCCCC, fontSize: 28.sp),
+              ),
               20.sizedBoxH,
             ],
           ),
@@ -111,5 +129,4 @@ class _QrcodeBusinessCardPageState extends State<QrcodeBusinessCardPage> {
       ),
     );
   }
-
 }
